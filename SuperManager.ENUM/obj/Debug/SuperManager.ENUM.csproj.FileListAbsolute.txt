@@ -2,3 +2,7 @@ F:\SuperManager\SuperManager.ENUM\bin\Debug\SuperManager.ENUM.dll
 F:\SuperManager\SuperManager.ENUM\bin\Debug\SuperManager.ENUM.pdb
 F:\SuperManager\SuperManager.ENUM\obj\Debug\SuperManager.ENUM.dll
 F:\SuperManager\SuperManager.ENUM\obj\Debug\SuperManager.ENUM.pdb
+E:\GitProject\SuperManager\SuperManager.ENUM\bin\Debug\SuperManager.ENUM.dll
+E:\GitProject\SuperManager\SuperManager.ENUM\bin\Debug\SuperManager.ENUM.pdb
+E:\GitProject\SuperManager\SuperManager.ENUM\obj\Debug\SuperManager.ENUM.dll
+E:\GitProject\SuperManager\SuperManager.ENUM\obj\Debug\SuperManager.ENUM.pdb

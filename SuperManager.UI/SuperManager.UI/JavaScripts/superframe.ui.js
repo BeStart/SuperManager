@@ -87,6 +87,51 @@ $(function () {
     $("#checkAllOrNoTop").change(function () {
         CheckBoxCheckAllOrNot(this);
     });
+
+    var contextMenuStatus = $("#contextMenuStatus").val();
+
+    // 如果开启右键菜单，并且非自定义菜单
+    if (contextMenuStatus > 0) {
+        // 获取上下文菜单列表
+        var contextMenuList = $("#contextMenuList").val().split(",");
+        var data = [];
+        var dataItemList = [];
+        for (var index = 0; index < contextMenuList.length; index++) {
+            var contextMenu = contextMenuList[index];
+            var contextMenuText = "";
+            var contextMenuFunc = null;
+            if (contextMenu == "add") {
+                contextMenuText = "添加";
+                contextMenuFunc = function () {
+                    location.href = $("#operaterAddUrl").val();
+                }
+            } else if (contextMenu == "edit") {
+                contextMenuText = "编辑";
+                contextMenuFunc = function () {
+                    EditOperater($(this).attr("id"));
+                }
+            } else if (contextMenu == "delete") {
+                contextMenuText = "删除";
+                contextMenuFunc = function () {
+                    DeleteAskConfirmToUrl($(this).attr("id"));
+                }
+            } else if (contextMenu == "refresh") {
+                contextMenuText = "刷新";
+                contextMenuFunc = function () {
+                    // 刷新页面
+                    location.reload();
+                }
+            }
+            if (contextMenuText != "") {
+                // 初始右键菜单
+                var dataItem = { "text": contextMenuText, "func": contextMenuFunc };
+                dataItemList.push(dataItem);
+            }
+        }
+        data.push(dataItemList);
+        $("#tableList tr[data-menu='contextMenu']").smartMenu(data);
+    }
+
 });
 
 // 窗口大小改变

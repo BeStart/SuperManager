@@ -122,9 +122,11 @@
 <div style="display:none;">
     <input type="hidden" id="operaterInfoUrl" value="@Url.Action("Info", new { identityID = -1 })" />
     <input type="hidden" id="operaterDeleteUrl" value="@Url.Action("DeleteOperater", new { identityID = -1 })" />
+    <input type="hidden" id="contextMenuList" value="@SuperManager.ENUM.ContextMenuTypeEnum.AddEditDeleteRefresh" />
+    <input type="hidden" id="contextMenuList" value="@SuperManager.ENUM.ContextMenuTypeEnum.DeleteRefresh" />
 </div>
 @section Scripts
 {
-    <script type="text/javascript" src="~/JavaScripts/module/Message/list.js?v=@ConfigTools.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/module/Message/list.js?v=@ConfigHelper.Version"></script>
 }
 

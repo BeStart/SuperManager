@@ -7,3 +7,12 @@ F:\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.MODEL.pdb
 F:\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.csprojResolveAssemblyReference.cache
 F:\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.dll
 F:\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.pdb
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.DAL.dll
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.DAL.pdb
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\Helper.Core.Library.dll
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.MODEL.dll
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\Helper.Core.Library.pdb
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.MODEL.pdb
+E:\GitProject\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.csprojResolveAssemblyReference.cache
+E:\GitProject\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.dll
+E:\GitProject\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.pdb
