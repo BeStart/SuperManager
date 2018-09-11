@@ -1,0 +1,7 @@
+F:\SuperManager\SuperManager.MODEL\bin\Debug\SuperManager.MODEL.dll
+F:\SuperManager\SuperManager.MODEL\bin\Debug\SuperManager.MODEL.pdb
+F:\SuperManager\SuperManager.MODEL\bin\Debug\Helper.Core.Library.dll
+F:\SuperManager\SuperManager.MODEL\bin\Debug\Helper.Core.Library.pdb
+F:\SuperManager\SuperManager.MODEL\obj\Debug\SuperManager.MODEL.csprojResolveAssemblyReference.cache
+F:\SuperManager\SuperManager.MODEL\obj\Debug\SuperManager.MODEL.dll
+F:\SuperManager\SuperManager.MODEL\obj\Debug\SuperManager.MODEL.pdb

@@ -1,0 +1,9 @@
+F:\SuperManager\SuperManager.FILTER\bin\Debug\SuperManager.FILTER.dll
+F:\SuperManager\SuperManager.FILTER\bin\Debug\SuperManager.FILTER.pdb
+F:\SuperManager\SuperManager.FILTER\bin\Debug\SuperManager.MODEL.dll
+F:\SuperManager\SuperManager.FILTER\bin\Debug\Helper.Core.Library.dll
+F:\SuperManager\SuperManager.FILTER\bin\Debug\SuperManager.MODEL.pdb
+F:\SuperManager\SuperManager.FILTER\bin\Debug\Helper.Core.Library.pdb
+F:\SuperManager\SuperManager.FILTER\obj\Debug\SuperManager.FILTER.csprojResolveAssemblyReference.cache
+F:\SuperManager\SuperManager.FILTER\obj\Debug\SuperManager.FILTER.dll
+F:\SuperManager\SuperManager.FILTER\obj\Debug\SuperManager.FILTER.pdb

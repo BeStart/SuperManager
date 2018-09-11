@@ -1,0 +1,72 @@
+﻿@using SuperManager.MODEL
+@model DBLinkFriendModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="operater">
+    <form id="submitForm" action="@Url.Action(Model != null ? "EditOperater" : "AddOperater", new { identityID = (Model != null ? Model.IdentityID : 0) })" class="form-horizontal" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">链接名称：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control required" style="width:300px;" type="text" name="linkFriendName" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.LinkFriendName : ""))" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">链接图片：</label>
+            <div class="col-xs-10" style="padding-left : 0px;height:35px;line-height:35px;">
+                <input type="text" id="cover_url" name="LinkFriendCoverImageUrl" class="form-control pull-left" style="width:500px;border-top-right-radius:0px;border-bottom-right-radius:0px;" value="@(Model != null ? Model.LinkFriendCoverImageUrl : "")" />
+                <a href="javascript:;" class="btn btn-primary pull-left" style="position: relative;border-top-left-radius:0px;border-bottom-left-radius:0px;width:100px;overflow:hidden;">
+                    选择文件 ...
+                    <input id="coverUpload" style="position: absolute;overflow: hidden;right: 0;top: 0;opacity: 0;" type="file" multiple="multiple" />
+                </a>
+                <span id="cover_item" class="pull-left" style="margin-left:10px;margin-top:0px;display:@(Model != null && !string.IsNullOrEmpty(Model.LinkFriendCoverImageUrl) ? "block" : "none")">
+                    <a href="@(Model != null ? Model.LinkFriendCoverImageUrl : "")" id="cover_link" target="_blank" style="margin-right:10px;">查看</a><a id="cover_delete" style="cursor:pointer">删除</a>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">链接地址：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control required" style="width:500px;" type="text" name="linkFriendUrl" value="@(Model != null ? Model.LinkFriendUrl : "")" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">链接排序：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control" style="width:200px;" type="text" name="linkFriendSort" value="@(Model != null ? Model.LinkFriendSort : 0)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">所属类别：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <select class="form-control" style="width:200px;" name="linkFriendType">
+                    @if (ViewBag.LinkFriendTypeList != null && ViewBag.LinkFriendTypeList.Count > 0)
+                    {
+                        foreach (DBLinkFriendTypeModel modelItem in ViewBag.LinkFriendTypeList)
+                        {
+                            <option value="@modelItem.IdentityID" @(Html.Raw(Model != null && Model.LinkFriendType == modelItem.IdentityID ? "selected=\"selected\"" : ""))>@Html.Raw(Server.HtmlEncode(modelItem.TypeName))</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <span style="padding-left:100px;">
+                <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-saved" style="font-size:12px;padding-right : 10px;"></i>保存</button>
+                <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回友情链接管理</a>
+                <span id="errorNote" style="margin-left:10px;"></span>
+            </span>
+        </div>
+    </form>
+</div>
+@section Scripts
+{
+    <script type="text/javascript" src="~/JavaScripts/plugin.fileupload.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/module/LinkFriend/edit.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript">
+        var uploadCoverPath = "@Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File })";
+    </script>
+}

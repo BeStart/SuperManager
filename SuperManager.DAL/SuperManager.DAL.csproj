@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F0729A88-BEB4-4513-A477-F4CC353489A9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuperManager.DAL</RootNamespace>
+    <AssemblyName>SuperManager.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttachmentDAL.cs" />
+    <Compile Include="DALFactory.cs" />
+    <Compile Include="FlowDAL.cs" />
+    <Compile Include="FlowStepDAL.cs" />
+    <Compile Include="LinkFriendDAL.cs" />
+    <Compile Include="LinkFriendTypeDAL.cs" />
+    <Compile Include="MessageDAL.cs" />
+    <Compile Include="MessageReplyDAL.cs" />
+    <Compile Include="ModuleDAL.cs" />
+    <Compile Include="ActionTypeDAL.cs" />
+    <Compile Include="FlowTypeDAL.cs" />
+    <Compile Include="MenuDAL.cs" />
+    <Compile Include="ProjectDAL.cs" />
+    <Compile Include="ProjectTypeDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleDAL.cs" />
+    <Compile Include="TopicDAL.cs" />
+    <Compile Include="FlowSymbolTypeDAL.cs" />
+    <Compile Include="UserDAL.cs" />
+    <Compile Include="UserLogDAL.cs" />
+    <Compile Include="VoteDAL.cs" />
+    <Compile Include="VoteItemDAL.cs" />
+    <Compile Include="VoteTypeDAL.cs" />
+    <Compile Include="TopicPositionTypeDAL.cs" />
+    <Compile Include="TopicTypeDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Helper.Core.Library\Helper.Core.Library.csproj">
+      <Project>{8d52f0ba-e8f6-4cd5-bd16-bf32ba18e9e5}</Project>
+      <Name>Helper.Core.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SuperManager.MODEL\SuperManager.MODEL.csproj">
+      <Project>{86d0318c-d562-4ae5-bda5-53f9039f660e}</Project>
+      <Name>SuperManager.MODEL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

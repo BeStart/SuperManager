@@ -1,0 +1,4 @@
+F:\SuperManager\Helper.Core.Library\bin\Debug\Helper.Core.Library.dll
+F:\SuperManager\Helper.Core.Library\bin\Debug\Helper.Core.Library.pdb
+F:\SuperManager\Helper.Core.Library\obj\Debug\Helper.Core.Library.dll
+F:\SuperManager\Helper.Core.Library\obj\Debug\Helper.Core.Library.pdb

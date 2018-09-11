@@ -1,0 +1,9 @@
+F:\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.DAL.dll
+F:\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.DAL.pdb
+F:\SuperManager\SuperManager.DAL\bin\Debug\Helper.Core.Library.dll
+F:\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.MODEL.dll
+F:\SuperManager\SuperManager.DAL\bin\Debug\Helper.Core.Library.pdb
+F:\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.MODEL.pdb
+F:\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.csprojResolveAssemblyReference.cache
+F:\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.dll
+F:\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.pdb
