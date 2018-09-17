@@ -10,53 +10,42 @@ namespace SuperManager.DAL
 {
     public class TopicTypeDAL
     {
+        private const string TABLE_NAME = "T_TopicType";
+
         public bool Operater(DBTopicTypeModel model)
         {
-            if(model.IdentityID == 0)
+            if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_TopicType(ParentID, TypeName, TypeSort)values(@ParentID, @TypeName, @TypeSort)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { ParentID = model.ParentID, TypeName = model.TypeName, TypeSort = model.TypeSort }) > 0;
+                return DataBaseHelper.Insert<DBTopicTypeModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_TopicType set ParentID=@ParentID, TypeName=@TypeName, TypeSort=@TypeSort where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { ParentID = model.ParentID, TypeName = model.TypeName, TypeSort = model.TypeSort, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBTopicTypeModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_TopicType where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBTopicTypeModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_TopicType where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBTopicTypeModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public DBTopicTypeModel Select(int identityID)
         {
-            string commandText = "select IdentityID, ParentID, TypeName, TypeSort from T_TopicType with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBTopicTypeModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBTopicTypeModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.ParentID, p.TypeName, p.TypeSort }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public List<DBTopicTypeModel> List(int parentID = -1)
         {
-            if(parentID == -1)
+            System.Linq.Expressions.Expression<Func<DBTopicTypeModel, object>> queryLambda = p => new { p.IdentityID, p.ParentID, p.TypeName };
+            if (parentID == -1)
             {
-                string commandText = "select IdentityID, ParentID, TypeName from T_TopicType with(nolock)";
-                return DataBaseHelper.ToEntityList<DBTopicTypeModel>(commandText);
+                return DataBaseHelper.More<DBTopicTypeModel>(null, queryLambda, null, p => p.TypeSort, true, TABLE_NAME);
             }
             else
             {
-                string commandText = "select IdentityID, TypeName from T_TopicType with(nolock) where ParentID=@ParentID";
-                return DataBaseHelper.ToEntityList<DBTopicTypeModel>(commandText, new { ParentID = parentID });
+                return DataBaseHelper.More<DBTopicTypeModel>(new { ParentID = parentID }, queryLambda, p => p.ParentID == p.ParentID, p => p.TypeSort, true, TABLE_NAME);
             }
         }
 

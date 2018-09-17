@@ -10,6 +10,8 @@ namespace SuperManager.DAL
 {
     public class FlowDAL
     {
+        private const string TABLE_NAME = "T_Flow";
+
         public bool Operater(DBFlowModel model, List<DBFlowStepModel> stepModelList)
         {
             List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>();
@@ -47,59 +49,34 @@ namespace SuperManager.DAL
             }
             return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
         }
-
         public bool Edit(DBFlowModel model)
         {
-            string commandText = "update T_Flow set FlowType=@FlowType, FlowName=@FlowName where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { FlowType = model.FlowType, FlowName = model.FlowName, IdentityID = model.IdentityID }) > 0;
+            return DataBaseHelper.Update<DBFlowModel>(new { model.FlowType, model.FlowName, model.IdentityID }, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>()
+            return (bool)DataBaseHelper.Transaction((con, transaction) =>
             {
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_FlowStep where FlowID=@IdentityID",
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
-                    ParameterList = new { IdentityID = identityID }
-                },
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_Flow where IdentityID=@IdentityID",
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
-                    ParameterList = new { IdentityID = identityID }
-                }
-            };
-            return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
+                DataBaseHelper.TransactionDelete<DBFlowStepModel>(con, transaction, new { FlowID = identityID }, p => p.FlowID == p.FlowID, "T_FlowStep");
+                return DataBaseHelper.TransactionDelete<DBFlowModel>(con, transaction, new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
+            });
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>()
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return (bool)DataBaseHelper.Transaction((con, transaction) =>
             {
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_FlowStep where FlowID in (@IdentityIDList)".Replace("@IdentityIDList", identityIDList),
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery
-                },
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_Flow where IdentityID in (@IdentityIDList)".Replace("@IdentityIDList", identityIDList),
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery
-                }
-            };
-            return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
+                DataBaseHelper.Delete<DBFlowStepModel>(null, p => dataList.Contains(p.FlowID), "T_FlowStep");
+                return DataBaseHelper.Delete<DBFlowModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
+            });
         }
-
         public DBFlowModel Select(int identityID)
         {
-            string commandText = "select IdentityID, FlowType, FlowName from T_Flow with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBFlowModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBFlowModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.FlowType, p.FlowName }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public List<DBFlowModel> List()
         {
-            string commandText = "select IdentityID, FlowName from T_Flow with(nolock)";
-            return DataBaseHelper.ToEntityList<DBFlowModel>(commandText);
+            return DataBaseHelper.More<DBFlowModel>(null, p => new { p.IdentityID, p.FlowName }, null, null, true, TABLE_NAME);
         }
 
         public List<DBFlowFullModel> Page(string searchKey, int flowType, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)

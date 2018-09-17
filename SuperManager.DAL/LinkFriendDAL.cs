@@ -10,38 +10,33 @@ namespace SuperManager.DAL
 {
     public class LinkFriendDAL
     {
+        private const string TABLE_NAME = "T_LinkFriend";
+
         public bool Operater(DBLinkFriendModel model)
         {
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_LinkFriend(LinkFriendType, LinkFriendCoverImageUrl, LinkFriendName, LinkFriendUrl, LinkFriendSort)values(@LinkFriendType, @LinkFriendCoverImageUrl, @LinkFriendName, @LinkFriendUrl, @LinkFriendSort)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { model.LinkFriendType, model.LinkFriendCoverImageUrl, model.LinkFriendName, model.LinkFriendUrl, model.LinkFriendSort }) > 0;
+                return DataBaseHelper.Insert<DBLinkFriendModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_LinkFriend set LinkFriendType=@LinkFriendType, LinkFriendCoverImageUrl=@LinkFriendCoverImageUrl, LinkFriendName=@LinkFriendName, LinkFriendUrl=@LinkFriendUrl, LinkFriendSort=@LinkFriendSort where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { model.LinkFriendType, model.LinkFriendCoverImageUrl, model.LinkFriendName, model.LinkFriendUrl, model.LinkFriendSort, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBLinkFriendModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_LinkFriend where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBLinkFriendModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_LinkFriend where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBLinkFriendModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
         public DBLinkFriendModel Select(int identityID)
         {
-            string commandText = "select IdentityID, LinkFriendType, LinkFriendCoverImageUrl, LinkFriendName, LinkFriendUrl, LinkFriendSort from T_LinkFriend with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBLinkFriendModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBLinkFriendModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.LinkFriendType, p.LinkFriendCoverImageUrl, p.LinkFriendName, p.LinkFriendUrl, p.LinkFriendSort }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
+
         public List<DBLinkFriendFullModel> Page(string searchKey, int linkFriendType, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);

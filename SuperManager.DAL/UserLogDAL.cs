@@ -10,26 +10,22 @@ namespace SuperManager.DAL
 {
     public class UserLogDAL
     {
+        private const string TABLE_NAME = "T_UserLog";
+
         public bool Operater(DBUserLogModel model)
         {
-            string commandText = "insert into T_UserLog(UserCode, LoginIP, LoginStatus)values(@UserCode, @LoginIP, @LoginStatus)";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { UserCode = model.UserCode, LoginIP = model.LoginIP, LoginStatus = model.LoginStatus }) > 0;
+            return DataBaseHelper.Insert<DBUserLogModel>(model, p => new { p.IdentityID, p.LoginDate }, TABLE_NAME);
         }
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_UserLog where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBUserLogModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_UserLog where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBUserLogModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
+
         public List<DBUserLogModel> Page(string searchKey, int loginStatus, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
             StringBuilder stringBuilder = new StringBuilder();

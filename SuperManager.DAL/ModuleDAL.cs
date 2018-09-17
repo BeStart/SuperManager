@@ -10,64 +10,45 @@ namespace SuperManager.DAL
 {
     public class ModuleDAL
     {
+        private const string TABLE_NAME = "T_Module";
+
         public bool Operater(DBModuleModel model)
         {
-            if (model != null)
-            {
-                model.ActionList = StringHelper.PadChar(model.ActionList, ",");
-            }
+            model.ActionList = StringHelper.PadChar(model.ActionList, ",");
+
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_Module(ModuleCode, ModuleName, ActionList)values(@ModuleCode, @ModuleName, @ActionList)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { ModuleCode = model.ModuleCode, ModuleName = model.ModuleName, ActionList = model.ActionList }) > 0;
+                return DataBaseHelper.Insert<DBModuleModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_Module set ModuleCode=@ModuleCode, ModuleName=@ModuleName, ActionList=@ActionList where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { ModuleCode = model.ModuleCode, ModuleName = model.ModuleName, ActionList = model.ActionList, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBModuleModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
-
         public bool Exists(string moduleCode, int identityID)
         {
-            string commandText = "select IdentityID from T_Module with(nolock) where ModuleCode=@ModuleCode";
-            int result = DataBaseHelper.ExecuteScalar<int>(commandText, new { ModuleCode = moduleCode });
-
-            if (identityID == 0) return result > 0;
-            return result == 0 ? false : (result != identityID);
+            return DataBaseHelper.Exists<DBModuleModel>(new { ModuleCode = moduleCode }, p => p.IdentityID, p => p.ModuleCode == p.ModuleCode, identityID, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_Module where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBModuleModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_Module where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBModuleModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public DBModuleModel Select(int identityID)
         {
-            string commandText = "select IdentityID, ModuleCode, ModuleName, ActionList from T_Module with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBModuleModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBModuleModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.ModuleCode, p.ModuleName, p.ActionList }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
         public DBModuleModel Select(string moduleCode)
         {
-            string commandText = "select IdentityID, ModuleCode, ModuleName, ActionList from T_Module with(nolock) where ModuleCode=@ModuleCode";
-            return DataBaseHelper.ToEntity<DBModuleModel>(commandText, new { ModuleCode = moduleCode });
+            return DataBaseHelper.Single<DBModuleModel>(new { ModuleCode = moduleCode }, p => new { p.IdentityID, p.ModuleCode, p.ModuleName, p.ActionList }, p => p.ModuleCode == p.ModuleCode, TABLE_NAME);
         }
-
         public List<DBModuleModel> List()
         {
-            string commandText = "select IdentityID, ModuleCode, ModuleName from T_Module with(nolock)";
-            return DataBaseHelper.ToEntityList<DBModuleModel>(commandText);
+            return DataBaseHelper.More<DBModuleModel>(null, p => new { p.IdentityID, p.ModuleCode, p.ModuleName }, null, null, true, TABLE_NAME);
         }
 
         public List<DBModuleModel> All(string searchKey)

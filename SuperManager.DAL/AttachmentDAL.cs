@@ -10,34 +10,25 @@ namespace SuperManager.DAL
 {
     public class AttachmentDAL
     {
+        private const string TABLE_NAME = "T_Attachment";
+
         public bool Operater(DBAttachmentModel model)
         {
-            string commandText = "insert into T_Attachment(AttachmentType,AttachmentName,AttachmentSize,AttachmentPath)values(@AttachmentType,@AttachmentName,@AttachmentSize,@AttachmentPath)";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { AttachmentType = model.AttachmentType, AttachmentName = model.AttachmentName, AttachmentSize = model.AttachmentSize, AttachmentPath = model.AttachmentPath }) > 0;
+            return DataBaseHelper.Insert<DBAttachmentModel>(model, p => new { p.IdentityID, p.AttachmentDate }, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_Attachment where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBAttachmentModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_Attachment where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBAttachmentModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public List<DBAttachmentModel> List(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList);
-
-            string commandText = string.Format("select IdentityID,AttachmentType,AttachmentName,AttachmentSize,AttachmentPath from T_Attachment with(nolock) where IdentityID in ({0})", identityIDList);
-            return DataBaseHelper.ToEntityList<DBAttachmentModel>(commandText);
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.More<DBAttachmentModel>(null, p => new { p.IdentityID, p.AttachmentType, p.AttachmentName, p.AttachmentSize, p.AttachmentPath }, p => dataList.Contains(p.IdentityID), null, true, TABLE_NAME);
         }
 
         public List<DBAttachmentModel> Page(string searchKey, string attachmentType, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)

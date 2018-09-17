@@ -10,55 +10,39 @@ namespace SuperManager.DAL
 {
     public class ProjectTypeDAL
     {
+        private const string TABLE_NAME = "T_ProjectType";
+
         public bool Operater(DBProjectTypeModel model)
         {
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_ProjectType(TypeName, TypeSort)values(@TypeName, @TypeSort)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { TypeName = model.TypeName, TypeSort = model.TypeSort }) > 0;
+                return DataBaseHelper.Insert<DBProjectTypeModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_ProjectType set TypeName=@TypeName, TypeSort=@TypeSort where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { TypeName = model.TypeName, TypeSort = model.TypeSort, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBProjectTypeModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
-
         public bool Exists(string typeName, int identityID)
         {
-            string commandText = "select IdentityID from T_ProjectType with(nolock) where TypeName=@TypeName";
-            int result = DataBaseHelper.ExecuteScalar<int>(commandText, new { TypeName = typeName });
-
-            if (identityID == 0) return result > 0;
-            return result == 0 ? false : (result != identityID);
+            return DataBaseHelper.Exists<DBProjectTypeModel>(new { TypeName = typeName }, p => p.IdentityID, p => p.TypeName == p.TypeName, identityID, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_ProjectType where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBProjectTypeModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_ProjectType where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBProjectTypeModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public DBProjectTypeModel Select(int identityID)
         {
-            string commandText = "select IdentityID, TypeName, TypeSort from T_ProjectType with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBProjectTypeModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBProjectTypeModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.TypeName, p.TypeSort }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public List<DBProjectTypeModel> List()
         {
-            string commandText = "select IdentityID, TypeName from T_ProjectType with(nolock)";
-            return DataBaseHelper.ToEntityList<DBProjectTypeModel>(commandText);
+            return DataBaseHelper.More<DBProjectTypeModel>(null, p => new { p.IdentityID, p.TypeName }, null, p => p.TypeSort, true, TABLE_NAME);
         }
 
         public List<DBProjectTypeModel> Page(string searchKey, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)

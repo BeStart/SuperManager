@@ -10,6 +10,8 @@ namespace SuperManager.DAL
 {
     public class RoleDAL
     {
+        private const string TABLE_NAME = "T_Role";
+
         public bool Operater(DBRoleModel model, string menuList, string actionList)
         {
             menuList = StringHelper.PadChar(menuList, ",");
@@ -17,51 +19,33 @@ namespace SuperManager.DAL
 
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_Role(RoleName, MenuList, ActionList)values(@RoleName, @MenuList, @ActionList)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { RoleName = model.RoleName, MenuList = menuList, ActionList = actionList }) > 0;
+                return DataBaseHelper.Insert<DBRoleModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_Role set RoleName=@RoleName, MenuList=@MenuList, ActionList=@ActionList where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { RoleName = model.RoleName, MenuList = menuList, ActionList = actionList, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBRoleModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
-
         public bool Exists(string roleName, int identityID)
         {
-            string commandText = "select identityID from T_Role with(nolock) where RoleName=@RoleName";
-            int result = DataBaseHelper.ExecuteScalar<int>(commandText, new { RoleName = roleName });
-
-            if (identityID == 0) return result > 0;
-            return result == 0 ? false : (result != identityID);
+            return DataBaseHelper.Exists<DBRoleModel>(new { RoleName = roleName }, p => p.IdentityID, p => p.RoleName == p.RoleName, identityID, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_Role where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBRoleModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_Role where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBRoleModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public DBRoleModel Select(int identityID)
         {
-            string commandText = "select IdentityID, RoleName, MenuList, ActionList from T_Role with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBRoleModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBRoleModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.RoleName, p.MenuList, p.ActionList }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public List<DBRoleModel> List()
         {
-            string commandText = "select IdentityID, RoleName from T_Role with(nolock)";
-            return DataBaseHelper.ToEntityList<DBRoleModel>(commandText);
+            return DataBaseHelper.More<DBRoleModel>(null, p => new { p.IdentityID, p.RoleName }, null, null, true, TABLE_NAME);
         }
 
         public List<DBRoleModel> All(string searchKey)

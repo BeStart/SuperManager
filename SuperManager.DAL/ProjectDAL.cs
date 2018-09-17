@@ -10,40 +10,31 @@ namespace SuperManager.DAL
 {
     public class ProjectDAL
     {
+        private const string TABLE_NAME = "T_Project";
+
         public bool Operater(DBProjectModel model, int flowStepID = 0)
         {
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_Project(ProjectType, ProjectName, FlowID, FlowStepID)values(@ProjectType, @ProjectName, @FlowID, @FlowStepID)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { ProjectType = model.ProjectType, ProjectName = model.ProjectName, FlowID = model.FlowID, FlowStepID = model.FlowStepID }) > 0;
+                return DataBaseHelper.Insert<DBProjectModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_Project set ProjectType = @ProjectType, ProjectName = @ProjectName, FlowID=@FlowID, FlowStepID=@FlowStepID where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { ProjectType = model.ProjectType, ProjectName = model.ProjectName, FlowID = model.FlowID, FlowStepID = model.FlowStepID, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBProjectModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_Project where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBProjectModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_Project where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBProjectModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public DBProjectModel Select(int identityID)
         {
-            string commandText = "select IdentityID, ProjectType, ProjectName, FlowID, FlowStepID from T_Project with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBProjectModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBProjectModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.ProjectType, p.ProjectName, p.FlowID, p.FlowStepID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
 
         public List<DBProjectFullModel> Page(string searchKey, int projectType, int flowID, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)

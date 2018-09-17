@@ -10,22 +10,15 @@ namespace SuperManager.DAL
 {
     public class MessageReplyDAL
     {
+        private const string TABLE_NAME = "T_MessageReply";
+
         public bool Operater(DBMessageReplyModel model, int messageStatus)
         {
-            List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>()
+            return (bool)DataBaseHelper.Transaction((con, transaction) =>
             {
-                new DataBaseTransactionItem(){
-                    CommandText = "update T_Message set MessageStatus = @MessageStatus where IdentityID=@IdentityID",
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
-                    ParameterList = new { IdentityID = model.MessageID, MessageStatus = messageStatus }
-                },
-                new DataBaseTransactionItem(){
-                    CommandText = "insert into T_MessageReply(MessageID, ReplyContent, UserCode, NickName)values(@MessageID, @ReplyContent, @UserCode, @NickName)",
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
-                    ParameterList = new { MessageID = model.MessageID, ReplyContent = model.ReplyContent, UserCode = model.UserCode, NickName = model.NickName }
-                }
-            };
-            return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
+                DataBaseHelper.TransactionUpdate<DBMessageModel>(con, transaction, new { IdentityID = model.MessageID, MessageStatus = messageStatus }, p => p.IdentityID == p.IdentityID, p => p.IdentityID, "T_Message");
+                return DataBaseHelper.TransactionInsert<DBMessageReplyModel>(con, transaction, model, p => new { p.IdentityID, p.ReplyDate }, TABLE_NAME);
+            });
         }
     }
 }

@@ -181,25 +181,42 @@ namespace Helper.Core.Library
             List<string> dataList = new List<string>();
 
             dynamic body = expression.Body;
-            var argumentList = body.Arguments;
-
-            int count = argumentList.Count;
-            for (int index = 0; index < count; index++)
+            if (body.NodeType == ExpressionType.New)
             {
-                var nodeType = argumentList[index].NodeType;
-                string argumentName = null;
-                if (nodeType == ExpressionType.Constant)
+                var argumentList = body.Arguments;
+
+                int count = argumentList.Count;
+                for (int index = 0; index < count; index++)
                 {
-                    argumentName = argumentList[index].Value;
+                    var nodeType = argumentList[index].NodeType;
+                    string argumentName = null;
+                    if (nodeType == ExpressionType.Constant)
+                    {
+                        argumentName = argumentList[index].Value;
+                    }
+                    else if (nodeType == ExpressionType.MemberAccess)
+                    {
+                        argumentName = argumentList[index].Member.Name;
+                    }
+                    dataList.Add(argumentName);
                 }
-                else if (nodeType == ExpressionType.MemberAccess)
+            }
+            else
+            {
+                if (body.NodeType == ExpressionType.Convert)
                 {
-                    argumentName = argumentList[index].Member.Name;
+                    dataList.Add(body.Operand.Member.Name);
                 }
-                dataList.Add(argumentName);
             }
 
             return dataList;
+        }
+
+        internal static string GetExpression<T>(Expression<Func<T, object>> expression) where T : class
+        {
+            List<string> resultList = GetExpressionList<T>(expression);
+            if (resultList != null && resultList.Count > 0) return resultList[0];
+            return null;
         }
 
         internal static Dictionary<string, object> GetParameterDict(object param)

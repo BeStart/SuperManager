@@ -10,6 +10,8 @@ namespace SuperManager.DAL
 {
     public class VoteDAL
     {
+        private const string TABLE_NAME = "T_Vote";
+
         public bool Operater(DBVoteModel model, List<DBVoteItemModel> modelList)
         {
             List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>();
@@ -53,47 +55,26 @@ namespace SuperManager.DAL
             }
             return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
         }
-
         public bool Delete(int identityID)
         {
-            List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>()
+            return (bool)DataBaseHelper.Transaction((con, transaction) =>
             {
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_VoteItem where VoteID=@IdentityID",
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
-                    ParameterList = new { IdentityID = identityID }
-                },
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_Vote where IdentityID=@IdentityID",
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
-                    ParameterList = new { IdentityID = identityID }
-                }
-            };
-            return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
+                DataBaseHelper.TransactionDelete<DBVoteItemModel>(con, transaction, new { VoteID = identityID }, p => p.VoteID == p.VoteID, "T_VoteItem");
+                return DataBaseHelper.TransactionDelete<DBVoteModel>(con, transaction, new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
+            });
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            List<DataBaseTransactionItem> transactionItemList = new List<DataBaseTransactionItem>()
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return (bool)DataBaseHelper.Transaction((con, transaction) =>
             {
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_VoteItem where VoteID in (@IdentityIDList)".Replace("@IdentityIDList", identityIDList),
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery
-                },
-                new DataBaseTransactionItem(){
-                    CommandText = "delete from T_Vote where IdentityID in (@IdentityIDList)".Replace("@IdentityIDList", identityIDList),
-                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery
-                }
-            };
-            return DataBaseHelper.TransactionNonQuery(transactionItemList) > 0;
+                DataBaseHelper.TransactionDelete<DBVoteItemModel>(con, transaction, null, p => dataList.Contains(p.VoteID), "T_VoteItem");
+                return DataBaseHelper.TransactionDelete<DBVoteModel>(con, transaction, null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
+            });
         }
-
         public DBVoteModel Select(int identityID)
         {
-            string commandText = "select IdentityID, VoteType, VoteTitle, VoteSummary from T_Vote with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBVoteModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBVoteModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.VoteType, p.VoteTitle, p.VoteSummary }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
 
         public List<DBVoteFullModel> Page(string searchKey, int voteType, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)

@@ -10,16 +10,15 @@ namespace SuperManager.DAL
 {
     public class FlowStepDAL
     {
+        private const string TABLE_NAME = "T_FlowStep";
+
         public List<DBFlowStepModel> List(int flowID)
         {
-            string commandText = "select IdentityID, FlowID, StepCode, StepSymbol, StepName, StepAddrName, RoleList, StepList, NextStep, PositionTop, PositionLeft from T_FlowStep with(nolock) where FlowID=@FlowID";
-            return DataBaseHelper.ToEntityList<DBFlowStepModel>(commandText, new { FlowID = flowID });
+            return DataBaseHelper.More<DBFlowStepModel>(new { FlowID = flowID }, p => new { p.IdentityID, p.FlowID, p.StepCode, p.StepSymbol, p.StepName, p.StepAddrName, p.RoleList, p.NextStep, p.PositionTop, p.PositionLeft }, p => p.FlowID == p.FlowID, null, true, TABLE_NAME);
         }
-
         public List<DBFlowStepModel> List()
         {
-            string commandText = "select IdentityID, StepCode, StepName from T_FlowStep with(nolock)";
-            return DataBaseHelper.ToEntityList<DBFlowStepModel>(commandText);
+            return DataBaseHelper.More<DBFlowStepModel>(null, p => new { p.IdentityID, p.StepCode, p.StepName }, null, null, true, TABLE_NAME);
         }
 
         public bool Operater(int flowID, List<DBFlowStepModel> modelList)

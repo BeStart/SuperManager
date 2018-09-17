@@ -10,90 +10,38 @@ namespace SuperManager.DAL
 {
     public class TopicDAL
     {
-        /// <summary>
-        /// 添加/更新
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        private const string TABLE_NAME = "T_Topic";
+
         public bool Operater(DBTopicModel model)
         {
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_Topic(TopicType,PositionTypeList,TopicTitle,TopicTags,TopicCoverImageUrl,TopicSummary,TopicContent,TopicOriginalWebsite,TopicOriginalUrl,TopicUserCode,TopicStatus)values(@TopicType,@PositionTypeList,@TopicTitle,@TopicTags,@TopicCoverImageUrl,@TopicSummary,@TopicContent,@TopicOriginalWebsite,@TopicOriginalUrl,@TopicUserCode,@TopicStatus)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { TopicType = model.TopicType, PositionTypeList = model.PositionTypeList, TopicTitle = model.TopicTitle, TopicTags = model.TopicTags, TopicCoverImageUrl = model.TopicCoverImageUrl, TopicSummary = model.TopicSummary, TopicContent = model.TopicContent, TopicOriginalWebsite = model.TopicOriginalWebsite, TopicOriginalUrl = model.TopicOriginalUrl, TopicUserCode = model.TopicUserCode, TopicStatus = model.TopicStatus }) > 0;
+                return DataBaseHelper.Insert<DBTopicModel>(model, p => new { p.IdentityID, p.TopicVisitNum, p.TopicDateTime }, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_Topic set TopicType=@TopicType,PositionTypeList=@PositionTypeList,TopicTitle=@TopicTitle,TopicTags=@TopicTags,TopicCoverImageUrl=@TopicCoverImageUrl,TopicSummary=@TopicSummary,TopicContent=@TopicContent,TopicOriginalWebsite=@TopicOriginalWebsite,TopicOriginalUrl=@TopicOriginalUrl,TopicUserCode=@TopicUserCode where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { TopicType = model.TopicType, PositionTypeList = model.PositionTypeList, TopicTitle = model.TopicTitle, TopicTags = model.TopicTags, TopicCoverImageUrl = model.TopicCoverImageUrl, TopicSummary = model.TopicSummary, TopicContent = model.TopicContent, TopicOriginalWebsite = model.TopicOriginalWebsite, TopicOriginalUrl = model.TopicOriginalUrl, TopicUserCode = model.TopicUserCode, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBTopicModel>(model, p => p.IdentityID == p.IdentityID, p => new { p.IdentityID, p.TopicVisitNum, p.TopicDateTime }, TABLE_NAME);
             }
         }
-
-        /// <summary>
-        /// 删除单条数据
-        /// </summary>
-        /// <param name="identityID"></param>
-        /// <returns></returns>
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_Topic where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBTopicModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
-        /// <summary>
-        /// 删除多条数据
-        /// </summary>
-        /// <param name="identityIDList"></param>
-        /// <returns></returns>
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_Topic where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBTopicModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
-        /// <summary>
-        /// 更新状态
-        /// </summary>
-        /// <param name="identityIDList"></param>
-        /// <param name="topicStatus"></param>
-        /// <returns></returns>
         public bool StatusMore(string identityIDList, int topicStatus)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "update T_Topic set TopicStatus=@TopicStatus where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { TopicStatus = topicStatus }) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Update<DBTopicModel>(new { TopicStatus = topicStatus }, p => dataList.Contains(p.IdentityID), null, TABLE_NAME);
         }
-
-        /// <summary>
-        /// 查询单条数据
-        /// </summary>
-        /// <param name="identityID"></param>
-        /// <returns></returns>
         public DBTopicModel Select(int identityID)
         {
-            string commandText = "select IdentityID, TopicType,PositionTypeList,TopicTitle,TopicTags,TopicCoverImageUrl,TopicSummary,TopicContent,TopicOriginalWebsite,TopicOriginalUrl,TopicUserCode,TopicStatus from T_Topic with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBTopicModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBTopicModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.TopicType, p.PositionTypeList, p.TopicTitle, p.TopicTags, p.TopicCoverImageUrl, p.TopicSummary, p.TopicContent, p.TopicOriginalWebsite, p.TopicOriginalUrl, p.TopicUserCode, p.TopicStatus }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
 
-        /// <summary>
-        /// 管理后台分页显示
-        /// </summary>
-        /// <param name="searchKey"></param>
-        /// <param name="topicType"></param>
-        /// <param name="topicPositionType"></param>
-        /// <param name="topicStatus"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="totalCount"></param>
-        /// <param name="pageCount"></param>
-        /// <returns></returns>
         public List<DBTopicFullModel> Page(string searchKey, int topicType, int topicPositionType, int topicStatus, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
             StringBuilder stringBuilder = new StringBuilder();

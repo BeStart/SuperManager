@@ -10,32 +10,24 @@ namespace SuperManager.DAL
 {
     public class MessageDAL
     {
+        private const string TABLE_NAME = "T_Message";
+
         public bool Operater(DBMessageModel model)
         {
-            string commandText = "insert into T_Message(ContactName, ContactTelphone, ContactEmail, MessageContent, ContactIP)values(@ContactName, @ContactTelphone, @ContactEmail, @MessageContent, @ContactIP)";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { ContactName = model.ContactName, ContactTelphone = model.ContactTelphone, ContactEmail = model.ContactEmail, MessageContent = model.MessageContent, ContactIP = model.ContactIP }) > 0;
+            return DataBaseHelper.Insert<DBMessageModel>(model, p => new { p.IdentityID, p.MessageStatus, p.MessageDate }, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_Message where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBMessageModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_Message where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBMessageModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public bool Status(int identityID, int messageStatus)
         {
-            string commandText = "update T_Message set MessageStatus=@MessageStatus where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID, MessageStatus = messageStatus }) > 0;
+            return DataBaseHelper.Update<DBMessageModel>(new { IdentityID = identityID, MessageStatus = messageStatus }, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
         }
 
         public DBMessageFullModel FullSelect(int identityID)

@@ -91,7 +91,7 @@ $(function () {
     var contextMenuStatus = $("#contextMenuStatus").val();
 
     // 如果开启右键菜单，并且非自定义菜单
-    if (contextMenuStatus > 0) {
+    if (contextMenuStatus > 0 && $("#contextMenuList").length > 0) {
         // 获取上下文菜单列表
         var contextMenuList = $("#contextMenuList").val().split(",");
         var data = [];

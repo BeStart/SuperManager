@@ -10,69 +10,44 @@ namespace SuperManager.DAL
 {
     public class ActionTypeDAL
     {
+        private const string TABLE_NAME = "T_ActionType";
+
         public bool Operater(DBActionTypeModel model)
         {
             if (model.IdentityID == 0)
             {
-                string commandText = "insert into T_ActionType(TypeCode, TypeName, TypeSort)values(@TypeCode, @TypeName, @TypeSort)";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { TypeCode = model.TypeCode, TypeName = model.TypeName, TypeSort = model.TypeSort }) > 0;
+                return DataBaseHelper.Insert<DBActionTypeModel>(model, p => p.IdentityID, TABLE_NAME);
             }
             else
             {
-                string commandText = "update T_ActionType set TypeCode=@TypeCode, TypeName=@TypeName, TypeSort=@TypeSort where IdentityID=@IdentityID";
-                return DataBaseHelper.ExecuteNonQuery(commandText, new { TypeCode = model.TypeCode, TypeName = model.TypeName, TypeSort = model.TypeSort, IdentityID = model.IdentityID }) > 0;
+                return DataBaseHelper.Update<DBActionTypeModel>(model, p => p.IdentityID == p.IdentityID, p => p.IdentityID, TABLE_NAME);
             }
         }
-
         public bool Exists(string typeCode, int identityID)
         {
-            string commandText = "select IdentityID from T_ActionType with(nolock) where TypeCode=@TypeCode";
-            int result = DataBaseHelper.ExecuteScalar<int>(commandText, new { TypeCode = typeCode });
-
-            if (identityID == 0) return result > 0;
-            return result == 0 ? false : (result != identityID);
+            return DataBaseHelper.Exists<DBActionTypeModel>(new { TypeCode = typeCode }, p => p.IdentityID, p => p.TypeCode == p.TypeCode, identityID, TABLE_NAME);
         }
-
         public bool Delete(int identityID)
         {
-            string commandText = "delete from T_ActionType where IdentityID=@IdentityID";
-            return DataBaseHelper.ExecuteNonQuery(commandText, new { IdentityID = identityID }) > 0;
+            return DataBaseHelper.Delete<DBActionTypeModel>(new { IdentityID = identityID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public bool DeleteMore(string identityIDList)
         {
-            identityIDList = StringHelper.TrimChar(identityIDList, ",");
-
-            string commandText = "delete from T_ActionType where IdentityID in (@IdentityIDList)";
-            commandText = commandText.Replace("@IdentityIDList", identityIDList);
-
-            return DataBaseHelper.ExecuteNonQuery(commandText) > 0;
+            List<int> dataList = StringHelper.ToList<int>(identityIDList, ",");
+            return DataBaseHelper.Delete<DBActionTypeModel>(null, p => dataList.Contains(p.IdentityID), TABLE_NAME);
         }
-
         public DBActionTypeModel Select(int identityID)
         {
-            string commandText = "select IdentityID, TypeCode, TypeName, TypeSort from T_ActionType with(nolock) where IdentityID=@IdentityID";
-            return DataBaseHelper.ToEntity<DBActionTypeModel>(commandText, new { IdentityID = identityID });
+            return DataBaseHelper.Single<DBActionTypeModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.TypeCode, p.TypeName, p.TypeSort }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
-
         public List<DBActionTypeModel> List()
         {
-            string commandText = "select IdentityID, TypeCode, TypeName from T_ActionType with(nolock)";
-            return DataBaseHelper.ToEntityList<DBActionTypeModel>(commandText);
+            return DataBaseHelper.More<DBActionTypeModel>(null, p => new { p.IdentityID, p.TypeCode, p.TypeName }, null, p => p.TypeSort, true, TABLE_NAME);
         }
-
         public List<DBActionTypeModel> List(string typeCodeList)
         {
-            if(!string.IsNullOrEmpty(typeCodeList))
-            {
-                typeCodeList = StringHelper.TrimChar(typeCodeList, ",");
-                typeCodeList = typeCodeList.Replace(",", "','");
-                typeCodeList = StringHelper.PadChar(typeCodeList, "'");
-            }
-            string commandText = "select IdentityID, TypeCode, TypeName from T_ActionType with(nolock) where TypeCode in (@TypeCodeList)";
-            commandText = commandText.Replace("@TypeCodeList", typeCodeList);
-
-            return DataBaseHelper.ToEntityList<DBActionTypeModel>(commandText);
+            List<string> dataList = StringHelper.ToList<string>(typeCodeList, ",");
+            return DataBaseHelper.More<DBActionTypeModel>(null, p => new { p.IdentityID, p.TypeCode, p.TypeName }, p => dataList.Contains(p.TypeCode), p => p.TypeSort, true, TABLE_NAME);
         }
 
         public List<DBActionTypeModel> All(string searchKey)
