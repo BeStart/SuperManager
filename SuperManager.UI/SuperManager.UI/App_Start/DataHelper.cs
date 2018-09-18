@@ -210,6 +210,9 @@ namespace SuperManager.UI
         /// <returns></returns>
         public static bool AuthAction(string roleID, string controllerName, string actionName)
         {
+            // 如果未开启权限验证
+            if (!ConfigHelper.AuthStatus) return true;
+
             if (!string.IsNullOrEmpty(controllerName)) controllerName = controllerName.ToLower();
             if (!string.IsNullOrEmpty(actionName)) actionName = actionName.ToLower();
 

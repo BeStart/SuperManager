@@ -67,6 +67,6 @@
     <script type="text/javascript" src="~/JavaScripts/plugin.fileupload.js?v=@ConfigHelper.Version"></script>
     <script type="text/javascript" src="~/JavaScripts/module/LinkFriend/edit.js?v=@ConfigHelper.Version"></script>
     <script type="text/javascript">
-        var uploadCoverPath = "@Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File })";
+        var uploadCoverPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File }))";
     </script>
 }

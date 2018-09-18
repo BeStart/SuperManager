@@ -71,9 +71,10 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 {
                     foreach (DBAttachmentModel modelItem in modelList)
                     {
-                        if (System.IO.File.Exists(modelItem.AttachmentPath))
+                        string filePath = Server.MapPath(string.Format("~/{0}", modelItem.AttachmentPath));
+                        if (System.IO.File.Exists(filePath))
                         {
-                            System.IO.File.Delete(modelItem.AttachmentPath);
+                            System.IO.File.Delete(filePath);
                         }
                     }
                 }

@@ -14,13 +14,14 @@ namespace SuperManager.UI.Areas.Manager.Controllers
     public class RoleController : BaseManagerListController
     {
         [RoleMenuFilter]
-        public ActionResult List(string searchKey = "")
+        public ActionResult List(string searchKey = "", int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
+            List<DBRoleModel> modelList = DALFactory.Role.Page(searchKey, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
 
-            this.InitViewData(searchKey, 0, "");
+            this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey }));
 
-            return View(DALFactory.Role.All(searchKey));
+            return View(modelList);
         }
 
         [RoleActionFilter]
@@ -34,8 +35,8 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         {
             List<ViewTreeMenuModel> dataList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.All(""));
             ViewBag.MenuList = dataList;
-            ViewBag.ModuleList = DALFactory.Module.All("");
-            ViewBag.ActionTypeList = DALFactory.ActionType.All("");
+            ViewBag.ModuleList = DALFactory.Module.List();
+            ViewBag.ActionTypeList = DALFactory.ActionType.List();
             return View("Edit", identityID > 0 ? DALFactory.Role.Select(identityID) : null);
         }
 
@@ -92,7 +93,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 // 如果保存数据成功，要替换掉内存中的角色配置数据
                 if (result)
                 {
-                    DataHelper.InitRoleMenuAndActionData(model.IdentityID.ToString(), DALFactory.Menu.List(menuList), actionList, DALFactory.Module.All(""));
+                    DataHelper.InitRoleMenuAndActionData(model.IdentityID.ToString(), DALFactory.Menu.List(menuList), actionList, DALFactory.Module.List());
                 }
                 return result;
             }, Url.Action("List"), model.IdentityID == 0 ? Url.Action("Add") : "", Url.Action("Edit", new { identityID = model.IdentityID }), "角色名称已存在！");

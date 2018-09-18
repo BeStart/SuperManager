@@ -14,8 +14,8 @@ namespace SuperManager.DAL
 
         public bool Operater(DBRoleModel model, string menuList, string actionList)
         {
-            menuList = StringHelper.PadChar(menuList, ",");
-            actionList = StringHelper.PadChar(actionList, ",");
+            model.ActionList = StringHelper.PadChar(actionList, ","); ;
+            model.MenuList = StringHelper.PadChar(menuList, ",");
 
             if (model.IdentityID == 0)
             {
@@ -48,18 +48,28 @@ namespace SuperManager.DAL
             return DataBaseHelper.More<DBRoleModel>(null, p => new { p.IdentityID, p.RoleName }, null, null, true, TABLE_NAME);
         }
 
-        public List<DBRoleModel> All(string searchKey)
+        public List<DBRoleModel> Page(string searchKey, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
-            string commandText = "select IdentityID, RoleName from T_Role with(nolock) {0}";
             StringBuilder stringBuilder = new StringBuilder();
             if (!string.IsNullOrEmpty(searchKey))
             {
-                stringBuilder.Append(" where RoleName like '%");
+                stringBuilder.Append(" RoleName like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' ");
             }
-            commandText = string.Format(commandText, stringBuilder.ToString());
-            return DataBaseHelper.ToEntityList<DBRoleModel>(commandText);
+            string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
+
+            Dictionary<string, object> parameterList = new Dictionary<string, object>();
+            parameterList.Add("@FieldSql", "IdentityID, RoleName");
+            parameterList.Add("@Field", "");
+            parameterList.Add("@TableName", "T_Role");
+            parameterList.Add("@PrimaryKey", "IdentityID");
+            parameterList.Add("@PageIndex", pageIndex);
+            parameterList.Add("@PageSize", pageSize);
+            parameterList.Add("@WhereSql", whereSql);
+            parameterList.Add("@OrderSql", "IdentityID desc");
+
+            return DataBaseHelper.ToEntityList<DBRoleModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
     }
 }

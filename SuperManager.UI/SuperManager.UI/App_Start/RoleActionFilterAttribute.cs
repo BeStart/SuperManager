@@ -12,11 +12,22 @@ namespace SuperManager.UI
     {
         protected override void Valid(System.Web.Mvc.ActionExecutingContext filterContext)
         {
-            ViewUserModel viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
+            ViewUserModel viewUserModel = null;
+            if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+            {
+                viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
+            }
+            else
+            {
+                viewUserModel = filterContext.HttpContext.Session[ConfigHelper.TokenName] as ViewUserModel;
+            }
             if (viewUserModel == null)
             {
                 this.RedirectToLoginUrl(filterContext);
             }
+            // 如果未开启授权验证
+            if (!ConfigHelper.AuthStatus) return;
+
             // 如果以后缀 operater 出现
             if (actionName.EndsWith("operater"))
             {

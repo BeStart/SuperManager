@@ -798,6 +798,7 @@
     <Content Include="JavaScripts\jquery.min.js" />
     <Content Include="JavaScripts\jquery.ui.min.js" />
     <Content Include="JavaScripts\jquery.validate.min.js" />
+    <Content Include="JavaScripts\module\IndexMapper\edit.js" />
     <Content Include="JavaScripts\module\LinkFriend\edit.js" />
     <Content Include="JavaScripts\module\Message\info.js" />
     <Content Include="JavaScripts\module\Message\list.js" />
@@ -825,6 +826,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ConfigHelper.cs" />
+    <Compile Include="App_Start\ConstHelper.cs" />
     <Compile Include="App_Start\DataHelper.cs" />
     <Compile Include="App_Start\LogHelper.cs" />
     <Compile Include="App_Start\RoleActionFilterAttribute.cs" />
@@ -851,6 +853,7 @@
     <Compile Include="Areas\Manager\Controllers\TopicController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowSymbolTypeController.cs" />
+    <Compile Include="Areas\Manager\Controllers\IndexMapperController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserLogController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserController.cs" />
     <Compile Include="Areas\Manager\Controllers\VoteTypeController.cs" />
@@ -949,6 +952,8 @@
     <Content Include="Areas\Manager\Views\LinkFriend\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\LinkFriend\List.cshtml" />
     <Content Include="Log4net.config" />
+    <Content Include="Areas\Manager\Views\IndexMapper\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\IndexMapper\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

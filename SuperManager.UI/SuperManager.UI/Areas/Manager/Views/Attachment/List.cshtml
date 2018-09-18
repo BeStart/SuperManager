@@ -58,10 +58,10 @@
                                         <input type="checkbox" name="identityIDList" value="@modelItem.IdentityID" />
                                     </td>
                                     <td>
-                                        <a href="@modelItem.AttachmentName" target="_blank">
+                                        <a href="@modelItem.AttachmentPath" target="_blank">
                                             @if(modelItem.AttachmentType == SuperManager.ENUM.UploadTypeEnum.Cover)
                                             { 
-                                            <img src="@modelItem.AttachmentName" alt="" style="max-width:200px;max-height:100px;" />
+                                            <img src="@modelItem.AttachmentPath" alt="" style="max-width:200px;max-height:100px;" />
                                             }
                                             else
                                             {

@@ -71,6 +71,10 @@
                                             <button class="btn btn-default" type="button" id="btnOperaterSubmit">操作</button>
                                         </span>
                                     </div>
+                                    @if (ViewData["PageModel"] != null)
+                                    {
+                                        @Html.Partial("~/Areas/Manager/Views/Shared/_Pagination.cshtml", ViewData["PageModel"])
+                                    }
                                 </td>
                             </tr>
                         }

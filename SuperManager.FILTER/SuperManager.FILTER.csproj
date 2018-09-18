@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IndexMapperFilter.cs" />
     <Compile Include="LinkFriendFilter.cs" />
     <Compile Include="LinkFriendTypeFilter.cs" />
     <Compile Include="MessageFilter.cs" />

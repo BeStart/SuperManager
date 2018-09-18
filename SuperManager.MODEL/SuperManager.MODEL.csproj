@@ -44,6 +44,7 @@
     <Compile Include="DBFlowModel.cs" />
     <Compile Include="DBFlowStepModel.cs" />
     <Compile Include="DBFlowTypeModel.cs" />
+    <Compile Include="DBIndexMapperModel.cs" />
     <Compile Include="DBKeyValueModel.cs" />
     <Compile Include="DBLinkFriendFullModel.cs" />
     <Compile Include="DBLinkFriendModel.cs" />

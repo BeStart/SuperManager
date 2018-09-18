@@ -183,7 +183,16 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 // 保存上传文件
                 upload.SaveAs(uploadFilePath);
 
-                if (fromType != UploadTypeEnum.File)
+                // 记录到附件
+                bool operaterResult = DALFactory.Attachment.Operater(new MODEL.DBAttachmentModel()
+                {
+                    AttachmentType = type,
+                    AttachmentName = upload.FileName,
+                    AttachmentSize = upload.ContentLength,
+                    AttachmentPath = filePath
+                });
+
+                if (fromType != UploadFromTypeEnum.File)
                 {
                     return Content("<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", \"" + filePath + "\");</script>");
                 }
@@ -194,7 +203,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }
             catch (Exception ex)
             {
-                if (fromType != UploadTypeEnum.File)
+                if (fromType != UploadFromTypeEnum.File)
                 {
                     return this.Content("<script type=\"text/javascript\">alert('" + ex.Message + "！');</script>");
                 }

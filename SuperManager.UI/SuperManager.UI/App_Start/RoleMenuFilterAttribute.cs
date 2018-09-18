@@ -1,4 +1,5 @@
 ﻿using Helper.Core.Library;
+using SuperManager.ENUM;
 using SuperManager.MODEL;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,22 @@ namespace SuperManager.UI
 
         protected virtual void Valid(ActionExecutingContext filterContext)
         {
-            ViewUserModel viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
+            ViewUserModel viewUserModel = null;
+            if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+            {
+                viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
+            }
+            else
+            {
+                viewUserModel = filterContext.HttpContext.Session[ConfigHelper.TokenName] as ViewUserModel;
+            }
             if (viewUserModel == null)
             {
                 this.RedirectToLoginUrl(filterContext);
             }
+            // 如果未开启授权验证
+            if (!ConfigHelper.AuthStatus) return;
+
             bool authStatus = DataHelper.AuthMenu(viewUserModel.RoleID.ToString(), string.Format("/{0}/{1}/{2}", this.areaName, this.controllerName, this.actionName), this.paramDict);
             if (!authStatus)
             {

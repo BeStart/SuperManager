@@ -57,7 +57,7 @@ namespace SuperManager.DAL
 
             if (menuStatus != -1)
             {
-                return DataBaseHelper.More<DBMenuModel>(new { MenuStatus = menuStatus }, queryLambda, p => dataList.Contains(p.IdentityID) && p.MenuSort == p.MenuSort, orderLambda, true, TABLE_NAME);
+                return DataBaseHelper.More<DBMenuModel>(new { MenuStatus = menuStatus }, queryLambda, p => dataList.Contains(p.IdentityID) && p.MenuStatus == p.MenuStatus, orderLambda, true, TABLE_NAME);
             }
             else
             {

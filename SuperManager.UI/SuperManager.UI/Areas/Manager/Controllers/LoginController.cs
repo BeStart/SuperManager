@@ -61,7 +61,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                     this.Session[ConfigHelper.TokenName] = tokenModel;
                 }
                 // 设置角色权限
-                DataHelper.InitRoleMenuAndActionData(tokenModel.RoleID.ToString(), DALFactory.Menu.List(model.MenuList, MenuStatusTypeEnum.SHOW), model.ActionList, DALFactory.Module.All(""));
+                DataHelper.InitRoleMenuAndActionData(tokenModel.RoleID.ToString(), DALFactory.Menu.List(model.MenuList, MenuStatusTypeEnum.SHOW), model.ActionList, DALFactory.Module.List());
                 // 跳转到管理后台首页
                 return this.Redirect(Url.Action("Index", "Home"));
             }

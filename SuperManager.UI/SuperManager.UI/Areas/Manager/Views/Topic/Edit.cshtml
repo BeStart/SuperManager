@@ -111,10 +111,10 @@
     <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@ConfigHelper.Version"></script>
     <script type="text/javascript" src="~/JavaScripts/module/Topic/edit.js?v=@ConfigHelper.Version"></script>
     <script type="text/javascript">
-        var uploadCoverPath = "@Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File })";
-        var uploadFilePath = "@Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins })";
-        var uploadImagePath = "@Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Image, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins })";
-        var uploadVideoPath = "@Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Video, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins })";
+        var uploadCoverPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File }))";
+        var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadImagePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Image, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadVideoPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Video, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
     </script>   
 }
 

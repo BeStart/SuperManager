@@ -50,20 +50,30 @@ namespace SuperManager.DAL
             return DataBaseHelper.More<DBActionTypeModel>(null, p => new { p.IdentityID, p.TypeCode, p.TypeName }, p => dataList.Contains(p.TypeCode), p => p.TypeSort, true, TABLE_NAME);
         }
 
-        public List<DBActionTypeModel> All(string searchKey)
+        public List<DBActionTypeModel> Page(string searchKey, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
-            string commandText = "select IdentityID, TypeCode, TypeName from T_ActionType with(nolock) {0} order by TypeSort desc";
             StringBuilder stringBuilder = new StringBuilder();
-            if(!string.IsNullOrEmpty(searchKey))
+            if (!string.IsNullOrEmpty(searchKey))
             {
-                stringBuilder.Append(" where TypeCode like '%");
+                stringBuilder.Append(" TypeCode like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' or TypeName like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' ");
             }
-            commandText = string.Format(commandText, stringBuilder.ToString());
-            return DataBaseHelper.ToEntityList<DBActionTypeModel>(commandText);
+            string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
+
+            Dictionary<string, object> parameterList = new Dictionary<string, object>();
+            parameterList.Add("@FieldSql", "IdentityID, TypeCode, TypeName, TypeSort");
+            parameterList.Add("@Field", "");
+            parameterList.Add("@TableName", "T_ActionType");
+            parameterList.Add("@PrimaryKey", "IdentityID");
+            parameterList.Add("@PageIndex", pageIndex);
+            parameterList.Add("@PageSize", pageSize);
+            parameterList.Add("@WhereSql", whereSql);
+            parameterList.Add("@OrderSql", "TypeSort desc");
+
+            return DataBaseHelper.ToEntityList<DBActionTypeModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
     }
 }

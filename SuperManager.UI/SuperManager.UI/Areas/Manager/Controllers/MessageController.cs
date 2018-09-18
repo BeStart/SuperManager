@@ -81,7 +81,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             return this.UploadOperater(() =>
             {
                 return DataHelper.AuthAction(this.viewUserModel.RoleID.ToString(), "Message", "Upload");
-            }, type, fromType, CKEditorFuncNum);
+            }, type, fromType, CKEditorFuncNum, "Messages");
         }
 
         [HttpPost]

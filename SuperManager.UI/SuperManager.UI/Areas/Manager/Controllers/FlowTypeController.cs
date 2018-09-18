@@ -14,13 +14,14 @@ namespace SuperManager.UI.Areas.Manager.Controllers
     public class FlowTypeController : BaseManagerListController
     {
         [RoleMenuFilter]
-        public ActionResult List(string searchKey = "")
+        public ActionResult List(string searchKey = "", int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
+            List<DBFlowTypeModel> modelList = DALFactory.FlowType.Page(searchKey, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
 
-            this.InitViewData(searchKey, 0, "");
+            this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey }));
 
-            return View(DALFactory.FlowType.All(searchKey));
+            return View(modelList);
         }
 
         [RoleActionFilter]

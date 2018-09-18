@@ -45,18 +45,28 @@ namespace SuperManager.DAL
             return DataBaseHelper.More<DBTopicPositionTypeModel>(null, p => new { p.IdentityID, p.TypeName }, null, p => p.TypeSort, true, TABLE_NAME);
         }
 
-        public List<DBTopicPositionTypeModel> All(string searchKey)
+        public List<DBTopicPositionTypeModel> Page(string searchKey, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
-            string commandText = "select IdentityID, TypeName, TypeSort from T_TopicPositionType with(nolock) {0} order by TypeSort desc";
             StringBuilder stringBuilder = new StringBuilder();
-            if(!string.IsNullOrEmpty(searchKey))
+            if (!string.IsNullOrEmpty(searchKey))
             {
-                stringBuilder.Append(" where TypeName like '%");
+                stringBuilder.Append(" TypeName like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' ");
             }
-            commandText = string.Format(commandText, stringBuilder.ToString());
-            return DataBaseHelper.ToEntityList<DBTopicPositionTypeModel>(commandText);
+            string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
+
+            Dictionary<string, object> parameterList = new Dictionary<string, object>();
+            parameterList.Add("@FieldSql", "IdentityID, TypeName, TypeSort");
+            parameterList.Add("@Field", "");
+            parameterList.Add("@TableName", "T_TopicPositionType");
+            parameterList.Add("@PrimaryKey", "IdentityID");
+            parameterList.Add("@PageIndex", pageIndex);
+            parameterList.Add("@PageSize", pageSize);
+            parameterList.Add("@WhereSql", whereSql);
+            parameterList.Add("@OrderSql", "TypeSort desc");
+
+            return DataBaseHelper.ToEntityList<DBTopicPositionTypeModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
     }
 }

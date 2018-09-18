@@ -22,8 +22,8 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             List<ViewTreeMenuModel> dataList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.All(searchKey));
             this.InitViewData(searchKey, 0, "");
 
-            ViewBag.ActionTypeList = DALFactory.ActionType.All("");
-            ViewBag.ModuleList = DALFactory.Module.All("");
+            ViewBag.ActionTypeList = DALFactory.ActionType.List();
+            ViewBag.ModuleList = DALFactory.Module.List();
             return View(dataList);
         }
 
@@ -42,7 +42,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 model = DALFactory.Menu.Select(identityID);
             }
 
-            List<DBModuleModel> moduleList = DALFactory.Module.All("");
+            List<DBModuleModel> moduleList = DALFactory.Module.List();
 
             ViewBag.ParentID = parentID;
             ViewBag.TreeMenuList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.All(""));
@@ -98,10 +98,10 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         #region 获取页面菜单 JSON 数据
         public ActionResult GetMenuJsonText()
         {
-            List<DBModuleModel> moduleList = DALFactory.Module.All("");
+            List<DBModuleModel> moduleList = DALFactory.Module.List();
             if (moduleList == null) return this.Content("{}");
 
-            List<DBActionTypeModel> actionList = DALFactory.ActionType.All("");
+            List<DBActionTypeModel> actionList = DALFactory.ActionType.List();
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("{");

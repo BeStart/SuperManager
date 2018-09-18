@@ -45,7 +45,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             return this.UploadOperater(() =>
             {
                 return DataHelper.AuthAction(this.viewUserModel.RoleID.ToString(), "LinkFriend", "Upload");
-            }, type, fromType, CKEditorFuncNum, "Notices");
+            }, type, fromType, CKEditorFuncNum, "LinkFriends");
         }
 
         [RoleActionFilter]

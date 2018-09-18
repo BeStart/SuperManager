@@ -45,18 +45,28 @@ namespace SuperManager.DAL
             return DataBaseHelper.More<DBVoteTypeModel>(null, p => new { p.IdentityID, p.TypeName }, null, p => p.TypeSort, true, TABLE_NAME);
         }
 
-        public List<DBVoteTypeModel> All(string searchKey)
+        public List<DBVoteTypeModel> Page(string searchKey, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
-            string commandText = "select IdentityID, TypeName, TypeSort from T_VoteType with(nolock) {0} order by TypeSort desc";
             StringBuilder stringBuilder = new StringBuilder();
-            if(!string.IsNullOrEmpty(searchKey))
+            if (!string.IsNullOrEmpty(searchKey))
             {
-                stringBuilder.Append(" where TypeName like '%");
+                stringBuilder.Append(" TypeName like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' ");
             }
-            commandText = string.Format(commandText, stringBuilder.ToString());
-            return DataBaseHelper.ToEntityList<DBVoteTypeModel>(commandText);
+            string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
+
+            Dictionary<string, object> parameterList = new Dictionary<string, object>();
+            parameterList.Add("@FieldSql", "IdentityID, TypeName, TypeSort");
+            parameterList.Add("@Field", "");
+            parameterList.Add("@TableName", "T_VoteType");
+            parameterList.Add("@PrimaryKey", "IdentityID");
+            parameterList.Add("@PageIndex", pageIndex);
+            parameterList.Add("@PageSize", pageSize);
+            parameterList.Add("@WhereSql", whereSql);
+            parameterList.Add("@OrderSql", "TypeSort desc");
+
+            return DataBaseHelper.ToEntityList<DBVoteTypeModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
     }
 }

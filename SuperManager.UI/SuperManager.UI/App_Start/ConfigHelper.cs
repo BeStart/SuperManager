@@ -53,6 +53,17 @@ namespace SuperManager.UI
             get { return int.Parse(GetValue("logStatus")) > 0; }
         }
 
+        public static bool AuthStatus
+        {
+            get
+            {
+                string authStatus = GetValue("authStatus");
+                if (string.IsNullOrEmpty(authStatus)) return true;
+
+                return int.Parse(authStatus) > 0;
+            }
+        }
+
         public static int ManagerConextMenuOpenStatus
         {
             get { return int.Parse(GetValue("managerConextMenuOpenStatus")); }

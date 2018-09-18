@@ -48,23 +48,34 @@ namespace SuperManager.DAL
         }
         public List<DBModuleModel> List()
         {
-            return DataBaseHelper.More<DBModuleModel>(null, p => new { p.IdentityID, p.ModuleCode, p.ModuleName }, null, null, true, TABLE_NAME);
+            return DataBaseHelper.More<DBModuleModel>(null, p => new { p.IdentityID, p.ModuleCode, p.ModuleName, p.ActionList }, null, null, true, TABLE_NAME);
         }
 
-        public List<DBModuleModel> All(string searchKey)
+        public List<DBModuleModel> Page(string searchKey, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
-            string commandText = "select IdentityID, ModuleCode, ModuleName, ActionList from T_Module with(nolock) {0}";
             StringBuilder stringBuilder = new StringBuilder();
             if(!string.IsNullOrEmpty(searchKey))
             {
-                stringBuilder.Append(" where ModuleCode like '%");
+                stringBuilder.Append(" ModuleCode like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' or ModuleName like '%");
                 stringBuilder.Append(searchKey);
                 stringBuilder.Append("%' ");
             }
-            commandText = string.Format(commandText, stringBuilder.ToString());
-            return DataBaseHelper.ToEntityList<DBModuleModel>(commandText);
+
+            string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
+
+            Dictionary<string, object> parameterList = new Dictionary<string, object>();
+            parameterList.Add("@FieldSql", "IdentityID, ModuleCode, ModuleName, ActionList");
+            parameterList.Add("@Field", "");
+            parameterList.Add("@TableName", "T_Module");
+            parameterList.Add("@PrimaryKey", "IdentityID");
+            parameterList.Add("@PageIndex", pageIndex);
+            parameterList.Add("@PageSize", pageSize);
+            parameterList.Add("@WhereSql", whereSql);
+            parameterList.Add("@OrderSql", "IdentityID desc");
+
+            return DataBaseHelper.ToEntityList<DBModuleModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
     }
 }

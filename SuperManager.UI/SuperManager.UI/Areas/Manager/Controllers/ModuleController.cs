@@ -14,13 +14,14 @@ namespace SuperManager.UI.Areas.Manager.Controllers
     public class ModuleController : BaseManagerListController
     {
         [RoleMenuFilter]
-        public ActionResult List(string searchKey = "")
+        public ActionResult List(string searchKey = "", int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
+            List<DBModuleModel> modelList = DALFactory.Module.Page(searchKey, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
 
-            this.InitViewData(searchKey, 0, "");
+            this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey }));
 
-            return View(DALFactory.Module.All(searchKey));
+            return View(modelList);
         }
 
         [RoleActionFilter]

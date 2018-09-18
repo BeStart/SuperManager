@@ -31,5 +31,6 @@ namespace SuperManager.DAL
         public static AttachmentDAL Attachment { get { return new AttachmentDAL(); } }
         public static LinkFriendTypeDAL LinkFriendType { get { return new LinkFriendTypeDAL(); } }
         public static LinkFriendDAL LinkFriend { get { return new LinkFriendDAL(); } }
+        public static IndexMapperDAL IndexMapper { get { return new IndexMapperDAL(); } }
     }
 }
