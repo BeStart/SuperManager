@@ -64,11 +64,6 @@ namespace SuperManager.UI
             }
         }
 
-        public static int ManagerConextMenuOpenStatus
-        {
-            get { return int.Parse(GetValue("managerConextMenuOpenStatus")); }
-        }
-
         public static string GetValue(string key)
         {
             return ConfigurationManager.AppSettings[key];

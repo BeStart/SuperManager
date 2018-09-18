@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionTypeEnum.cs" />
-    <Compile Include="ContextMenuTypeEnum.cs" />
     <Compile Include="IndexMapperTypeEnum.cs" />
     <Compile Include="MessageStatusTypeEnum.cs" />
     <Compile Include="LoginStatusTypeEnum.cs" />
