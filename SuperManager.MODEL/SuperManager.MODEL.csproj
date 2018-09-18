@@ -56,6 +56,9 @@
     <Compile Include="DBMessageReplyModel.cs" />
     <Compile Include="DBActionTypeModel.cs" />
     <Compile Include="DBModuleModel.cs" />
+    <Compile Include="DBNoticeFullModel.cs" />
+    <Compile Include="DBNoticeModel.cs" />
+    <Compile Include="DBNoticeTypeModel.cs" />
     <Compile Include="DBProjectFullModel.cs" />
     <Compile Include="DBProjectModel.cs" />
     <Compile Include="DBProjectTypeModel.cs" />

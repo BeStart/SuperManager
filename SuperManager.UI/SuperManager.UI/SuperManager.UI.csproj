@@ -807,6 +807,7 @@
     <Content Include="JavaScripts\module\Menu\edit.js" />
     <Content Include="JavaScripts\module\Menu\list.js" />
     <Content Include="JavaScripts\module\Role\edit.js" />
+    <Content Include="JavaScripts\module\Notice\edit.js" />
     <Content Include="JavaScripts\module\Vote\edit.js" />
     <Content Include="JavaScripts\module\TopicType\list.js" />
     <Content Include="JavaScripts\module\Topic\edit.js" />
@@ -850,12 +851,14 @@
     <Compile Include="Areas\Manager\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Manager\Controllers\ProjectTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Manager\Controllers\NoticeController.cs" />
     <Compile Include="Areas\Manager\Controllers\TopicController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowSymbolTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\IndexMapperController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserLogController.cs" />
     <Compile Include="Areas\Manager\Controllers\UserController.cs" />
+    <Compile Include="Areas\Manager\Controllers\NoticeTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\VoteTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\TopicPositionTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\TopicTypeController.cs" />
@@ -954,6 +957,10 @@
     <Content Include="Log4net.config" />
     <Content Include="Areas\Manager\Views\IndexMapper\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\IndexMapper\List.cshtml" />
+    <Content Include="Areas\Manager\Views\NoticeType\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\NoticeType\List.cshtml" />
+    <Content Include="Areas\Manager\Views\Notice\Edit.cshtml" />
+    <Content Include="Areas\Manager\Views\Notice\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

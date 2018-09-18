@@ -25,7 +25,13 @@ namespace SuperManager.UI
 
         public static int ManagerPageSize
         {
-            get { return int.Parse(GetValue("managerPageSize")); }
+            get
+            {
+                string managerPageSize = GetValue("managerPageSize");
+                if (string.IsNullOrEmpty(managerPageSize)) return 1;
+
+                return int.Parse(managerPageSize);
+            }
         }
 
         public static string ConfuseKey
@@ -50,7 +56,13 @@ namespace SuperManager.UI
 
         public static bool LogStatus
         {
-            get { return int.Parse(GetValue("logStatus")) > 0; }
+            get
+            {
+                string logStatus = GetValue("logStatus");
+                if (string.IsNullOrEmpty(logStatus)) return false;
+
+                return int.Parse(logStatus) > 0;
+            }
         }
 
         public static bool AuthStatus
@@ -61,6 +73,17 @@ namespace SuperManager.UI
                 if (string.IsNullOrEmpty(authStatus)) return true;
 
                 return int.Parse(authStatus) > 0;
+            }
+        }
+
+        public static bool AttachStatus
+        {
+            get
+            {
+                string attachStatus = GetValue("attachStatus");
+                if (string.IsNullOrEmpty(attachStatus)) return false;
+
+                return int.Parse(attachStatus) > 0;
             }
         }
 

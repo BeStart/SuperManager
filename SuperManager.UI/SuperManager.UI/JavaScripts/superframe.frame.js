@@ -139,6 +139,7 @@ var FRAME_WIDTH = 0;
 var FRAME_HEIGHT = 0;
 var SHOW_MASK_WINDOW_ID = null;
 var SHOW_MASK_WINDOW_OPTIONS = null;
+var TEMP_FRAME_INDEX = 0;
 
 $(function () {
 
@@ -148,6 +149,17 @@ $(function () {
     InitFrameWidthAndHeight();
     // 初始化首页
     AppendMenuItem(0);
+    // 附加按钮事件
+    $("#btnAttachToFrame").click(function () {
+
+        var url = $("#txtAttachToFrame").val();
+        if (url == "") return;
+
+        AddMenuItem("TempFrame_" + TEMP_FRAME_INDEX, url);
+        TEMP_FRAME_INDEX++;
+
+        $("#txtAttachToFrame").val("");
+    });
     // 
     $("#frameNavList [data-trunk]").click(function (evt) {
         // 获取菜单编号

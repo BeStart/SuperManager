@@ -32,5 +32,8 @@ namespace SuperManager.DAL
         public static LinkFriendTypeDAL LinkFriendType { get { return new LinkFriendTypeDAL(); } }
         public static LinkFriendDAL LinkFriend { get { return new LinkFriendDAL(); } }
         public static IndexMapperDAL IndexMapper { get { return new IndexMapperDAL(); } }
+        public static NoticeTypeDAL NoticeType { get { return new NoticeTypeDAL(); } }
+        public static NoticeDAL Notice { get { return new NoticeDAL(); } }
+        
     }
 }

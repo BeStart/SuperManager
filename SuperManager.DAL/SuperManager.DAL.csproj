@@ -52,6 +52,7 @@
     <Compile Include="ActionTypeDAL.cs" />
     <Compile Include="FlowTypeDAL.cs" />
     <Compile Include="MenuDAL.cs" />
+    <Compile Include="NoticeDAL.cs" />
     <Compile Include="ProjectDAL.cs" />
     <Compile Include="ProjectTypeDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="UserLogDAL.cs" />
     <Compile Include="VoteDAL.cs" />
     <Compile Include="VoteItemDAL.cs" />
+    <Compile Include="NoticeTypeDAL.cs" />
     <Compile Include="VoteTypeDAL.cs" />
     <Compile Include="TopicPositionTypeDAL.cs" />
     <Compile Include="TopicTypeDAL.cs" />

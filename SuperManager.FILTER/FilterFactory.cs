@@ -28,5 +28,7 @@ namespace SuperManager.FILTER
         public static LinkFriendTypeFilter LinkFriendType = new LinkFriendTypeFilter();
         public static LinkFriendFilter LinkFriend = new LinkFriendFilter();
         public static IndexMapperFilter IndexMapper = new IndexMapperFilter();
+        public static NoticeFilter Notice = new NoticeFilter();
+        public static NoticeTypeFilter NoticeType = new NoticeTypeFilter();
     }
 }

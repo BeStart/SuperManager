@@ -1,0 +1,59 @@
+﻿@using Helper.Core.Library
+@using SuperManager.MODEL
+@model SuperManager.MODEL.DBNoticeModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="operater">
+    <form id="operaterForm" action="@Url.Action(Model != null ? "EditOperater" : "AddOperater", new { identityID = Model != null ? Model.IdentityID : 0 })" class="form-horizontal" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">公告类别：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <select class="form-control" style="width:400px;" name="noticeType">
+                    @if (ViewBag.NoticeTypeList != null && ViewBag.NoticeTypeList.Count > 0)
+                    {
+                        foreach (DBNoticeTypeModel modelItem in ViewBag.NoticeTypeList)
+                        {
+                            <option value="@modelItem.IdentityID" @Html.Raw((Model != null && Model.NoticeType == modelItem.IdentityID) ? "selected=\"selected\"" : "")>@Html.Raw(Server.HtmlEncode(modelItem.TypeName))</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">公告标题：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control" style="width:400px;" name="noticeTitle" type="text" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.NoticeTitle : ""))" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">公告内容：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <div style="width:800px;overflow:hidden;">
+                    <textarea name="noticeContent" style="height:400px;">@(Model != null ? Model.NoticeContent : "")</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span style="padding-left:100px;">
+                <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-saved" style="font-size:12px;padding-right : 10px;"></i>保存</button>
+                <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回公告管理</a>
+            </span>
+        </div>
+    </form>
+</div>
+@section Scripts
+{
+    <script type="text/javascript" src="~/JavaScripts/plugin.fileupload.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/module/Notice/edit.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript">
+        var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadImagePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Image, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadVideoPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Video, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+    </script>   
+}
+

@@ -51,6 +51,8 @@
     <Compile Include="FlowSymbolTypeFilter.cs" />
     <Compile Include="FlowTypeFilter.cs" />
     <Compile Include="MenuFilter.cs" />
+    <Compile Include="NoticeFilter.cs" />
+    <Compile Include="NoticeTypeFilter.cs" />
     <Compile Include="ProjectFilter.cs" />
     <Compile Include="ProjectTypeFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
