@@ -40,9 +40,28 @@ namespace SuperManager.DAL
         {
             return DataBaseHelper.More<DBIndexMapperModel>(null, p => new { p.IdentityID, p.IndexType, p.IndexID }, null, null, true, TABLE_NAME);
         }
-        public List<DBIndexMapperModel> All()
+        public List<DBIndexMapperModel> Page(int indexType, int pageIndex, int pageSize, ref int totalCount, ref int pageCount)
         {
-            return DataBaseHelper.More<DBIndexMapperModel>(null, p => new { p.IdentityID, p.IndexType, p.IndexID }, null, null, true, TABLE_NAME);
+            StringBuilder stringBuilder = new StringBuilder();
+            if (indexType != -1)
+            {
+                stringBuilder.Append(" IndexType = ");
+                stringBuilder.Append(indexType);
+                stringBuilder.Append(" and ");
+            }
+            string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
+
+            Dictionary<string, object> parameterList = new Dictionary<string, object>();
+            parameterList.Add("@FieldSql", "IdentityID, IndexType, IndexID");
+            parameterList.Add("@Field", "");
+            parameterList.Add("@TableName", "T_IndexMapper");
+            parameterList.Add("@PrimaryKey", "IdentityID");
+            parameterList.Add("@PageIndex", pageIndex);
+            parameterList.Add("@PageSize", pageSize);
+            parameterList.Add("@WhereSql", whereSql);
+            parameterList.Add("@OrderSql", "IdentityID desc");
+
+            return DataBaseHelper.ToEntityList<DBIndexMapperModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
     }
 }

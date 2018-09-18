@@ -15,7 +15,21 @@
                 <button type="button" id="toolbarDelete" class="btn btn-danger"><i class="glyphicon glyphicon-trash" style="font-size:12px;padding-right : 10px;"></i>删除</button>
             </div>
             <div class="input-group pull-right" style="padding:0px;width:400px;">
-                
+                <span class="input-group-btn" style="width : 135px;">
+                    <select class="form-control" name="indexType">
+                        <option value="-1" selected>选择类别</option>
+                        @if (ViewBag.IndexTypeList != null && ViewBag.IndexTypeList.Count > 0)
+                        {
+                            foreach (DBKeyValueModel modelItem in ViewBag.IndexTypeList)
+                            {
+                                <option value="@modelItem.Key" @Html.Raw(ViewData["IndexType"] != null && ViewData["IndexType"].ToString() == modelItem.Key ? "selected=\"selected\"" : "")>@Html.Raw(Server.HtmlEncode(modelItem.Value))</option>
+                            }
+                        }
+                    </select>
+                </span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" style="width:80px;" type="submit"><span class="glyphicon glyphicon-search"></span><i style="margin-left:10px;font-style:normal;">搜索</i></button>
+                </span>
             </div>
         </form>
     </div>
@@ -65,6 +79,10 @@
                                             <button class="btn btn-default" type="button" id="btnOperaterSubmit">操作</button>
                                         </span>
                                     </div>
+                                    @if (ViewData["PageModel"] != null)
+                                    {
+                                        @Html.Partial("~/Areas/Manager/Views/Shared/_Pagination.cshtml", ViewData["PageModel"])
+                                    }
                                 </td>
                             </tr>
                         }

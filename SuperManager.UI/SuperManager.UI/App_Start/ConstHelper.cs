@@ -21,6 +21,15 @@ namespace SuperManager.UI
             }}
         };
 
+        public static List<DBKeyValueModel> GetIndexMapperList()
+        {
+            List<DBKeyValueModel> modelList = new List<DBKeyValueModel>()
+            {
+                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.Topic.ToString(), Value = GetIndexMapperName(IndexMapperTypeEnum.Topic) },
+                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.LinkFriend.ToString(), Value = GetIndexMapperName(IndexMapperTypeEnum.LinkFriend) },
+            };
+            return modelList;
+        }
         public static Dictionary<int, List<DBKeyValueModel>> GetIndexMapperKeyValueDict()
         {
             return IndexMapperKeyValueDict;
@@ -33,6 +42,7 @@ namespace SuperManager.UI
         public static string GetIndexMapperName(int indexType)
         {
             if (indexType == IndexMapperTypeEnum.Topic) return "新闻";
+            if (indexType == IndexMapperTypeEnum.LinkFriend) return "链接";
             return "";
         }
         public static string GetIndexMapperName(int indexType, int indexID)

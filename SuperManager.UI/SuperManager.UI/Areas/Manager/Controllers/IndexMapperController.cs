@@ -15,10 +15,16 @@ namespace SuperManager.UI.Areas.Manager.Controllers
     public class IndexMapperController : BaseManagerListController
     {
         [RoleMenuFilter]
-        public ActionResult List()
+        public ActionResult List(int indexType = -1, int pageIndex = 1)
         {
-            this.InitViewData("", 0, "");
-            return View(DALFactory.IndexMapper.All());
+            List<DBIndexMapperModel> modelList = DALFactory.IndexMapper.Page(indexType, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+
+            this.InitViewData("", pageIndex, Url.Action("List", new { PageIndex = -999, IndexType = indexType }));
+
+            ViewBag.IndexTypeList = ConstHelper.GetIndexMapperList();
+            ViewData["IndexType"] = indexType;
+
+            return View(modelList);
         }
 
         [RoleActionFilter]
@@ -31,11 +37,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult Edit(int identityID = 0)
         {
             DBIndexMapperModel model = identityID > 0 ? DALFactory.IndexMapper.Select(identityID) : null;
-            ViewBag.IndexTypeList = new List<DBKeyValueModel>()
-            {
-                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.Topic.ToString(), Value = "主题" },
-                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.LinkFriend.ToString(), Value = "友情链接" },
-            };
+            ViewBag.IndexTypeList = ConstHelper.GetIndexMapperList();
             if(model != null)
             {
                 ViewBag.IndexIDList = ConstHelper.GetIndexMapperKeyValueList(model.IndexType);

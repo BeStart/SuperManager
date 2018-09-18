@@ -52,7 +52,7 @@ namespace SuperManager.DAL
             {
                 stringBuilder.Append(" TypeName like '%");
                 stringBuilder.Append(searchKey);
-                stringBuilder.Append("%' ");
+                stringBuilder.Append("%' and ");
             }
             string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
 
