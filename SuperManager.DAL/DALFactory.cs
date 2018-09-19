@@ -34,6 +34,6 @@ namespace SuperManager.DAL
         public static IndexMapperDAL IndexMapper { get { return new IndexMapperDAL(); } }
         public static NoticeTypeDAL NoticeType { get { return new NoticeTypeDAL(); } }
         public static NoticeDAL Notice { get { return new NoticeDAL(); } }
-        
+        public static InitDAL Init { get { return new InitDAL(); } }
     }
 }

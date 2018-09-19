@@ -44,7 +44,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
 
             if (model == null)
             {
-                return this.Content(string.Format("<script>alert('{0}');location.href='{1}'</script>", "用户名或者密码错误！", Url.Action("Index")));
+                return this.Redirect(Url.Action("Error", "Common", new { note = "用户名或者密码错误！", url = Url.Action("Index"), status = false, parent = false, hasParent = false }));
             }
             else
             {

@@ -1033,7 +1033,7 @@ namespace Helper.Core.Library
         /// 实体数据列表批量导入
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="connectionString"></param>
+        /// <param name="connectionString">连接字符串</param>
         /// <param name="tableName">数据库表名称</param>
         /// <param name="dataList">实体类型数据列表</param>
         /// <param name="propertyMatchList">属性匹配，Dictionary&lt;string, object&gt; 或 new {}</param>
@@ -1046,6 +1046,26 @@ namespace Helper.Core.Library
             DataTable dataTable = DataTableHelper.ToDataTable<T>(dataList, propertyMatchList, propertyList, propertyContain, reflectionType);
             if (dataTable != null) return DataTableBatchImport(connectionString, tableName, dataTable);
             return false;
+        }
+        /// <summary>
+        /// 实体数据列表批量导入
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="con">DbConnection</param>
+        /// <param name="transaction">DbTransaction</param>
+        /// <param name="tableName">数据库表名称</param>
+        /// <param name="dataList">实体类型数据列表</param>
+        /// <param name="propertyMatchList">属性匹配，Dictionary&lt;string, object&gt; 或 new {}</param>
+        /// <param name="propertyList">属性列表，如果指定，则按指定属性列表生成 DataTable 数据</param>
+        /// <param name="propertyContain">是否包含，true 属性包含，flase 属性排除</param>
+        /// <param name="reflectionType">反射类型</param>
+        public static void TransactionEntityListBatchImport<T>(DbConnection con, DbTransaction transaction, string tableName, List<T> dataList, object propertyMatchList = null, string[] propertyList = null, bool propertyContain = true, ReflectionTypeEnum reflectionType = ReflectionTypeEnum.Expression) where T : class
+        {
+            DataTable dataTable = DataTableHelper.ToDataTable<T>(dataList, propertyMatchList, propertyList, propertyContain, reflectionType);
+            if (dataTable != null)
+            {
+                TransactionDataTableBatchImport(con, transaction, tableName, dataTable);
+            }
         }
         /// <summary>
         /// DataTable 数据批量导入
@@ -1064,21 +1084,7 @@ namespace Helper.Core.Library
             {
                 using (con = CreateDbConnection(connectionString))
                 {
-                    using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(connectionString, SqlBulkCopyOptions.UseInternalTransaction))
-                    {
-                        sqlBulkCopy.DestinationTableName = tableName;
-
-                        int columnCount = dataTable.Columns.Count;
-                        DataColumn dataColumn = null;
-
-                        for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
-                        {
-                            dataColumn = dataTable.Columns[columnIndex];
-                            sqlBulkCopy.ColumnMappings.Add(dataColumn.ColumnName, dataColumn.ColumnName);
-                        }
-
-                        sqlBulkCopy.WriteToServer(dataTable);
-                    }
+                    ExecuteBatchDataTable(new SqlBulkCopy(connectionString, SqlBulkCopyOptions.UseInternalTransaction), tableName, dataTable);
                     return true;
                 }
             }
@@ -1090,6 +1096,18 @@ namespace Helper.Core.Library
             {
                 if (con != null) con.Close();
             }
+        }
+        /// <summary>
+        /// DataTable 数据批量导入
+        /// </summary>
+        /// <param name="con">DbConnection</param>
+        /// <param name="transaction">DbTransaction</param>
+        /// <param name="tableName">数据库表名称</param>
+        /// <param name="dataTable">DataTable 数据</param>
+        public static void TransactionDataTableBatchImport(DbConnection con, DbTransaction transaction, string tableName, DataTable dataTable)
+        {
+            if (DataBaseType != DataBaseTypeEnum.Sql) throw new Exception(BatchImportException);
+            ExecuteBatchDataTable(new SqlBulkCopy((SqlConnection)con, SqlBulkCopyOptions.Default, (SqlTransaction)transaction), tableName, dataTable);
         }
         #endregion
 
@@ -1400,14 +1418,14 @@ namespace Helper.Core.Library
             stringBuilder.Append(" ");
             stringBuilder.Append(GetWithNoLockSql(withNoLock));
             stringBuilder.Append(" ");
-            if (whereLambda != null)
+            if(whereLambda != null)
             {
                 stringBuilder.Append(" where ");
                 whereSql = GetWhereConditionSql<T>(whereLambda);
                 stringBuilder.Append(whereSql);
             }
             stringBuilder.Append(" ");
-            if (orderLambda != null)
+            if(orderLambda != null)
             {
                 stringBuilder.Append(" order by ");
                 stringBuilder.Append(GetOrderConditionSql<T>(orderLambda));
@@ -1425,7 +1443,7 @@ namespace Helper.Core.Library
                 return TransactionEntityList<T>(con, transaction, commandText, RevisePropertyMapperDict<T>(new Dictionary<string, object>(), data, whereSql), propertyMatchList, reflectionType);
             }
         }
-
+        
         private static void ExecuteCommand(string connectionString, string dataBaseType, string commandText, Dictionary<string, object> parameterList, Dictionary<string, object> outParameterList, CommandType commandType = CommandType.Text, Action<DbCommand> callback = null, DbConnection con = null, DbTransaction transaction = null)
         {
             DbCommand command = null;
@@ -1551,6 +1569,24 @@ namespace Helper.Core.Library
                 {
                     callback(dataReader);
                 }
+            }
+        }
+        private static void ExecuteBatchDataTable(SqlBulkCopy sqlBulkCopy, string tableName, DataTable dataTable)
+        {
+            using (sqlBulkCopy)
+            {
+                sqlBulkCopy.DestinationTableName = tableName;
+
+                int columnCount = dataTable.Columns.Count;
+                DataColumn dataColumn = null;
+
+                for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+                {
+                    dataColumn = dataTable.Columns[columnIndex];
+                    sqlBulkCopy.ColumnMappings.Add(dataColumn.ColumnName, dataColumn.ColumnName);
+                }
+
+                sqlBulkCopy.WriteToServer(dataTable);
             }
         }
         private static List<T> DataReaderToEntityList<T>(DbCommand command, object propertyMatchList = null, ReflectionTypeEnum reflectionType = ReflectionTypeEnum.Expression, DbConnection con = null, DbTransaction transaction = null) where T : class, new()

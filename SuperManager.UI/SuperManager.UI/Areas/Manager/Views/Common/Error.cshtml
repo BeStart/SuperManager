@@ -10,7 +10,14 @@
     <script type="text/javascript" src="~/JavaScripts/jquery.min.js?v=@ConfigHelper.Version"></script>
     <script type="text/javascript" src="~/Content/3.3.7/js/bootstrap.min.js?v=@ConfigHelper.Version"></script>
     <script type="text/javascript" src="~/JavaScripts/plugin.common.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/superframe.ui.js?v=@ConfigHelper.Version"></script>
+    @if (ViewBag.HasParent)
+    {
+        <script type="text/javascript" src="~/JavaScripts/superframe.ui.js?v=@ConfigHelper.Version"></script>
+    }
+    else
+    {
+        <script type="text/javascript" src="~/JavaScripts/superframe.frame.js?v=@ConfigHelper.Version"></script>
+    }
 
     <script type="text/javascript">
 

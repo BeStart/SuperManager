@@ -44,6 +44,7 @@
     <Compile Include="DALFactory.cs" />
     <Compile Include="FlowDAL.cs" />
     <Compile Include="FlowStepDAL.cs" />
+    <Compile Include="InitDAL.cs" />
     <Compile Include="LinkFriendDAL.cs" />
     <Compile Include="LinkFriendTypeDAL.cs" />
     <Compile Include="MessageDAL.cs" />

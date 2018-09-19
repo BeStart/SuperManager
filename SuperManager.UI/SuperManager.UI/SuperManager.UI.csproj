@@ -840,6 +840,7 @@
     <Compile Include="Areas\Manager\Controllers\BaseManagerListController.cs" />
     <Compile Include="Areas\Manager\Controllers\CommonController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowController.cs" />
+    <Compile Include="Areas\Manager\Controllers\InitController.cs" />
     <Compile Include="Areas\Manager\Controllers\LinkFriendController.cs" />
     <Compile Include="Areas\Manager\Controllers\LinkFriendTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\MessageController.cs" />
@@ -961,6 +962,7 @@
     <Content Include="Areas\Manager\Views\NoticeType\List.cshtml" />
     <Content Include="Areas\Manager\Views\Notice\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\Notice\List.cshtml" />
+    <Content Include="Areas\Manager\Views\Init\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
