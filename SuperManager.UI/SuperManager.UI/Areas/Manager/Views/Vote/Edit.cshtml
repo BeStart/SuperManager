@@ -111,8 +111,8 @@
 </div>
 @section Scripts
 {
-    <script type="text/javascript" src="~/JavaScripts/plugin.vote.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/module/Vote/edit.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/plugin.vote.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/module/Vote/edit.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript">
         var voteJsonText = "@Html.Raw(ViewBag.VoteItemList)";
         var voteJsonData = JSON.parse(voteJsonText);

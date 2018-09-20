@@ -107,9 +107,9 @@
 </div>
 @section Scripts
 {
-    <script type="text/javascript" src="~/JavaScripts/plugin.fileupload.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/module/Topic/edit.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/plugin.fileupload.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/module/Topic/edit.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript">
         var uploadCoverPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File }))";
         var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";

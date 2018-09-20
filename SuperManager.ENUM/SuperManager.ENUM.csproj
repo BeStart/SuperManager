@@ -46,6 +46,7 @@
     <Compile Include="MenuStatusTypeEnum.cs" />
     <Compile Include="OperaterTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingTypeEnum.cs" />
     <Compile Include="TokenTypeEnum.cs" />
     <Compile Include="UploadFromTypeEnum.cs" />
     <Compile Include="UploadTypeEnum.cs" />

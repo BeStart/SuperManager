@@ -20,6 +20,9 @@ namespace SuperManager.UI
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            // 加载 xml 网站配置信息
+            SettingHelper.Init(Server.MapPath("~/settings.xml"));
+
             // 初始化数据库连接字符串
             DataBaseHelper.InitConnectionString(ConfigHelper.ConnectionString);
             // Log4 日志配置加载
@@ -41,7 +44,7 @@ namespace SuperManager.UI
         protected void Application_Error(object sender, EventArgs e)
         {
             // 如果日志未开启
-            if (!ConfigHelper.LogStatus) return;
+            if (!SettingHelper.LogOpenStatus) return;
 
             Exception exception = Server.GetLastError();
             // 开始一个线程来写日志

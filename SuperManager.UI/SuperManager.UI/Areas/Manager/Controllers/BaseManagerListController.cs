@@ -14,6 +14,14 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         protected int pageCount = 0;
         #endregion
 
+        protected virtual int PageSize
+        {
+            get
+            {
+                return SettingHelper.ManagerPageSize;
+            }
+        }
+
         protected virtual void InitViewData(string searchKey, int pageIndex, string pageUrl)
         {
             ViewData.Add("SearchKey", searchKey);

@@ -18,7 +18,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             if (attachmentType == "-1") attachmentType = "";
 
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBAttachmentModel> modelList = DALFactory.Attachment.Page(searchKey, attachmentType, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBAttachmentModel> modelList = DALFactory.Attachment.Page(searchKey, attachmentType, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, AttachmentType = attachmentType }));
 

@@ -76,8 +76,8 @@
 </div>
 @section Scripts
 {
-    <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/module/Message/info.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/module/Message/info.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript">
     var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
     var uploadImagePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Image, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";

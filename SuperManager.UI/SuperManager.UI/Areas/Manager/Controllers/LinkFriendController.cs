@@ -17,7 +17,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         {
             searchKey = this.FilterSpecChar(searchKey);
 
-            List<DBLinkFriendFullModel> modelList = DALFactory.LinkFriend.Page(searchKey, linkFriendType, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBLinkFriendFullModel> modelList = DALFactory.LinkFriend.Page(searchKey, linkFriendType, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, LinkFriendType = linkFriendType }));
             ViewData["LinkFriendType"] = linkFriendType;

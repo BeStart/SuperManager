@@ -3,10 +3,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>首页 - @ConfigHelper.ManagerTitle</title>
-    <link rel="stylesheet" href="~/Content/3.3.7/css/bootstrap.min.css?v=@ConfigHelper.Version" />
-    <link rel="stylesheet" href="~/Content/plugin.css?v=@ConfigHelper.Version" />
-    <link rel="stylesheet" href="~/Content/superframe.ui.css?v=@ConfigHelper.Version" />
+    <title>首页 - @SettingHelper.ManagerTitle</title>
+    <link rel="stylesheet" href="~/Content/3.3.7/css/bootstrap.min.css?v=@SettingHelper.Version" />
+    <link rel="stylesheet" href="~/Content/plugin.css?v=@SettingHelper.Version" />
+    <link rel="stylesheet" href="~/Content/superframe.ui.css?v=@SettingHelper.Version" />
 </head>
 <body style="overflow-y:hidden;overflow-x:hidden">
 
@@ -42,7 +42,7 @@
             <div class="pull-left expand-close">
                 <span class="btn btn-info" id="btnExpandOrCloseNav"><i class="glyphicon glyphicon-folder-open"></i></span>
             </div>
-            @if (ConfigHelper.AttachStatus)
+            @if (SettingHelper.AttachOpenStatus)
             { 
             <div class="pull-left input-group" style="width:500px;margin-left:10px;">
                 <input type="text" id="txtAttachToFrame" class="form-control" placeholder="输入链接地址！" />
@@ -66,9 +66,9 @@
             <iframe id="iframe_item_0" data-id="0" src="@Url.Action("Detail")" class="frame-iframe"></iframe>
         </div>
     </div>
-    <script type="text/javascript" src="~/JavaScripts/jquery.min.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/Content/3.3.7/js/bootstrap.min.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/plugin.common.js?v=@ConfigHelper.Version"></script>
-    <script type="text/javascript" src="~/JavaScripts/superframe.frame.js?v=@ConfigHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/jquery.min.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/Content/3.3.7/js/bootstrap.min.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/plugin.common.js?v=@SettingHelper.Version"></script>
+    <script type="text/javascript" src="~/JavaScripts/superframe.frame.js?v=@SettingHelper.Version"></script>
 </body>
 </html>

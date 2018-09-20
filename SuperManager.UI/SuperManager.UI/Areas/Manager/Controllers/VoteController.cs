@@ -20,7 +20,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult List(string searchKey = "", int voteType = -1, int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBVoteFullModel> modelList = DALFactory.Vote.Page(searchKey, voteType, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBVoteFullModel> modelList = DALFactory.Vote.Page(searchKey, voteType, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, VoteType = voteType }));
             ViewData["VoteType"] = voteType;

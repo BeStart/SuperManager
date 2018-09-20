@@ -21,3 +21,4 @@ LinkFriend,友情链接
 IndexMapper,类别映射
 NoticeType,公告类别
 Notice,公告
+Setting,系统设置

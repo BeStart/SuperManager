@@ -26,7 +26,7 @@ namespace SuperManager.UI
                 this.RedirectToLoginUrl(filterContext);
             }
             // 如果未开启授权验证
-            if (!ConfigHelper.AuthStatus) return;
+            if (!SettingHelper.AuthOpenStatus) return;
 
             // 如果以后缀 operater 出现
             if (actionName.EndsWith("operater"))

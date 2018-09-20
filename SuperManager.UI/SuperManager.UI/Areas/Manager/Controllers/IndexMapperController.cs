@@ -17,7 +17,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [RoleMenuFilter]
         public ActionResult List(int indexType = -1, int pageIndex = 1)
         {
-            List<DBIndexMapperModel> modelList = DALFactory.IndexMapper.Page(indexType, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBIndexMapperModel> modelList = DALFactory.IndexMapper.Page(indexType, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData("", pageIndex, Url.Action("List", new { PageIndex = -999, IndexType = indexType }));
 

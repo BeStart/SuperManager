@@ -70,31 +70,31 @@ namespace SuperManager.DAL
 
                 #region 添加菜单数据，只支持二级菜单，二级以上菜单需要初始化进入后台之后再手动调整
 
-                List<InitMenuModel> menuModelList = new List<InitMenuModel>();
+                List<ViewInitMenuModel> menuModelList = new List<ViewInitMenuModel>();
 
                 // 读取菜单数据
-                List<InitMenuItemModel> menuItemModelList = TxtHelper.ToEntityList<InitMenuItemModel>(directoryPath + "Menus.txt", ",");
+                List<ViewInitMenuItemModel> menuItemModelList = TxtHelper.ToEntityList<ViewInitMenuItemModel>(directoryPath + "Menus.txt", ",");
                 // 读取根级菜单数据
-                List<InitMenuItemModel> rootMenuItemModelList = menuItemModelList.Where(p => string.IsNullOrEmpty(p.ParentCode) || p.ParentCode == "-1").ToList();
+                List<ViewInitMenuItemModel> rootMenuItemModelList = menuItemModelList.Where(p => string.IsNullOrEmpty(p.ParentCode) || p.ParentCode == "-1").ToList();
 
-                foreach (InitMenuItemModel rootMenuItemModel in rootMenuItemModelList)
+                foreach (ViewInitMenuItemModel rootMenuItemModel in rootMenuItemModelList)
                 {
-                    InitMenuModel menuModel = new InitMenuModel()
+                    ViewInitMenuModel menuModel = new ViewInitMenuModel()
                     {
                         TrunkMenu = new DBMenuModel() { ParentID = 0, MenuName = rootMenuItemModel.MenuName, BelongModule = "-1", MenuIcon = rootMenuItemModel.MenuIcon, MenuUrl = "", ActionList = "", MenuSort = 0, MenuStatus = 1 },
                         NodeMenuList = new List<DBMenuModel>() { }
                     };
-                    List<InitMenuItemModel> nodeMenuItemModelList = menuItemModelList.Where(p => p.ParentCode == rootMenuItemModel.MenuCode).ToList();
+                    List<ViewInitMenuItemModel> nodeMenuItemModelList = menuItemModelList.Where(p => p.ParentCode == rootMenuItemModel.MenuCode).ToList();
                     if (nodeMenuItemModelList != null && nodeMenuItemModelList.Count > 0)
                     {
-                        foreach(InitMenuItemModel nodeMenuItemModel in nodeMenuItemModelList)
+                        foreach (ViewInitMenuItemModel nodeMenuItemModel in nodeMenuItemModelList)
                         {
                             menuModel.NodeMenuList.Add(new DBMenuModel() { MenuName = nodeMenuItemModel.MenuName, MenuUrl = nodeMenuItemModel.MenuUrl, BelongModule = nodeMenuItemModel.MenuCode, ActionList = moduleActionDict.ContainsKey(nodeMenuItemModel.MenuCode) ? moduleActionDict[nodeMenuItemModel.MenuCode] : "", ParentID = 0, MenuIcon = "", MenuSort = 0, MenuStatus = 1 });
                         }
                     }
                     menuModelList.Add(menuModel);
                 }
-                foreach(InitMenuModel menuItem in menuModelList)
+                foreach (ViewInitMenuModel menuItem in menuModelList)
                 {
                     DBMenuModel menuModel = menuItem.TrunkMenu;
                     int menuID = DataBaseHelper.TransactionScalar<int>(con, transaction, "insert into T_Menu(ParentID, MenuName, MenuUrl, BelongModule, ActionList, MenuSort, MenuIcon, MenuStatus)values(@ParentID, @MenuName, @MenuUrl, @BelongModule, @ActionList, @MenuSort, @MenuIcon, @MenuStatus);select SCOPE_IDENTITY();", new { menuModel.ParentID, menuModel.MenuName, menuModel.MenuIcon, menuModel.BelongModule, menuModel.MenuUrl, menuModel.ActionList, menuModel.MenuSort, menuModel.MenuStatus });
@@ -127,24 +127,5 @@ namespace SuperManager.DAL
                 return true;
             });
         }
-    }
-
-    class InitMenuModel
-    {
-        public DBMenuModel TrunkMenu { get; set; }
-        public List<DBMenuModel> NodeMenuList { get; set; }
-    }
-    public class InitMenuItemModel
-    {
-        [TxtT(0)]
-        public string MenuCode { get; set; }
-        [TxtT(1)]
-        public string MenuName { get; set; }
-        [TxtT(2)]
-        public string MenuUrl { get; set; }
-        [TxtT(3)]
-        public string MenuIcon { get; set; }
-        [TxtT(4)]
-        public string ParentCode { get; set; }
     }
 }

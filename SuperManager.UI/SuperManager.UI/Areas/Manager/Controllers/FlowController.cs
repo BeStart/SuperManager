@@ -20,7 +20,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult List(string searchKey = "", int flowType = -1, int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBFlowFullModel> modelList = DALFactory.Flow.Page(searchKey, flowType, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBFlowFullModel> modelList = DALFactory.Flow.Page(searchKey, flowType, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, FlowType = flowType }));
             ViewData["FlowType"] = flowType;

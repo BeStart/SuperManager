@@ -16,7 +16,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult List(string searchKey = "", int roleID = -1, int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBUserFullModel> modelList = DALFactory.User.Page(searchKey, roleID, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBUserFullModel> modelList = DALFactory.User.Page(searchKey, roleID, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, RoleID = roleID }));
             ViewData["RoleID"] = roleID;

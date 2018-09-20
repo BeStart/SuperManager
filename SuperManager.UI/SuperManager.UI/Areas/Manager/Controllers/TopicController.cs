@@ -17,7 +17,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult List(string searchKey = "", int topicType = -1, int topicPositionType = -1, int topicStatus = -1, int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBTopicFullModel> modelList = DALFactory.Topic.Page(searchKey, topicType, topicPositionType, topicStatus, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBTopicFullModel> modelList = DALFactory.Topic.Page(searchKey, topicType, topicPositionType, topicStatus, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, TopicType = topicType, TopicPosition = topicPositionType, TopicStatus = topicStatus }));
 

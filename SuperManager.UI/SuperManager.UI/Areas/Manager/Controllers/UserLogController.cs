@@ -17,7 +17,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult List(string searchKey = "", int loginStatus = -1, int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBUserLogModel> modelList = DALFactory.UserLog.Page(searchKey, loginStatus, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBUserLogModel> modelList = DALFactory.UserLog.Page(searchKey, loginStatus, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, LoginStatus = loginStatus }));
             ViewBag.StatusTypeList = new List<DBKeyValueModel>()

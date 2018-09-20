@@ -21,3 +21,4 @@ LinkFriend:Add,Delete,Edit
 IndexMapper:Add,Delete,Edit
 NoticeType:Add,Delete,Edit
 Notice:Add,Delete,Edit,Upload
+Setting:Set

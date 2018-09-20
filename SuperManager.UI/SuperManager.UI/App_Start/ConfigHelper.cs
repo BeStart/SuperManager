@@ -13,27 +13,6 @@ namespace SuperManager.UI
             get { return GetValue("connectionString"); }
         }
 
-        public static string Version
-        {
-            get { return GetValue("version"); }
-        }
-
-        public static string ManagerTitle
-        {
-            get { return GetValue("managerTitle"); }
-        }
-
-        public static int ManagerPageSize
-        {
-            get
-            {
-                string managerPageSize = GetValue("managerPageSize");
-                if (string.IsNullOrEmpty(managerPageSize)) return 1;
-
-                return int.Parse(managerPageSize);
-            }
-        }
-
         public static string ConfuseKey
         {
             get { return GetValue("confuseKey"); }
@@ -52,39 +31,6 @@ namespace SuperManager.UI
         public static string TokenUserCode
         {
             get { return GetValue("tokenUserCode"); }
-        }
-
-        public static bool LogStatus
-        {
-            get
-            {
-                string logStatus = GetValue("logStatus");
-                if (string.IsNullOrEmpty(logStatus)) return false;
-
-                return int.Parse(logStatus) > 0;
-            }
-        }
-
-        public static bool AuthStatus
-        {
-            get
-            {
-                string authStatus = GetValue("authStatus");
-                if (string.IsNullOrEmpty(authStatus)) return true;
-
-                return int.Parse(authStatus) > 0;
-            }
-        }
-
-        public static bool AttachStatus
-        {
-            get
-            {
-                string attachStatus = GetValue("attachStatus");
-                if (string.IsNullOrEmpty(attachStatus)) return false;
-
-                return int.Parse(attachStatus) > 0;
-            }
         }
 
         public static string GetValue(string key)

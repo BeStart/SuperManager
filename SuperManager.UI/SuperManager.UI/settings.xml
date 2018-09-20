@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <!--管理后台版本-->
+  <item name="version" value="1.0.0.2" />
+  <!--管理后台 Title 显示-->
+  <item name="managerTitle" value="信息管理系统界面" />
+  <!--管理后台分页页大小-->
+  <item name="managerPageSize" value="10" />
+  <!--是否开启日志记录-->
+  <item name="logOpenStatus" value="0" />
+  <!--是否开启权限验证-->
+  <item name="authOpenStatus" value="1" />
+  <!--是否开启管理后台首页开发者工具-->
+  <item name="attachOpenStatus" value="1" />
+  <!--数据库备份参数-->
+  <item name="bakCron" value="00:50" />
+</settings>

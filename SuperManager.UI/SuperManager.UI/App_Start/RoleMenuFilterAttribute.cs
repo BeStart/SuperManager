@@ -49,7 +49,7 @@ namespace SuperManager.UI
                 this.RedirectToLoginUrl(filterContext);
             }
             // 如果未开启授权验证
-            if (!ConfigHelper.AuthStatus) return;
+            if (!SettingHelper.AuthOpenStatus) return;
 
             bool authStatus = DataHelper.AuthMenu(viewUserModel.RoleID.ToString(), string.Format("/{0}/{1}/{2}", this.areaName, this.controllerName, this.actionName), this.paramDict);
             if (!authStatus)

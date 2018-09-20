@@ -17,7 +17,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult List(string searchKey = "", int projectType = -1, int flowID = -1, int pageIndex = 1)
         {
             searchKey = StringHelper.FilterSpecChar(searchKey);
-            List<DBProjectFullModel> modelList = DALFactory.Project.Page(searchKey, projectType, flowID, pageIndex, ConfigHelper.ManagerPageSize, ref this.totalCount, ref this.pageCount);
+            List<DBProjectFullModel> modelList = DALFactory.Project.Page(searchKey, projectType, flowID, pageIndex, this.PageSize, ref this.totalCount, ref this.pageCount);
 
             this.InitViewData(searchKey, pageIndex, Url.Action("List", new { PageIndex = -999, SearchKey = searchKey, ProjectType = projectType, FlowID = flowID }));
             ViewData["ProjectType"] = projectType;

@@ -88,6 +88,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Static\loading.gif" />
+    <Content Include="settings.xml" />
     <Content Include="Content\3.3.7\css\bootstrap-theme.css" />
     <Content Include="Content\3.3.7\css\bootstrap-theme.min.css" />
     <Content Include="Content\3.3.7\css\bootstrap.css" />
@@ -103,7 +105,6 @@
     <Content Include="Content\Static\header-background.gif" />
     <Content Include="Content\Static\help.png" />
     <Content Include="Content\Static\icon-user.png" />
-    <Content Include="Content\Static\loading.gif" />
     <Content Include="Content\Static\login-background.jpg" />
     <Content Include="Content\Static\login-password.png" />
     <Content Include="Content\Static\login-user.png" />
@@ -839,6 +840,7 @@
     <Compile Include="App_Start\RoleMenuFilterAttribute.cs" />
     <Compile Include="App_Start\RoleAuthorizeAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SettingHelper.cs" />
     <Compile Include="Areas\Manager\Controllers\AttachmentController.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseManagerController.cs" />
@@ -858,6 +860,7 @@
     <Compile Include="Areas\Manager\Controllers\ProjectTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\RoleController.cs" />
     <Compile Include="Areas\Manager\Controllers\NoticeController.cs" />
+    <Compile Include="Areas\Manager\Controllers\SettingController.cs" />
     <Compile Include="Areas\Manager\Controllers\TopicController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowTypeController.cs" />
     <Compile Include="Areas\Manager\Controllers\FlowSymbolTypeController.cs" />
@@ -968,6 +971,7 @@
     <Content Include="Areas\Manager\Views\Notice\Edit.cshtml" />
     <Content Include="Areas\Manager\Views\Notice\List.cshtml" />
     <Content Include="Areas\Manager\Views\Init\Index.cshtml" />
+    <Content Include="Areas\Manager\Views\Setting\Set.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

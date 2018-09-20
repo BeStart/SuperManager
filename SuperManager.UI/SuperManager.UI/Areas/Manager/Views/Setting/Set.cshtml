@@ -1,0 +1,50 @@
+﻿@model SuperManager.MODEL.DBVoteTypeModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="operater">
+    <form action="@Url.Action("SetOperater")" class="form-horizontal" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">数据备份：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control" style="width:400px;" type="text" name="bakCron" value="@Html.Raw(Server.HtmlEncode(SettingHelper.BakCron))" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">后台版本：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control" style="width:400px;" type="text" name="version" value="@Html.Raw(Server.HtmlEncode(SettingHelper.Version))" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">后台标题：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control" style="width:400px;" type="text" name="managerTitle" value="@Html.Raw(Server.HtmlEncode(SettingHelper.ManagerTitle))" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">分页大小：</label>
+            <div class="col-xs-10" style="padding-left : 0px;">
+                <input class="form-control" style="width:100px;" type="text" name="managerPageSize" value="@SettingHelper.ManagerPageSize" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">&nbsp;</label>
+            <div class="col-xs-10 checkbox-inline forbidden-text-select">
+                <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="logOpenStatus" value="@(SettingHelper.LogOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.LogOpenStatus ? "checked=\"checked\"" : "") />是否开启日志记录</label>
+                <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="authOpenStatus" value="@(SettingHelper.AuthOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.AuthOpenStatus ? "checked=\"checked\"" : "") />是否开启权限认证</label>
+                <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="attachOpenStatus" value="@(SettingHelper.AttachOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.AttachOpenStatus ? "checked=\"checked\"" : "") />是否开启开发者工具</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <span style="padding-left:100px;">
+                <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-saved" style="font-size:12px;padding-right : 10px;"></i>保存配置</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+

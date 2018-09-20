@@ -23,6 +23,7 @@ Module,模块管理,/Manager/Module/List,#,Setting-Trunk
 Menu,菜单管理,/Manager/Menu/List,#,Setting-Trunk
 Role,角色管理,/Manager/Role/List,#,Setting-Trunk
 User,用户管理,/Manager/User/List,#,Setting-Trunk
+Setting,用户管理,/Manager/Setting/Set,#,Setting-Trunk
 Message,留言管理,/Manager/Message/List,#,Setting-Trunk
 UserLog,日志管理,/Manager/UserLog/List,#,Setting-Trunk
 Attachment,附件管理,/Manager/Attachment/List,#,Setting-Trunk
