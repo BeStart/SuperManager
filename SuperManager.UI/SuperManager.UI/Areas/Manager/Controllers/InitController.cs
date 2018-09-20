@@ -19,7 +19,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [ValidateAntiForgeryToken()]
         public ActionResult Init(string userCode, string nickName, string userPassword)
         {
-            bool result = DALFactory.Init.Init(userCode, nickName, EncryptHelper.MD5(userPassword, ConfigHelper.ConfuseKey));
+            bool result = DALFactory.Init.Init(userCode, nickName, EncryptHelper.MD5(userPassword, ConfigHelper.ConfuseKey), Server.MapPath("~/Init/"));
             if(result)
             {
                 return this.Redirect(Url.Action("Error", "Common", new { note = "初始化成功！", url = Url.Action("Index", "Home"), status = true, parent = false, hasParent = false }));

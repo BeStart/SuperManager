@@ -129,6 +129,11 @@
     <Content Include="Content\superframe.ui.css" />
     <Content Include="Content\ui.css" />
     <Content Include="Global.asax" />
+    <Content Include="Init\Actions.txt" />
+    <Content Include="Init\Menus.txt" />
+    <Content Include="Init\ModuleActions.txt" />
+    <Content Include="Init\Modules.txt" />
+    <Content Include="Init\Role.txt" />
     <Content Include="JavaScripts\ckeditor\adapters\jquery.js" />
     <Content Include="JavaScripts\ckeditor\build-config.js" />
     <Content Include="JavaScripts\ckeditor\ckeditor.js" />
