@@ -22,6 +22,11 @@ namespace SuperManager.UI
         {
             try
             {
+                if (dict == null) return false;
+
+                string prevBakCon = (SettingDict != null && SettingDict.ContainsKey(SettingTypeEnum.BakCron)) ? SettingDict[SettingTypeEnum.BakCron] : "";
+                string currentBakCon = (dict.ContainsKey(SettingTypeEnum.BakCron)) ? dict[SettingTypeEnum.BakCron] : "";
+
                 if(!dict.ContainsKey(SettingTypeEnum.LogOpenStatus))
                 {
                     dict[SettingTypeEnum.LogOpenStatus] = "0";
@@ -42,6 +47,12 @@ namespace SuperManager.UI
                 }
                 XmlHelper.SetValue<ViewSettingModel>(XmlPath, "//settings", "item[@name=\"{name}\"]", modelList, null);
                 SettingDict = dict;
+
+                if (prevBakCon != currentBakCon)
+                {
+                    // 重新设置备份作业
+                    TaskHelper.RunBakDataBase();
+                }
 
                 return true;
             }
@@ -102,6 +113,10 @@ namespace SuperManager.UI
         public static string BakCron
         {
             get { return GetValue(SettingTypeEnum.BakCron); }
+        }
+        public static string BakPath
+        {
+            get { return GetValue(SettingTypeEnum.BakPath); }
         }
 
         private static string GetValue(string key)

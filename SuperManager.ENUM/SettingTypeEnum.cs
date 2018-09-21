@@ -15,5 +15,6 @@ namespace SuperManager.ENUM
         public const string AuthOpenStatus = "authOpenStatus";
         public const string AttachOpenStatus = "attachOpenStatus";
         public const string BakCron = "bakCron";
+        public const string BakPath = "bakPath";
     }
 }

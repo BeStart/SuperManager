@@ -12,6 +12,8 @@
   <item name="authOpenStatus" value="1" />
   <!--是否开启管理后台首页开发者工具-->
   <item name="attachOpenStatus" value="1" />
-  <!--数据库备份参数-->
-  <item name="bakCron" value="00:50" />
+  <!--数据库备份参数 默认每天 3 点-->
+  <item name="bakCron" value="0 0 3 * * ?" />
+  <!--数据库备份路径-->
+  <item name="bakPath" value="~/DataBase/" />
 </settings>

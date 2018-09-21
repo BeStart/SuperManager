@@ -12,3 +12,6 @@ E:\GitProject\SuperManager\SuperManager.MODEL\bin\Debug\Helper.Core.Library.pdb
 E:\GitProject\SuperManager\SuperManager.MODEL\obj\Debug\SuperManager.MODEL.csprojResolveAssemblyReference.cache
 E:\GitProject\SuperManager\SuperManager.MODEL\obj\Debug\SuperManager.MODEL.dll
 E:\GitProject\SuperManager\SuperManager.MODEL\obj\Debug\SuperManager.MODEL.pdb
+E:\GitProject\SuperManager\SuperManager.MODEL\bin\Debug\Quartz.dll
+E:\GitProject\SuperManager\SuperManager.MODEL\bin\Debug\Common.Logging.Core.dll
+E:\GitProject\SuperManager\SuperManager.MODEL\bin\Debug\Common.Logging.dll

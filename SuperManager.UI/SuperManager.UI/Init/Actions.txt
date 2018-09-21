@@ -11,3 +11,4 @@ Info,查看详情
 Reply,回复
 Upload,上传
 Set,设置
+Bak,备份

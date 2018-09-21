@@ -16,3 +16,6 @@ E:\GitProject\SuperManager\SuperManager.FILTER\bin\Debug\Helper.Core.Library.pdb
 E:\GitProject\SuperManager\SuperManager.FILTER\obj\Debug\SuperManager.FILTER.csprojResolveAssemblyReference.cache
 E:\GitProject\SuperManager\SuperManager.FILTER\obj\Debug\SuperManager.FILTER.dll
 E:\GitProject\SuperManager\SuperManager.FILTER\obj\Debug\SuperManager.FILTER.pdb
+E:\GitProject\SuperManager\SuperManager.FILTER\bin\Debug\Quartz.dll
+E:\GitProject\SuperManager\SuperManager.FILTER\bin\Debug\Common.Logging.Core.dll
+E:\GitProject\SuperManager\SuperManager.FILTER\bin\Debug\Common.Logging.dll

@@ -1,5 +1,6 @@
 ﻿using Helper.Core.Library;
 using log4net.Config;
+using Quartz;
 using SuperManager.MODEL;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace SuperManager.UI
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            ConfigHelper.RootDirectoryPath = HttpContext.Current.Server.MapPath("~/");
+
             // 加载 xml 网站配置信息
             SettingHelper.Init(Server.MapPath("~/settings.xml"));
 
@@ -31,6 +34,9 @@ namespace SuperManager.UI
             {
                 XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo(logFileName));
             }
+
+            // 运行数据库备份作业
+            TaskHelper.RunBakDataBase();
         }
         private static string FilePath(string name)
         {

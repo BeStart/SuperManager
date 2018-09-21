@@ -70,3 +70,6 @@ E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\bin\zh-Hans\System.We
 E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\obj\Debug\SuperManager.UI.csprojResolveAssemblyReference.cache
 E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\obj\Debug\SuperManager.UI.dll
 E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\obj\Debug\SuperManager.UI.pdb
+E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\bin\Quartz.dll
+E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\bin\Common.Logging.Core.dll
+E:\GitProject\SuperManager\SuperManager.UI\SuperManager.UI\bin\Common.Logging.dll

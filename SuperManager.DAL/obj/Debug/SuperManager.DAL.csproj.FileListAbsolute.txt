@@ -16,3 +16,6 @@ E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\SuperManager.MODEL.pdb
 E:\GitProject\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.csprojResolveAssemblyReference.cache
 E:\GitProject\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.dll
 E:\GitProject\SuperManager\SuperManager.DAL\obj\Debug\SuperManager.DAL.pdb
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\Quartz.dll
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\Common.Logging.Core.dll
+E:\GitProject\SuperManager\SuperManager.DAL\bin\Debug\Common.Logging.dll

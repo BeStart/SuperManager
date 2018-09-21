@@ -8,6 +8,9 @@ namespace SuperManager.UI
 {
     public class ConfigHelper
     {
+        // 系统根目录
+        public static string RootDirectoryPath = null;
+
         public static string ConnectionString
         {
             get { return GetValue("connectionString"); }
