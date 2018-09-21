@@ -110,7 +110,7 @@ namespace SuperManager.DAL
 
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append(",");
-                foreach (KeyValuePair<string, string> keyValueItem in moduleDict)
+                foreach (KeyValuePair<string, string> keyValueItem in moduleActionDict)
                 {
                     List<string> menuActionDataList = StringHelper.ToList<string>(keyValueItem.Value, ",", true);
                     foreach(string menuActionData in menuActionDataList)
