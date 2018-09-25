@@ -10,8 +10,8 @@
     <form id="operaterForm" action="@Url.Action(Model != null ? "EditOperater" : "AddOperater", new { identityID = Model != null ? Model.IdentityID : 0 })" class="form-horizontal" method="post">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">主题类别：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">主题类别：</label>
+            <div class="col-xs-10 form-cell">
                 <select class="form-control" style="width:400px;" name="topicType">
                     @if (ViewBag.TopicTypeList != null && ViewBag.TopicTypeList.Count > 0)
                     {
@@ -24,24 +24,24 @@
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">主题标题：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">主题标题：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:400px;" name="topicTitle" type="text" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.TopicTitle : ""))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">主题标签：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">主题标签：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:400px;" name="topicTags" type="text" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.TopicTags : ""))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">主题封面：</label>
-            <div class="col-xs-10" style="padding-left : 0px;height:35px;line-height:35px;">
-                <input type="text" id="cover_url" name="topicCoverImageUrl" class="form-control pull-left" style="width:400px;border-top-right-radius:0px;border-bottom-right-radius:0px;" value="@(Model != null ? Model.TopicCoverImageUrl : "")" />
-                <a href="javascript:;" class="btn btn-primary pull-left" style="position: relative;border-top-left-radius:0px;border-bottom-left-radius:0px;width:100px;overflow:hidden;">
+            <label class="col-xs-2 control-label form-label">主题封面：</label>
+            <div class="col-xs-10 form-cell" style="height:35px;line-height:35px;">
+                <input type="text" id="cover_url" name="topicCoverImageUrl" class="form-control pull-left form-file-input" value="@(Model != null ? Model.TopicCoverImageUrl : "")" />
+                <a href="javascript:;" class="btn btn-primary pull-left form-file-link">
                     选择文件 ...
-                    <input id="coverUpload" style="position: absolute;overflow: hidden;right: 0;top: 0;opacity: 0;" type="file" multiple="multiple" />
+                    <input id="coverUpload" class="form-file" type="file" multiple="multiple" />
                 </a>
                 <span id="cover_item" class="pull-left" style="margin-left:10px;margin-top:0px;display:@(Model != null && !string.IsNullOrEmpty(Model.TopicCoverImageUrl) ? "block" : "none")">
                     <a href="@(Model != null ? Model.TopicCoverImageUrl : "#")" id="cover_link" target="_blank" style="margin-right:10px;">查看</a><a id="cover_delete" style="cursor:pointer">删除</a>
@@ -49,40 +49,40 @@
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">主题简介：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">主题简介：</label>
+            <div class="col-xs-10 form-cell">
                 <textarea class="form-control" name="topicSummary" style="width:400px;height:60px;">@Html.Raw(Server.HtmlEncode(Model != null ? Model.TopicSummary : ""))</textarea>
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">主题内容：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">主题内容：</label>
+            <div class="col-xs-10 form-cell">
                 <div style="width:800px;overflow:hidden;">
                     <textarea name="topicContent" style="height:400px;">@(Model != null ? Model.TopicContent : "")</textarea>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">来源网站：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">来源网站：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" name="topicOriginalWebsite" style="width:400px;" type="text" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.TopicOriginalWebsite : ""))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">来源地址：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">来源地址：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" name="topicOriginalUrl" style="width:400px;" type="text" value="@(Model != null ? Model.TopicOriginalUrl : "")" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;padding-top:0px;" class="col-xs-2 control-label">投放位置：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label style="padding-top:0px;" class="col-xs-2 control-label form-label">投放位置：</label>
+            <div class="col-xs-10 form-cell">
                 <div class="checkbox-inline forbidden-text-select" style="padding-top:0px;" id="menuActionList">
                     @if (ViewBag.PositionTypeList != null && ViewBag.PositionTypeList.Count > 0)
                     {
                         foreach (DBTopicPositionTypeModel modelItem in ViewBag.PositionTypeList)
                         {
-                            <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="positionTypeList" value="@modelItem.IdentityID" @(Html.Raw(DataHelper.IsContains(modelItem.IdentityID.ToString(), Model != null ? Model.PositionTypeList : "") ? "checked=\"checked\"" : ""))/>@Html.Raw(Server.HtmlEncode(modelItem.TypeName))</label>
+                            <label class="form-checkbox-label"><input type="checkbox" name="positionTypeList" value="@modelItem.IdentityID" @(Html.Raw(DataHelper.IsContains(modelItem.IdentityID.ToString(), Model != null ? Model.PositionTypeList : "") ? "checked=\"checked\"" : ""))/>@Html.Raw(Server.HtmlEncode(modelItem.TypeName))</label>
                         }
                     }
                 </div>
@@ -100,7 +100,7 @@
                         <button type="button" id="btnSaveAndCheck" class="btn btn-danger" style="margin-left:10px;"><i class="glyphicon glyphicon-saved" style="font-size:12px;padding-right : 10px;"></i>保存并审核</button>
                     }
                 }
-                <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回主题管理</a>
+                <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回管理页面</a>
             </span>
         </div>
     </form>

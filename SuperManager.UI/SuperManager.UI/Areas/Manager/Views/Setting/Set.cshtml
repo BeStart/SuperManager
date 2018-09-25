@@ -8,42 +8,42 @@
     <form action="@Url.Action("SetOperater")" class="form-horizontal" method="post">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">备份时间：</label>
-            <div class="col-xs-10 form-inline" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">备份时间：</label>
+            <div class="col-xs-10 form-inline form-cell">
                 <input class="form-control" style="width:400px;" type="text" name="bakCron" value="@Html.Raw(Server.HtmlEncode(SettingHelper.BakCron))" />
                 <a class="btn btn-primary" style="margin-left:10px;" href="@Url.Action("Bak")">备份</a>
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">备份路径：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">备份路径：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:400px;" type="text" name="bakPath" value="@Html.Raw(Server.HtmlEncode(SettingHelper.BakPath))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">后台版本：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">后台版本：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:400px;" type="text" name="version" value="@Html.Raw(Server.HtmlEncode(SettingHelper.Version))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">后台标题：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">后台标题：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:400px;" type="text" name="managerTitle" value="@Html.Raw(Server.HtmlEncode(SettingHelper.ManagerTitle))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">分页大小：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">分页大小：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:100px;" type="text" name="managerPageSize" value="@SettingHelper.ManagerPageSize" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">&nbsp;</label>
+            <label class="col-xs-2 control-label form-label">&nbsp;</label>
             <div class="col-xs-10 checkbox-inline forbidden-text-select">
-                <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="logOpenStatus" value="@(SettingHelper.LogOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.LogOpenStatus ? "checked=\"checked\"" : "") />是否开启日志记录</label>
-                <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="authOpenStatus" value="@(SettingHelper.AuthOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.AuthOpenStatus ? "checked=\"checked\"" : "") />是否开启权限认证</label>
-                <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="attachOpenStatus" value="@(SettingHelper.AttachOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.AttachOpenStatus ? "checked=\"checked\"" : "") />是否开启开发者工具</label>
+                <label class="form-checkbox-label"><input type="checkbox" name="logOpenStatus" value="@(SettingHelper.LogOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.LogOpenStatus ? "checked=\"checked\"" : "") />是否开启日志记录</label>
+                <label class="form-checkbox-label"><input type="checkbox" name="authOpenStatus" value="@(SettingHelper.AuthOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.AuthOpenStatus ? "checked=\"checked\"" : "") />是否开启权限认证</label>
+                <label class="form-checkbox-label"><input type="checkbox" name="attachOpenStatus" value="@(SettingHelper.AttachOpenStatus ? "1" : "0")" @Html.Raw(SettingHelper.AttachOpenStatus ? "checked=\"checked\"" : "") />是否开启开发者工具</label>
             </div>
         </div>
         <div class="form-group">

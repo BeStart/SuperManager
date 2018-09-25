@@ -44,7 +44,7 @@
                         {
                             foreach (ViewTreeMenuModel modelItem in Model)
                             {
-                                <tr data-menu="contextMenu" id="@modelItem.IdentityID" data-pid="@modelItem.ParentID" data-status="false" style="@(modelItem.LayerIndex <= 1 ? "" : "display:none")">
+                                <tr id="@modelItem.IdentityID" data-pid="@modelItem.ParentID" data-status="false" style="@(modelItem.LayerIndex <= 1 ? "" : "display:none")">
                                     <td class="first">
                                         <input type="checkbox" name="identityIDList" data-id="@modelItem.IdentityID" value="@modelItem.IdentityID" />
                                     </td>
@@ -70,7 +70,7 @@
                                                     @foreach (DBActionTypeModel dataItem in dataList)
                                                     {
                                                         bool isExists = DataHelper.IsContains(dataItem.TypeCode, modelItem.ActionList);
-                                                        <span class="glyphicon @(isExists ? "glyphicon-ok" : "glyphicon-remove")" style="@Html.Raw(isExists ? "color:#8ac007" : "")"><i style="font-style:normal;padding-left:5px;margin-right:10px;">@Html.Raw(Server.HtmlEncode(dataItem.TypeName))</i></span>
+                                                        <span class="glyphicon @(isExists ? "glyphicon-ok" : "glyphicon-remove")" style="@Html.Raw(isExists ? "color:#8ac007" : "")"><i class="list-status-ok">@Html.Raw(Server.HtmlEncode(dataItem.TypeName))</i></span>
                                                     }
                                                 </div>
                                             }
@@ -79,13 +79,13 @@
                                     <td>@modelItem.MenuSort</td>
                                     <td>@(modelItem.MenuStatus == SuperManager.ENUM.MenuStatusTypeEnum.SHOW ? "是" : "否")</td>
                                     <td>
-                                        <a data-id="@modelItem.IdentityID" class="operater-edit"><i class="glyphicon glyphicon-edit" style="padding-right : 5px;font-size:12px;"></i>编辑</a>
-                                        <a data-id="@modelItem.IdentityID" class="operater-delete"><i class="glyphicon glyphicon-trash" style="margin-left : 20px; padding-right : 5px;font-size:12px;"></i>删除</a>
+                                        <a data-id="@modelItem.IdentityID" class="operater-edit"><i class="glyphicon glyphicon-edit list-oper-button"></i>编辑</a>
+                                        <a data-id="@modelItem.IdentityID" class="operater-delete"><i class="glyphicon glyphicon-trash list-oper-pad-button"></i>删除</a>
                                     </td>
                                 </tr>
                             }
                             <tr style="background-color:#ffffff;">
-                                <td style="padding-left : 21px; vertical-align:middle;">
+                                <td class="first" style="vertical-align:middle;">
                                     <input type="checkbox" id="checkAllOrNoBottom" />
                                 </td>
                                 <td colspan="6">
@@ -103,7 +103,7 @@
                         else
                         {
                             <tr style="background-color:#ffffff;">
-                                <td colspan="7" style="text-align:center;padding:15px 0px;">
+                                <td colspan="7" class="list-non-data">
                                     没有相关数据！
                                 </td>
                             </tr>

@@ -16,7 +16,7 @@
         <button type="button" id="btnSaveFlow" class="btn btn-primary"><i class="glyphicon glyphicon-saved" style="font-size:12px;padding-right : 10px;"></i>保存设计</button>
     </div>
     <div style="margin-top:15px;">
-        <a class="btn btn-warning" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回流程管理</a>
+        <a class="btn btn-warning" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回管理页面</a>
     </div>
 </div>
 
@@ -45,8 +45,8 @@
 <div id="addStep" style="display:none; width:400px; border:1px solid #cccccc;border-radius:5px;background-color:#ffffff;padding:20px;">
     <form action="#" method="post" class="form-horizontal">
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">步骤符号：</label>
-            <div class="col-xs-10" style="width:280px;padding-left:0px;padding-right:0px;">
+            <label class="col-xs-2 control-label form-label">步骤符号：</label>
+            <div class="col-xs-10 form-cell" style="width:280px;padding-left:0px;">
                 <div class="radio-inline forbidden-text-select">
                     @if (ViewBag.SymbolTypeList != null && ViewBag.SymbolTypeList.Count > 0)
                     {
@@ -61,38 +61,38 @@
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">步骤编号：</label>
-            <div class="col-xs-10" style="width:180px;padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">步骤编号：</label>
+            <div class="col-xs-10 form-cell" style="width:180px;">
                 <input class="form-control" id="stepCode" type="text" value="" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">步骤名称：</label>
-            <div class="col-xs-10" style="width:280px;padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">步骤名称：</label>
+            <div class="col-xs-10 form-cell" style="width:280px;">
                 <input class="form-control" id="stepName" type="text" value="" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">步骤简称：</label>
-            <div class="col-xs-10" style="width:280px;padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">步骤简称：</label>
+            <div class="col-xs-10 form-cell" style="width:280px;">
                 <input class="form-control" id="stepAddrName" type="text" value="" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">下级编号：</label>
-            <div class="col-xs-10" style="width:180px;padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">下级编号：</label>
+            <div class="col-xs-10 form-cell" style="width:180px;">
                 <input class="form-control" id="nextStep" type="text" value="" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;padding-top:0px;font-weight:normal;" class="col-xs-2 control-label">角色选择：</label>
-            <div class="col-xs-10" style="width:280px;padding-left : 0px;padding-right:0px;">
+            <label style="padding-top:0px;" class="col-xs-2 control-label form-label">角色选择：</label>
+            <div class="col-xs-10 form-cell" style="width:280px;padding-right:0px;">
                 <div class="checkbox-inline forbidden-text-select" style="padding-top:0px;" id="menuActionList">
                     @if (ViewBag.RoleList != null && ViewBag.RoleList.Count > 0)
                     {
                         foreach (DBRoleModel modelItem in ViewBag.RoleList)
                         {
-                            <label style="display:inline-block;margin-right:45px;font-weight:normal"><input type="checkbox" name="roleList" value="@modelItem.IdentityID" />@Html.Raw(Server.HtmlEncode(modelItem.RoleName))</label>
+                            <label class="form-checkbox-label"><input type="checkbox" name="roleList" value="@modelItem.IdentityID" />@Html.Raw(Server.HtmlEncode(modelItem.RoleName))</label>
                         }
                     }
                 </div>
@@ -113,13 +113,13 @@
     <form action="@Url.Action(Model != null ? "FlowDesignEditOperater" : "FlowDesignAddOperater")" id="operaterForm" method="post" class="form-horizontal">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">流程名称：</label>
-            <div class="col-xs-10" style="width:200px;padding:0px;">
+            <label class="col-xs-2 control-label form-label">流程名称：</label>
+            <div class="col-xs-10 form-cell" style="width:200px;">
                 <input class="form-control" id="flowName" name="flowName" type="text" value="" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">流程类别：</label>
+            <label class="col-xs-2 control-label form-label">流程类别：</label>
             <div class="col-xs-10" style="width:200px;padding:0px;">
                 <select class="form-control" id="flowType" name="flowType">
                     @if (ViewBag.FlowTypeList != null && ViewBag.FlowTypeList.Count > 0)

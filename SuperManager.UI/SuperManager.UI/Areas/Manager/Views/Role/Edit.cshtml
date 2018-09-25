@@ -25,7 +25,7 @@
                 <table id="tableList" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="first" style="padding-left : 21px;">
+                            <th class="first">
                                 <input type="checkbox" style="margin-top:0px;margin-bottom:0px;" id="checkAllOrNoTop" />
                             </th>
                             <th>菜单名称</th>
@@ -39,7 +39,7 @@
                             foreach (ViewTreeMenuModel modelItem in ViewBag.MenuList)
                             {
                                 <tr id="@modelItem.IdentityID" data-pid="@modelItem.ParentID" data-status="true">
-                                    <td style="padding-left : 21px;">
+                                    <td class="first">
                                         <input type="checkbox" name="identityIDList" data-id="@modelItem.IdentityID" data-pid="@modelItem.ParentID" value="@modelItem.IdentityID" @Html.Raw(DataHelper.ExistsMenu(modelItem.IdentityID, Model != null ? Model.MenuList : "") ? "checked=\"checked\"" : "") />
                                     </td>
                                     <td style="padding-left:@((modelItem.LayerIndex - 1) * 35 + 10)px;">
@@ -59,7 +59,7 @@
                                                 <div class="checkbox-inline" style="padding-top:0px;">
                                                     @foreach (DBActionTypeModel dataItem in dataList)
                                                     {
-                                                        <label style="display:inline-block;margin-right:45px;font-weight:normal;margin-bottom:0px;"><input type="checkbox" name="menuActionList" value="@Html.Raw(Server.HtmlEncode(modelItem.BelongModule + ":" + dataItem.TypeCode))" @Html.Raw(DataHelper.ExistsAction(dataItem.TypeCode, modelItem.BelongModule, Model != null ? Model.ActionList : "") ? "checked=\"checked\"" : "") />@Html.Raw(Server.HtmlEncode(dataItem.TypeName))</label>
+                                                        <label class="form-checkbox-label"><input type="checkbox" name="menuActionList" value="@Html.Raw(Server.HtmlEncode(modelItem.BelongModule + ":" + dataItem.TypeCode))" @Html.Raw(DataHelper.ExistsAction(dataItem.TypeCode, modelItem.BelongModule, Model != null ? Model.ActionList : "") ? "checked=\"checked\"" : "") />@Html.Raw(Server.HtmlEncode(dataItem.TypeName))</label>
                                                     }
                                                 </div>
                                             }

@@ -10,14 +10,14 @@
         <fieldset style="padding:.35em .625em .75em;width:815px;margin:0px;padding-bottom:15px;border:1px dashed #0CA3F2;margin-top:-15px;">
             <legend style="padding:.5em;border:0;width:auto;margin-bottom:0px;">基本信息</legend>
             <div class="form-group" style="padding-left:10px;">
-                <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">投票标题：</label>
-                <div class="col-xs-10" style="padding-left : 0px;">
+                <label class="col-xs-2 control-label form-label">投票标题：</label>
+                <div class="col-xs-10 form-cell">
                     <input class="form-control" name="voteTitle" style="width:400px;" type="text" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.VoteTitle : ""))" />
                 </div>
             </div>
             <div class="form-group" style="padding-left:10px;">
-                <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">所属分类：</label>
-                <div class="col-xs-10" style="padding-left : 0px;">
+                <label class="col-xs-2 control-label form-label">所属分类：</label>
+                <div class="col-xs-10 form-cell">
                     <select class="form-control" name="voteType" style="width:200px;">
                         @if (ViewBag.VoteTypeList != null && ViewBag.VoteTypeList.Count > 0)
                         {
@@ -30,8 +30,8 @@
                 </div>
             </div>
             <div class="form-group" style="padding-left:10px;margin-bottom:0px;">
-                <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">投票简介：</label>
-                <div class="col-xs-10" style="padding-left : 0px;">
+                <label class="col-xs-2 control-label form-label">投票简介：</label>
+                <div class="col-xs-10 form-cell">
                     <textarea class="form-control" name="voteSummary" style="width:400px;height:60px;">@Html.Raw(Server.HtmlEncode(Model != null ? Model.VoteSummary : ""))</textarea>
                 </div>
             </div>
@@ -49,50 +49,50 @@
     <div id="voteItem" style="display:none;width:450px;padding:40px 20px 20px 20px;background-color:#ffffff;border:1px solid #cccccc;border-radius:5px;">
         <form action="#" class="form-horizontal" method="post">
             <div class="form-group">
-                <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选项标题：</label>
-                <div class="col-xs-10" style="padding:0px;width:310px;">
+                <label class="col-xs-2 control-label form-label">选项标题：</label>
+                <div class="col-xs-10 form-cell" style="width:310px;">
                     <textarea class="form-control" style="height:60px;width:292px;" id="itemTitle"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选项类型：</label>
-                <div class="col-xs-10" style="padding-left : 0px;width:310px;">
-                    <div class="radio-inline pull-left">
-                        <label style="display:inline-block;font-weight:normal;margin-bottom:0px;margin-right:40px;"><input type="radio" name="itemType" value="1" checked="checked" />单选</label>
-                        <label style="display:inline-block;font-weight:normal;margin-bottom:0px;margin-right:40px;"><input type="radio" name="itemType" value="2" />多选</label>
-                        <label style="display:inline-block;font-weight:normal;margin-bottom:0px;margin-right:28px;"><input type="radio" name="itemType" value="3" />文本</label>
+                <label style="padding-top:0px;" class="col-xs-2 control-label form-label">选项类型：</label>
+                <div class="col-xs-10 form-inline form-cell" style="width:310px;padding-top:0px;">
+                    <div class="radio-inline pull-left" style="padding-top:0px;">
+                        <label class="form-radio-label"><input type="radio" name="itemType" value="1" checked="checked" />单选</label>
+                        <label class="form-radio-label"><input type="radio" name="itemType" value="2" />多选</label>
+                        <label class="form-radio-label" style="margin-right:28px;"><input type="radio" name="itemType" value="3" />文本</label>
                     </div>
-                    <input class="form-control pull-left" id="itemMaxCount" type="text" style="width:80px;display:none;" value="" />
+                    <input class="form-control pull-left" id="itemMaxCount" type="text" style="width:60px;display:none;" value="" />
                 </div>
             </div>
             <div id="voteItemContainer">
                 <div class="form-group">
-                    <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选&nbsp;&nbsp;项&nbsp;&nbsp;A：</label>
-                    <div class="col-xs-10" style="padding-left : 0px;width:310px;">
+                    <label class="col-xs-2 control-label form-label">选择项一：</label>
+                    <div class="col-xs-10 form-cell" style="width:310px;">
                         <input class="form-control" type="text" id="voteItemA" value="" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选&nbsp;&nbsp;项&nbsp;&nbsp;B：</label>
-                    <div class="col-xs-10" style="padding-left : 0px;width:310px;">
+                    <label class="col-xs-2 control-label form-label">选择项二：</label>
+                    <div class="col-xs-10 form-cell" style="width:310px;">
                         <input class="form-control" type="text" id="voteItemB" value="" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选&nbsp;&nbsp;项&nbsp;&nbsp;C：</label>
-                    <div class="col-xs-10" style="padding-left : 0px;width:310px;">
+                    <label class="col-xs-2 control-label form-label">选择项三：</label>
+                    <div class="col-xs-10 form-cell" style="width:310px;">
                         <input class="form-control" type="text" id="voteItemC" value="" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选&nbsp;&nbsp;项&nbsp;&nbsp;D：</label>
-                    <div class="col-xs-10" style="padding-left : 0px;width:310px;">
+                    <label class="col-xs-2 control-label form-label">选择项四：</label>
+                    <div class="col-xs-10 form-cell" style="width:310px;">
                         <input class="form-control" type="text" id="voteItemD" value="" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label style="width:110px;text-align:right;font-weight:normal;" class="col-xs-2 control-label">选&nbsp;&nbsp;项&nbsp;&nbsp;E：</label>
-                    <div class="col-xs-10" style="padding-left : 0px;width:310px;">
+                    <label class="col-xs-2 control-label form-label">选择项五：</label>
+                    <div class="col-xs-10 form-cell" style="width:310px;">
                         <input class="form-control" type="text" id="voteItemE" value="" />
                     </div>
                 </div>

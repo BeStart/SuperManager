@@ -10,8 +10,8 @@
     <form id="operaterForm" action="@Url.Action(Model != null ? "EditOperater" : "AddOperater", new { identityID = Model != null ? Model.IdentityID : 0 })" class="form-horizontal" method="post">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">公告类别：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">公告类别：</label>
+            <div class="col-xs-10 form-cell">
                 <select class="form-control" style="width:400px;" name="noticeType">
                     @if (ViewBag.NoticeTypeList != null && ViewBag.NoticeTypeList.Count > 0)
                     {
@@ -24,14 +24,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">公告标题：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">公告标题：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:400px;" name="noticeTitle" type="text" value="@Html.Raw(Server.HtmlEncode(Model != null ? Model.NoticeTitle : ""))" />
             </div>
         </div>
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">公告内容：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">公告内容：</label>
+            <div class="col-xs-10 form-cell">
                 <div style="width:800px;overflow:hidden;">
                     <textarea name="noticeContent" style="height:400px;">@(Model != null ? Model.NoticeContent : "")</textarea>
                 </div>
@@ -40,7 +40,7 @@
         <div class="form-group">
             <span style="padding-left:100px;">
                 <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-saved" style="font-size:12px;padding-right : 10px;"></i>保存</button>
-                <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回公告管理</a>
+                <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回管理页面</a>
             </span>
         </div>
     </form>

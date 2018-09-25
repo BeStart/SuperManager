@@ -8,8 +8,8 @@
     <form action="@Url.Action("EditInfoOperater")" class="form-horizontal" method="post">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label style="width:100px;text-align:left;font-weight:normal;" class="col-xs-2 control-label">用户昵称：</label>
-            <div class="col-xs-10" style="padding-left : 0px;">
+            <label class="col-xs-2 control-label form-label">用户昵称：</label>
+            <div class="col-xs-10 form-cell">
                 <input class="form-control" style="width:200px;" type="text" name="nickName" value="@(Model != null ? Model.NickName : "")" />
             </div>
         </div>

@@ -38,7 +38,7 @@
                 <table id="tableList" class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
-                            <th class="first" style="padding-left : 21px;">
+                            <th class="first">
                                 <input type="checkbox" style="margin-top:0px;margin-bottom:0px;" id="checkAllOrNoTop" />
                             </th>
                             <th>联系人</th>
@@ -55,8 +55,8 @@
                         {
                             foreach (DBMessageModel modelItem in Model)
                             {
-                                <tr data-menu="contextMenu" id="@modelItem.IdentityID" data-message-status="@modelItem.MessageStatus">
-                                    <td style="padding-left : 21px;">
+                                <tr id="@modelItem.IdentityID" data-message-status="@modelItem.MessageStatus">
+                                    <td class="first">
                                         <input type="checkbox" name="identityIDList" value="@modelItem.IdentityID" />
                                     </td>
                                     <td>@Html.Raw(Server.HtmlEncode(modelItem.ContactName))</td>
@@ -79,13 +79,13 @@
                                     </td>
                                     <td>@modelItem.MessageDate.ToString("yyyy-MM-dd hh:mm:ss")</td>
                                     <td>
-                                        <a data-id="@modelItem.IdentityID" class="operater-info"><i class="glyphicon glyphicon-file" style="margin-left : 20px; padding-right : 5px;font-size:12px;"></i>查看</a>
-                                        <a data-id="@modelItem.IdentityID" class="operater-delete"><i class="glyphicon glyphicon-trash" style="margin-left : 20px; padding-right : 5px;font-size:12px;"></i>删除</a>
+                                        <a data-id="@modelItem.IdentityID" class="operater-info"><i class="glyphicon glyphicon-file list-oper-button"></i>查看</a>
+                                        <a data-id="@modelItem.IdentityID" class="operater-delete"><i class="glyphicon glyphicon-trash list-oper-pad-button"></i>删除</a>
                                     </td>
                                 </tr>
                             }
                             <tr style="background-color:#ffffff;">
-                                <td style="padding-left : 21px; vertical-align:middle;">
+                                <td class="first" style="vertical-align:middle;">
                                     <input type="checkbox" id="checkAllOrNoBottom" />
                                 </td>
                                 <td colspan="7">
@@ -107,7 +107,7 @@
                         else
                         {
                             <tr style="background-color:#ffffff;">
-                                <td colspan="8" style="text-align:center;padding:15px 0px;">
+                                <td colspan="8" class="list-non-data">
                                     没有相关数据！
                                 </td>
                             </tr>

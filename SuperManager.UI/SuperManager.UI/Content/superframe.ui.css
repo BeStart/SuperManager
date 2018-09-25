@@ -320,7 +320,7 @@ a {
             }
                 .data-content .list .first {
                     width : 60px;
-                    padding-left:20px;
+                    padding-left:21px;
                     padding-right:20px;
                 }
             .data-content .list tr.odds {
@@ -353,6 +353,15 @@ a {
                     font-style: normal;
                     padding: 0px 5px;
                 }
+        .data-content .list .list-oper-button {
+            padding-right : 5px;font-size:12px;
+        }
+        .data-content .list .list-oper-pad-button {
+            margin-left : 20px; padding-right : 5px;font-size:12px;
+        }
+        .data-content .list .list-non-data {
+            text-align:center;padding:15px 0px;
+        }
         .data-content .operater {
             overflow: hidden;
             margin: 30px 0px 0px 30px;
@@ -360,6 +369,48 @@ a {
             .data-content .operater .operater-label {
                 padding-bottom: 10px;
             }
+    .data-content .form-label {
+        width: 100px;
+        text-align: left;
+        font-weight: normal;
+    }
+    .data-content .form-cell {
+        padding-left: 0px;
+    }
+    .data-content .form-checkbox-label {
+        display: inline-block;
+        margin-bottom: 0px;
+        font-weight: normal;
+        margin-right: 45px;
+    }
+    .data-content .form-radio-label {
+        display: inline-block;
+        margin-right: 45px;
+        font-weight: normal;
+        margin-bottom: 0px;
+    }
+    .data-content .form-file {
+        position: absolute;
+        overflow: hidden;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .data-content .form-file-input {
+        width: 500px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .data-content .form-file-link {
+        position: relative;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        width: 100px;
+        overflow: hidden;
+    }
+    .data-content .list-status-ok {
+        font-style:normal;padding-left:5px;margin-right:10px;
+    }
     .data-content .version {
         clear:both;
         height: 50px;

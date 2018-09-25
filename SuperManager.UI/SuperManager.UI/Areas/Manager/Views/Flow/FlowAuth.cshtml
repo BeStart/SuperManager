@@ -37,7 +37,7 @@
                                             <div class="checkbox-inline">
                                                 @foreach (DBRoleModel roleModelItem in ViewBag.RoleList)
                                                 {
-                                                    <label style="display:inline-block;margin-bottom: 0px; font-weight:normal;margin-right:45px;"><input type="checkbox" name="roleList" value="@(modelItem.IdentityID + "_" + roleModelItem.IdentityID)" @Html.Raw(DataHelper.IsContains(roleModelItem.IdentityID.ToString(), modelItem.RoleList) ? "checked=\"checked\"" : "") />@Html.Raw(Server.HtmlEncode(roleModelItem.RoleName))</label>
+                                                    <label class="form-checkbox-label"><input type="checkbox" name="roleList" value="@(modelItem.IdentityID + "_" + roleModelItem.IdentityID)" @Html.Raw(DataHelper.IsContains(roleModelItem.IdentityID.ToString(), modelItem.RoleList) ? "checked=\"checked\"" : "") />@Html.Raw(Server.HtmlEncode(roleModelItem.RoleName))</label>
                                                 }
                                             </div>
                                         }
@@ -48,7 +48,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="2" style="text-align:center;padding:15px 0px;">
+                                <td colspan="2" class="list-non-data">
                                     没有相关数据！
                                 </td>
                             </tr>

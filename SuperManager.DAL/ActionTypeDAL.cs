@@ -71,7 +71,7 @@ namespace SuperManager.DAL
             parameterList.Add("@PageIndex", pageIndex);
             parameterList.Add("@PageSize", pageSize);
             parameterList.Add("@WhereSql", whereSql);
-            parameterList.Add("@OrderSql", "TypeSort desc");
+            parameterList.Add("@OrderSql", "TypeSort desc, IdentityID desc");
 
             return DataBaseHelper.ToEntityList<DBActionTypeModel>("", parameterList, ref pageCount, ref totalCount, null, "PageCount", "TotalCount");
         }
