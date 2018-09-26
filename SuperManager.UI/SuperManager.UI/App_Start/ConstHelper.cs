@@ -16,8 +16,8 @@ namespace SuperManager.UI
                 new DBKeyValueModel(){ Key = "2", Value = "栏目二" },
             }},
             { IndexMapperTypeEnum.LinkFriend, new List<DBKeyValueModel>(){
-                new DBKeyValueModel(){ Key = "1", Value = "栏目一" },
-                new DBKeyValueModel(){ Key = "2", Value = "栏目二" },
+                new DBKeyValueModel(){ Key = "1", Value = "链接一" },
+                new DBKeyValueModel(){ Key = "2", Value = "链接二" },
             }}
         };
 

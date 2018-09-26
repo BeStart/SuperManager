@@ -7,8 +7,8 @@
 <div class="operater forbidden-text-select" style="width:815px;padding:0px;">
     <form action="@Url.Action(Model != null ? "EditOperater" : "AddOperater", new { identityID = Model != null ? Model.IdentityID : 0 })" id="operaterForm" class="form-horizontal" method="post">
         @Html.AntiForgeryToken()
-        <fieldset style="padding:.35em .625em .75em;width:815px;margin:0px;padding-bottom:15px;border:1px dashed #0CA3F2;margin-top:-15px;">
-            <legend style="padding:.5em;border:0;width:auto;margin-bottom:0px;">基本信息</legend>
+        <fieldset class="form-fieldset">
+            <legend class="form-legend">基本信息</legend>
             <div class="form-group" style="padding-left:10px;">
                 <label class="col-xs-2 control-label form-label">投票标题：</label>
                 <div class="col-xs-10 form-cell">
@@ -46,7 +46,7 @@
             <a class="btn btn-warning" style="margin-left:10px;" href="@Url.Action("List")"><i class="glyphicon glyphicon-share-alt" style="padding-right:10px;"></i>返回投票管理</a>
         </div>
     </form>
-    <div id="voteItem" style="display:none;width:450px;padding:40px 20px 20px 20px;background-color:#ffffff;border:1px solid #cccccc;border-radius:5px;">
+    <div id="voteItem" class="form-vote-item">
         <form action="#" class="form-horizontal" method="post">
             <div class="form-group">
                 <label class="col-xs-2 control-label form-label">选项标题：</label>

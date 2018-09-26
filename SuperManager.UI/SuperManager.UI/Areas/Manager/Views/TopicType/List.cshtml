@@ -32,6 +32,7 @@
                                 <input type="checkbox" style="margin-top:0px;margin-bottom:0px;" id="checkAllOrNoTop" />
                             </th>
                             <th>类别名称</th>
+                            <th>编号</th>
                             <th>排序</th>
                             <th>操作</th>
                         </tr>
@@ -52,6 +53,7 @@
                                         }
                                         @Html.Raw(Server.HtmlEncode(modelItem.TypeName))
                                     </td>
+                                    <td>@modelItem.IdentityID</td>
                                     <td>@modelItem.TypeSort</td>
                                     <td>
                                         <a data-id="@modelItem.IdentityID" class="operater-edit"><i class="glyphicon glyphicon-edit list-oper-button"></i>编辑</a>
@@ -63,7 +65,7 @@
                                 <td class="first" style="vertical-align:middle;">
                                     <input type="checkbox" id="checkAllOrNoBottom" />
                                 </td>
-                                <td colspan="5">
+                                <td colspan="4">
                                     <div class="input-group" style="padding-left : 0px; width:300px;">
                                         <select class="form-control" id="operaterType" name="operaterType">
                                             <option value="@SuperManager.ENUM.OperaterTypeEnum.DELETE">删除</option>
@@ -78,7 +80,7 @@
                         else
                         {
                             <tr style="background-color:#ffffff;">
-                                <td colspan="4" class="list-non-data">
+                                <td colspan="5" class="list-non-data">
                                     没有相关数据！
                                 </td>
                             </tr>

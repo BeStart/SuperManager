@@ -31,6 +31,7 @@
                             <th class="first">
                                 <input type="checkbox" style="margin-top:0px;margin-bottom:0px;" id="checkAllOrNoTop" />
                             </th>
+                            <th>编号</th>
                             <th>名称</th>
                             <th>排序</th>
                             <th>操作</th>
@@ -45,6 +46,7 @@
                                     <td class="first">
                                         <input type="checkbox" name="identityIDList" value="@modelItem.IdentityID" />
                                     </td>
+                                    <td>@modelItem.IdentityID</td>
                                     <td>@Html.Raw(Server.HtmlEncode(modelItem.TypeName))</td>
                                     <td>@modelItem.TypeSort</td>
                                     <td>
@@ -57,7 +59,7 @@
                                 <td class="first" style="vertical-align:middle;">
                                     <input type="checkbox" id="checkAllOrNoBottom" />
                                 </td>
-                                <td colspan="3">
+                                <td colspan="4">
                                     <div class="input-group" style="padding-left : 0px; width:300px;">
                                         <select class="form-control" id="operaterType" name="operaterType">
                                             <option value="@SuperManager.ENUM.OperaterTypeEnum.DELETE">删除</option>
@@ -76,7 +78,7 @@
                         else
                         {
                             <tr style="background-color:#ffffff;">
-                                <td colspan="4" class="list-non-data">
+                                <td colspan="5" class="list-non-data">
                                     没有相关数据！
                                 </td>
                             </tr>

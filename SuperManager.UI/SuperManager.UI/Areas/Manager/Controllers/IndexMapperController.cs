@@ -36,15 +36,24 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [RoleActionFilter]
         public ActionResult Edit(int identityID = 0)
         {
+            Dictionary<int, List<DBKeyValueModel>> indexTypeMapperKeyValueDict = this.IndexTypeMapperKeyValueDict();
             DBIndexMapperModel model = identityID > 0 ? DALFactory.IndexMapper.Select(identityID) : null;
             ViewBag.IndexTypeList = ConstHelper.GetIndexMapperList();
             if(model != null)
             {
                 ViewBag.IndexIDList = ConstHelper.GetIndexMapperKeyValueList(model.IndexType);
+                if (indexTypeMapperKeyValueDict.ContainsKey(model.IndexType))
+                {
+                    ViewBag.IndexMapperList = indexTypeMapperKeyValueDict[model.IndexType];
+                }
             }
             else
             {
                 ViewBag.IndexIDList = ConstHelper.GetIndexMapperKeyValueList(IndexMapperTypeEnum.Topic);
+                if (indexTypeMapperKeyValueDict.ContainsKey(IndexMapperTypeEnum.Topic))
+                {
+                    ViewBag.IndexMapperList = indexTypeMapperKeyValueDict[IndexMapperTypeEnum.Topic];
+                }
             }
             return View("Edit", model);
         }
@@ -86,8 +95,27 @@ namespace SuperManager.UI.Areas.Manager.Controllers
 
         public ActionResult GetIndexJsonText()
         {
-            Dictionary<int, List<DBKeyValueModel>> KeyValueDict = ConstHelper.GetIndexMapperKeyValueDict();
+            return this.GetJsonText(ConstHelper.GetIndexMapperKeyValueDict());
+        }
+        public ActionResult GetMapperJsonText()
+        {
+            return this.GetJsonText(this.IndexTypeMapperKeyValueDict());
+        }
 
+        [NonAction]
+        private ActionResult AddOrEditOperater(DBIndexMapperModel model)
+        {
+            return this.OperaterConfirm(() =>
+            {
+                return FilterFactory.IndexMapper.Operater(model);
+            }, null, () =>
+            {
+                return DALFactory.IndexMapper.Operater(model);
+            }, Url.Action("List"), model.IdentityID == 0 ? Url.Action("Add") : "", Url.Action("Edit", new { identityID = model.IdentityID }));
+        }
+
+        private ActionResult GetJsonText(Dictionary<int, List<DBKeyValueModel>> KeyValueDict)
+        {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("{");
 
@@ -104,7 +132,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                     int keyValueCount = keyValueList.Count;
                     for (int index = 0; index < keyValueCount; index++)
                     {
-                        stringBuilder.Append("\\\"key\\\":");
+                        stringBuilder.Append("{\\\"key\\\":");
                         stringBuilder.Append(keyValueList[index].Key);
                         stringBuilder.Append(",\\\"value\\\":\\\"");
                         stringBuilder.Append(keyValueList[index].Value);
@@ -128,16 +156,33 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             return this.Content(stringBuilder.ToString());
         }
 
-        [NonAction]
-        private ActionResult AddOrEditOperater(DBIndexMapperModel model)
+        #region 每个项目这儿都会不同，所以需要修改此方法
+        private Dictionary<int, List<DBKeyValueModel>> IndexTypeMapperKeyValueDict()
         {
-            return this.OperaterConfirm(() =>
+            Dictionary<int, List<DBKeyValueModel>> resultDict = new Dictionary<int, List<DBKeyValueModel>>();
+
+            List<ViewTreeTopicTypeModel> topicTypeModelList = TreeHelper.ToMenuList<ViewTreeTopicTypeModel>(DALFactory.TopicType.All(""));
+            if (topicTypeModelList != null && topicTypeModelList.Count > 0)
             {
-                return FilterFactory.IndexMapper.Operater(model);
-            }, null, () =>
+                resultDict.Add(IndexMapperTypeEnum.Topic, new List<DBKeyValueModel>());
+                foreach(ViewTreeTopicTypeModel modelItem in topicTypeModelList)
+                {
+                    resultDict[IndexMapperTypeEnum.Topic].Add(new DBKeyValueModel() { Key = modelItem.IdentityID.ToString(), Value = modelItem.LayerName });
+                }
+            }
+
+            List<DBLinkFriendTypeModel> linkTypeModelList = DALFactory.LinkFriendType.List();
+            if(linkTypeModelList != null && linkTypeModelList.Count > 0)
             {
-                return DALFactory.IndexMapper.Operater(model);
-            }, Url.Action("List"), model.IdentityID == 0 ? Url.Action("Add") : "", Url.Action("Edit", new { identityID = model.IdentityID }));
+                resultDict.Add(IndexMapperTypeEnum.LinkFriend, new List<DBKeyValueModel>());
+                foreach(DBLinkFriendTypeModel modelItem in linkTypeModelList)
+                {
+                    resultDict[IndexMapperTypeEnum.LinkFriend].Add(new DBKeyValueModel() { Key = modelItem.IdentityID.ToString(), Value = modelItem.TypeName });
+                }
+            }
+
+            return resultDict;
         }
+        #endregion
     }
 }

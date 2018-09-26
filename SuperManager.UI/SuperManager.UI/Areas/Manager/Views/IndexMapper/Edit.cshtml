@@ -39,7 +39,15 @@
         <div class="form-group">
             <label class="col-xs-2 control-label form-label">对应编号：</label>
             <div class="col-xs-10 form-cell">
-                <input class="form-control required" style="width:100px;" type="text" name="mapperID" value="@(Model != null ? Model.MapperID : 0)" />
+                <select class="form-control" id="mapperID" name="mapperID" style="width:300px;">
+                    @if (ViewBag.IndexMapperList != null && ViewBag.IndexMapperList.Count > 0)
+                    {
+                        foreach (DBKeyValueModel modelItem in ViewBag.IndexMapperList)
+                        {
+                            <option value="@modelItem.Key" @Html.Raw((Model != null && Model.MapperID.ToString() == modelItem.Key) ? "selected=\"selected\"" : "")>@Html.Raw(Server.HtmlEncode(modelItem.Value))</option>
+                        }
+                    }
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -58,5 +66,8 @@
     <script type="text/javascript">
         var indexJsonText = "@Html.Action("GetIndexJsonText")";
         var indexJsonData = JSON.parse(indexJsonText);
+
+        var indexMapperText = "@Html.Action("GetMapperJsonText")";
+        var indexMapperData = JSON.parse(indexMapperText);
     </script>
 }

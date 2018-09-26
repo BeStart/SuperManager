@@ -411,6 +411,28 @@ a {
     .data-content .list-status-ok {
         font-style:normal;padding-left:5px;margin-right:10px;
     }
+    .data-content .form-fieldset {
+        padding: .35em .625em .75em;
+        width: 815px;
+        margin: 0px;
+        padding-bottom: 15px;
+        border: 1px dashed #0CA3F2;
+        margin-top: -15px;
+    }
+    .data-content .form-legend {
+        padding: .5em;
+        border: 0;
+        width: auto;
+        margin-bottom: 0px;
+    }
+    .data-content .form-vote-item {
+        display: none;
+        width: 450px;
+        padding: 40px 20px 20px 20px;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+    }
     .data-content .version {
         clear:both;
         height: 50px;

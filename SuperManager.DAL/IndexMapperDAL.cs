@@ -34,7 +34,7 @@ namespace SuperManager.DAL
         }
         public DBIndexMapperModel Select(int identityID)
         {
-            return DataBaseHelper.Single<DBIndexMapperModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.IndexType, p.IndexID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
+            return DataBaseHelper.Single<DBIndexMapperModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.IndexType, p.IndexID, p.MapperID }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
         public List<DBIndexMapperModel> List()
         {
@@ -52,7 +52,7 @@ namespace SuperManager.DAL
             string whereSql = stringBuilder.ToString().TrimEnd().TrimEnd(new char[] { 'a', 'n', 'd' });
 
             Dictionary<string, object> parameterList = new Dictionary<string, object>();
-            parameterList.Add("@FieldSql", "IdentityID, IndexType, IndexID");
+            parameterList.Add("@FieldSql", "IdentityID, IndexType, IndexID, MapperID");
             parameterList.Add("@Field", "");
             parameterList.Add("@TableName", "T_IndexMapper");
             parameterList.Add("@PrimaryKey", "IdentityID");
