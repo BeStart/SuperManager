@@ -14,8 +14,6 @@ function SetMenuItemText(jsonData, indexType, element)
         for (var index = 0; index < itemList.length; index++) {
             html += "<option value={value}>{name}</option>".replace(/[{]value[}]/gi, itemList[index].key).replace(/[{]name[}]/gi, itemList[index].value);
         }
-        $("#" + element).html(html);
-    } else {
-        $("#" + element).html("");
     }
+    $("#" + element).html("");
 }

@@ -6,3 +6,4 @@ E:\GitProject\SuperManager\Helper.Core.Library\bin\Debug\Helper.Core.Library.dll
 E:\GitProject\SuperManager\Helper.Core.Library\bin\Debug\Helper.Core.Library.pdb
 E:\GitProject\SuperManager\Helper.Core.Library\obj\Debug\Helper.Core.Library.dll
 E:\GitProject\SuperManager\Helper.Core.Library\obj\Debug\Helper.Core.Library.pdb
+E:\GitProject\SuperManager\Helper.Core.Library\obj\Debug\Helper.Core.Library.csprojResolveAssemblyReference.cache

@@ -36,7 +36,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [RoleActionFilter]
         public ActionResult Edit(int identityID = 0)
         {
-            Dictionary<int, List<DBKeyValueModel>> indexTypeMapperKeyValueDict = this.IndexTypeMapperKeyValueDict();
+            Dictionary<int, List<DBKeyValueModel>> indexTypeMapperKeyValueDict = this.GetIndexTypeMapperKeyValueDict();
             DBIndexMapperModel model = identityID > 0 ? DALFactory.IndexMapper.Select(identityID) : null;
             ViewBag.IndexTypeList = ConstHelper.GetIndexMapperList();
             if(model != null)
@@ -99,7 +99,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         }
         public ActionResult GetMapperJsonText()
         {
-            return this.GetJsonText(this.IndexTypeMapperKeyValueDict());
+            return this.GetJsonText(this.GetIndexTypeMapperKeyValueDict());
         }
 
         [NonAction]
@@ -157,7 +157,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         }
 
         #region 每个项目这儿都会不同，所以需要修改此方法
-        private Dictionary<int, List<DBKeyValueModel>> IndexTypeMapperKeyValueDict()
+        private Dictionary<int, List<DBKeyValueModel>> GetIndexTypeMapperKeyValueDict()
         {
             Dictionary<int, List<DBKeyValueModel>> resultDict = new Dictionary<int, List<DBKeyValueModel>>();
 
