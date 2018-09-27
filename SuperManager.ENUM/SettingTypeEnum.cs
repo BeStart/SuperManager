@@ -14,6 +14,12 @@ namespace SuperManager.ENUM
         public const string LogOpenStatus = "logOpenStatus";
         public const string AuthOpenStatus = "authOpenStatus";
         public const string AttachOpenStatus = "attachOpenStatus";
+        public const string UploadImageMaxSize = "uploadImageMaxSize";
+        public const string UploadImageExt = "uploadImageExt";
+        public const string UploadVideoMaxSize = "uploadVideoMaxSize";
+        public const string UploadVideoExt = "uploadVideoExt";
+        public const string UploadFileMaxSize = "uploadFileMaxSize";
+        public const string UploadFileExt = "uploadFileExt";
         public const string BakCron = "bakCron";
         public const string BakPath = "bakPath";
     }

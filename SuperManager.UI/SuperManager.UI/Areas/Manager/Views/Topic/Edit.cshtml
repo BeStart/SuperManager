@@ -111,9 +111,17 @@
     <script type="text/javascript" src="~/JavaScripts/ckeditor/ckeditor.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript" src="~/JavaScripts/module/Topic/edit.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript">
+        // 封面可上传图片格式
+        var uploadImageExt = "@SettingHelper.UploadImageExt";
+        // 封面可上图片大小限制
+        var uploadImageMaxSize = "@SettingHelper.UploadImageMaxSize";
+        // 封面上传文件路径
         var uploadCoverPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File }))";
+        // 编辑器上传附件路径
         var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        // 编辑器上传图片路径
         var uploadImagePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Image, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        // 编辑器上传视频路径
         var uploadVideoPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Video, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
     </script>   
 }

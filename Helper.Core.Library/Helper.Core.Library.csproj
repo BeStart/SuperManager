@@ -83,6 +83,7 @@
     <Compile Include="Translator\WhereTranslator.cs" />
     <Compile Include="TreeHelper.cs" />
     <Compile Include="TxtHelper.cs" />
+    <Compile Include="UploadVerifyHelper.cs" />
     <Compile Include="UriHelper.cs" />
     <Compile Include="XmlHelper.cs" />
   </ItemGroup>

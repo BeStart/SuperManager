@@ -1,5 +1,10 @@
 ﻿$(function () {
-    AsyncUploadFile("coverUpload", uploadCoverPath, /(\.|\/)(gif|jpe?g|png)$/i, 10 * 1024 * 1024, "只能上传 JP(E)G/GIF/PNG 格式的图片！", "上传图片大小不能超过 10 M！", function (data) {
+
+    var regExp = new RegExp(uploadImageExt + "$", "i");
+    var uploadImageExtErrorNote = "只能上传" + uploadImageExt.toLocaleUpperCase() + " 格式的图片！";
+    var uploadImageMaxSizeErrorNote = "上传图片大小不能超过 " + GetFormatUploadSizeText(uploadImageMaxSize) + " M！";
+
+    AsyncUploadFile("coverUpload", uploadCoverPath, regExp, Number(uploadImageMaxSize), uploadImageExtErrorNote, uploadImageMaxSizeErrorNote, function (data) {
         if (data.Error != "") {
             ErrorAlert(data.Error);
             return;

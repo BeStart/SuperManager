@@ -12,7 +12,8 @@ namespace SuperManager.UI
     {
         private static string XmlPath = null;
         private static Dictionary<string, string> SettingDict = null;
-        
+
+        #region 初始 XML 数据，以及设置 XML 数据
         public static void Init(string xmlPath)
         {
             XmlPath = xmlPath;
@@ -61,7 +62,9 @@ namespace SuperManager.UI
                 return false;
             }
         }
+        #endregion
 
+        #region 配置数据
         public static string Version
         {
             get { return GetValue(SettingTypeEnum.Version); }
@@ -110,6 +113,45 @@ namespace SuperManager.UI
                 return int.Parse(value) > 0;
             }
         }
+        public static int UploadImageMaxSize
+        {
+            get
+            {
+                string value = GetValue(SettingTypeEnum.UploadImageMaxSize);
+                if (string.IsNullOrEmpty(value)) return 0;
+                return int.Parse(value);
+            }
+        }
+        public static string UploadImageExt
+        {
+            get { return GetValue(SettingTypeEnum.UploadImageExt); }
+        }
+        public static int UploadVideoMaxSize
+        {
+            get
+            {
+                string value = GetValue(SettingTypeEnum.UploadVideoMaxSize);
+                if (string.IsNullOrEmpty(value)) return 0;
+                return int.Parse(value);
+            }
+        }
+        public static string UploadVideoExt
+        {
+            get { return GetValue(SettingTypeEnum.UploadVideoExt); }
+        }
+        public static int UploadFileMaxSize
+        {
+            get
+            {
+                string value = GetValue(SettingTypeEnum.UploadFileMaxSize);
+                if (string.IsNullOrEmpty(value)) return 0;
+                return int.Parse(value);
+            }
+        }
+        public static string UploadFileExt
+        {
+            get { return GetValue(SettingTypeEnum.UploadFileExt); }
+        }
         public static string BakCron
         {
             get { return GetValue(SettingTypeEnum.BakCron); }
@@ -118,11 +160,14 @@ namespace SuperManager.UI
         {
             get { return GetValue(SettingTypeEnum.BakPath); }
         }
+        #endregion
 
+        #region 根据配置 KEY 获取配置数据
         private static string GetValue(string key)
         {
             if (SettingDict == null || !SettingDict.ContainsKey(key)) return "";
             return SettingDict[key];
         }
+        #endregion
     }
 }

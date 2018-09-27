@@ -277,3 +277,7 @@ function FormSubmitValidate(rules, messages, formName, errorNoteName) {
         }
     });
 }
+function GetFormatUploadSizeText(size) {
+    var data = Number(size) / (1024 * 1024);
+    return data.toFixed(1);
+}

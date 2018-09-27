@@ -27,7 +27,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RoleActionFilter]
-        public ActionResult SetOperater(string bakCron, string bakPath, string version, string managerTitle, string managerPageSize, string logOpenStatus, string authOpenStatus, string attachOpenStatus)
+        public ActionResult SetOperater(string bakCron, string bakPath, string version, string managerTitle, string managerPageSize, string uploadImageExt, string uploadImageMaxSize, string uploadVideoExt, string uploadVideoMaxSize, string uploadFileExt, string uploadFileMaxSize, string logOpenStatus, string authOpenStatus, string attachOpenStatus)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>()
             {
@@ -35,7 +35,13 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 { SettingTypeEnum.BakPath, bakPath },
                 { SettingTypeEnum.Version, version },
                 { SettingTypeEnum.ManagerTitle, managerTitle },
-                { SettingTypeEnum.ManagerPageSize, managerPageSize }
+                { SettingTypeEnum.ManagerPageSize, managerPageSize },
+                { SettingTypeEnum.UploadImageExt, uploadImageExt },
+                { SettingTypeEnum.UploadImageMaxSize, uploadImageMaxSize },
+                { SettingTypeEnum.UploadVideoExt, uploadVideoExt },
+                { SettingTypeEnum.UploadVideoMaxSize, uploadVideoMaxSize },
+                { SettingTypeEnum.UploadFileExt, uploadFileExt },
+                { SettingTypeEnum.UploadFileMaxSize, uploadFileMaxSize },
             };
             if(!string.IsNullOrEmpty(logOpenStatus))
             {

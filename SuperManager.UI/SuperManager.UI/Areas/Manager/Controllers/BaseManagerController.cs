@@ -144,6 +144,43 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 {
                     error = "未提交上传文件！";
                 }
+
+                HttpPostedFileBase upload = this.Request.Files[0];
+                string suffix = FileHelper.GetSuffix(upload.FileName).ToLower();
+
+                string extensionData = null;
+                int maxSize = 0;
+
+                // 根据类型读取配置
+                if (type == UploadTypeEnum.Cover || type == UploadTypeEnum.Image)
+                {
+                    extensionData = SettingHelper.UploadImageExt;
+                    maxSize = SettingHelper.UploadImageMaxSize;
+                }
+                else if (type == UploadTypeEnum.Video)
+                {
+                    extensionData = SettingHelper.UploadVideoExt;
+                    maxSize = SettingHelper.UploadVideoMaxSize;
+                }
+                else
+                {
+                    extensionData = SettingHelper.UploadFileExt;
+                    maxSize = SettingHelper.UploadFileMaxSize;
+                }
+
+                string maxSizeText = ((maxSize * 0.1f) / (1024 * 1024 * 0.1f)).ToString("f1");
+                // 如果上传文件大小超过配置数据
+                if (upload.ContentLength > maxSize)
+                {
+                    error = string.Format("上传文件大小不能超过 {0} M！", maxSizeText);
+                }
+                List<string> extensionDataList = StringHelper.ToList<string>(extensionData, "|");
+                // 验证上传文件格式是否正确
+                if (!UploadVerifyHelper.Verify(upload, extensionDataList.ToArray(), UploadVerifyHelper.GetSerialTypeListByString(extensionData).ToArray()))
+                {
+                    error = string.Format("只能上传 {0} 的文件！", extensionData.ToUpper());
+                }
+
                 if (!string.IsNullOrEmpty(error))
                 {
                     if (fromType == UploadFromTypeEnum.File)
@@ -155,8 +192,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                         return this.Content("<script type=\"text/javascript\">alert('" + error + "！');</script>");
                     }
                 }
-                HttpPostedFileBase upload = this.Request.Files[0];
-                string suffix = FileHelper.GetSuffix(upload.FileName).ToLower();
+
                 // 上传文件目录
                 string directoryName = "";
                 if (type == UploadTypeEnum.Cover)
