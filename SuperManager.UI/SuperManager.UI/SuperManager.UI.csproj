@@ -979,6 +979,9 @@
     <Content Include="Areas\Manager\Views\Notice\List.cshtml" />
     <Content Include="Areas\Manager\Views\Init\Index.cshtml" />
     <Content Include="Areas\Manager\Views\Setting\Set.cshtml" />
+    <Content Include="Plugins\JQuery\Gridly.rar" />
+    <None Include="Plugins\JQuery\JsMap.rar" />
+    <Content Include="Plugins\Css\Radio+CheckBox.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
