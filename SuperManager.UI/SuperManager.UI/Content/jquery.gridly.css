@@ -18,24 +18,28 @@
         position: relative;
         background-color: #c3e9fe;
         height: 60px;
-        line-height:60px;
+        line-height: 60px;
+        border-radius: 5px;
     }
         .gridly .brick .oper {
             display: block;
-            width:30px;
-            height:30px;
-            text-align:center;
-            line-height:30px;
-            background-color:#ff6600;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: #ffffff;
             position: absolute;
+            opacity: 0.7;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
         }
             .gridly .brick .oper.delete {
-                top: 0px;
-                right: 0px;
+                top: 5px;
+                right: 5px;
             }
             .gridly .brick .oper.edit {
-                top: 0px;
-                right: 35px;
+                top: 5px;
+                right: 40px;
             }
         .gridly .brick.small {
             width: 180px;
