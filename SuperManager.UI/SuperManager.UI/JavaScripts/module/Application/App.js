@@ -1,4 +1,6 @@
-﻿var TIMEOUT_UNIQUE = null;
+﻿var TYPE_SMALL = "small";
+var TYPE_MIDDLE = "middle";
+var TYPE_LARGE = "large";
 
 $(function () {
 
@@ -90,15 +92,24 @@ function GridAddOrUpdateItem() {
             ele.addClass(applicationType);
         }
 
+        var width = gridSizeOptions.widthSmall;
+        var height = gridSizeOptions.height;
+        if (applicationType == TYPE_MIDDLE) {
+            width = gridSizeOptions.widthMiddle;
+        } else if (applicationType == TYPE_LARGE) {
+            width = gridSizeOptions.widthLarge;
+        }
+
         ele.children(".link").html(applicationName);
         ele.children(".link").attr("href", applicationUrl);
         ele.children(".icon").attr("data-icon", applicationIcon);
         ele.children(".icon").attr("class", applicationIcon + " icon");
 
-        if (TIMEOUT_UNIQUE != null) clearTimeout(TIMEOUT_UNIQUE);
-        TIMEOUT_UNIQUE = setTimeout(function () {
-            $('.gridly').gridly('layout');
-        }, 400);
+        // 必须使用此种方法设置 width 和 height 数据
+        ele.data("width", width);
+        ele.data("height", height);
+
+        $('.gridly').gridly('layout');
     } else {
 
         var GridItemFormat = "<div id=\"grid_{identityID}\" data-type=\"{applicationType}\" class=\"brick {applicationType}\"><i data-icon=\"{applicationIcon}\" class=\"{applicationIcon} icon\"></i><a href=\"{applicationUrl}\" class=\"link\">{applicationName}</a><span id=\"grid_edit_{identityID}\" data-id=\"{identityID}\" class=\"glyphicon glyphicon-edit oper edit\"></span><span id=\"grid_delete_{identityID}\" class=\"glyphicon glyphicon-remove-sign oper delete\"></span></div>";
