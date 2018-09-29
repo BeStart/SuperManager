@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationDAL.cs" />
     <Compile Include="IndexMapperDAL.cs" />
     <Compile Include="AttachmentDAL.cs" />
     <Compile Include="DALFactory.cs" />

@@ -22,3 +22,4 @@ IndexMapper,类别映射
 NoticeType,公告类别
 Notice,公告
 Setting,系统设置
+Application,应用中心

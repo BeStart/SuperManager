@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBApplicationModel.cs" />
     <Compile Include="DBAttachmentModel.cs" />
     <Compile Include="DBFlowFullModel.cs" />
     <Compile Include="DBFlowModel.cs" />

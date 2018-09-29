@@ -35,5 +35,6 @@ namespace SuperManager.DAL
         public static NoticeTypeDAL NoticeType { get { return new NoticeTypeDAL(); } }
         public static NoticeDAL Notice { get { return new NoticeDAL(); } }
         public static InitDAL Init { get { return new InitDAL(); } }
+        public static ApplicationDAL Application { get { return new ApplicationDAL(); } }
     }
 }

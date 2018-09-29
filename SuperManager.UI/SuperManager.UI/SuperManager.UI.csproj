@@ -92,7 +92,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jquery.gridly.css" />
     <Content Include="Content\Static\loading.gif" />
+    <Content Include="JavaScripts\jquery.gridly.js" />
+    <Content Include="JavaScripts\module\Application\App.js" />
     <Content Include="settings.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -848,6 +851,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SettingHelper.cs" />
     <Compile Include="App_Start\TaskHelper.cs" />
+    <Compile Include="Areas\Manager\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Manager\Controllers\AttachmentController.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manager\Controllers\BaseManagerController.cs" />
@@ -980,6 +984,7 @@
     <Content Include="Areas\Manager\Views\Init\Index.cshtml" />
     <Content Include="Areas\Manager\Views\Setting\Set.cshtml" />
     <Content Include="Plugins\JQuery\Gridly.rar" />
+    <Content Include="Areas\Manager\Views\Application\App.cshtml" />
     <None Include="Plugins\JQuery\JsMap.rar" />
     <Content Include="Plugins\Css\Radio+CheckBox.zip" />
     <None Include="Web.Debug.config">

@@ -7,29 +7,6 @@ function VoteManager(min, voteList, voteContainer) {
     this.Min = min;
     this.VoteContainer = voteContainer;
     this.VotePrefixList = ["A", "B", "C", "D", "E"];
-    this.VoteContextMenuData = [
-        [{
-            "text": "添加题库",
-            "func": function () {
-                InsertItem();
-            }
-        }, {
-            "text": "编辑题库",
-            "func": function () {
-                EditItem($(this).attr("data-id"));
-            }
-        }, {
-            "text": "删除题库",
-            "func": function () {
-                RemoveItem($(this).attr("data-id"));
-            },
-        }, {
-            "text": "保存数据",
-            "func": function () {
-                SaveVoteData();
-            },
-        }]
-    ];
     if (voteList != null && voteList.length > 0) {
         for (var i = 0; i < voteList.length; i++) {
             this.AppendVoteItem(voteList[i]);
@@ -103,7 +80,6 @@ VoteManager.prototype.AppendVoteItem = function (voteItemData) {
             // 阻止事件冒泡
             evt.stopPropagation();
         });
-        divItem.smartMenu(this.VoteContextMenuData);
     }
 }
 VoteManager.prototype.UpdateVoteItem = function (voteItemData) {
@@ -174,7 +150,6 @@ VoteManager.prototype.InsertVoteItem = function () {
         var voteItemData = this.InitVoteItemData();
         // 验证最少选项是否正确
         if (voteItemData.itemType != VOTE_TEXT && voteItemData.voteItemList.length < this.Min) {
-            //alert("至少需要 " + this.Min + " 个选项！");
             ErrorAlert("至少需要 " + this.Min + " 个选项！");
             return;
         }

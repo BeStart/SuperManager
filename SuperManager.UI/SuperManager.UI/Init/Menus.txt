@@ -28,3 +28,4 @@ Message,留言管理,/Manager/Message/List,#,Setting-Trunk
 UserLog,日志管理,/Manager/UserLog/List,#,Setting-Trunk
 Attachment,附件管理,/Manager/Attachment/List,#,Setting-Trunk
 IndexMapper,类别映射,/Manager/IndexMapper/List,#,Setting-Trunk
+Application,应用中心,/Manager/Application/App,#,Setting-Trunk

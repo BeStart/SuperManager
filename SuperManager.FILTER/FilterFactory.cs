@@ -30,5 +30,6 @@ namespace SuperManager.FILTER
         public static IndexMapperFilter IndexMapper = new IndexMapperFilter();
         public static NoticeFilter Notice = new NoticeFilter();
         public static NoticeTypeFilter NoticeType = new NoticeTypeFilter();
+        public static ApplicationFilter Application = new ApplicationFilter();
     }
 }
