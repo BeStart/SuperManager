@@ -14,9 +14,9 @@ VoteType,投票类别,/Manager/VoteType/List,#,Vote-Trunk
 LinkFriend-Trunk,友情链接,#,glyphicon glyphicon-link,-1
 LinkFriend,链接管理,/Manager/LinkFriend/List,#,LinkFriend-Trunk
 LinkFriendType,链接类别,/Manager/LinkFriendType/List,#,LinkFriend-Trunk
-LinkFriend-Trunk,站内公告,#,glyphicon glyphicon-bullhorn,-1,
-Notice,公告管理,/Manager/Notice/List,#,LinkFriend-Trunk
-NoticeType,公告类别,/Manager/NoticeType/List,#,LinkFriend-Trunk
+Notice-Trunk,站内公告,#,glyphicon glyphicon-bullhorn,-1,
+Notice,公告管理,/Manager/Notice/List,#,Notice-Trunk
+NoticeType,公告类别,/Manager/NoticeType/List,#,Notice-Trunk
 Setting-Trunk,系统设置,#,glyphicon glyphicon-cog,-1
 ActionType,权限管理,/Manager/ActionType/List,#,Setting-Trunk
 Module,模块管理,/Manager/Module/List,#,Setting-Trunk

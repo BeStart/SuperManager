@@ -112,7 +112,7 @@
 {   
     <script type="text/javascript" src="~/JavaScripts/module/Menu/edit.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript">
-        var menuJsonText = "@Html.Action("GetMenuJsonText")";
+        var menuJsonText = "@Html.Raw(ViewBag.MenuJsonText)";
         var menuJsonData = JSON.parse(menuJsonText);
     </script>
 }

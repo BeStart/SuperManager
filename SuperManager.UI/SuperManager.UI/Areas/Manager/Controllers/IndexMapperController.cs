@@ -55,6 +55,8 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                     ViewBag.IndexMapperList = indexTypeMapperKeyValueDict[IndexMapperTypeEnum.TOPIC];
                 }
             }
+            ViewBag.IndexJsonText = this.GetIndexJsonText();
+            ViewBag.MapperJsonText = this.GetMapperJsonText();
             return View("Edit", model);
         }
 
@@ -93,15 +95,6 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }, null, Url.Action("List"));
         }
 
-        public ActionResult GetIndexJsonText()
-        {
-            return this.GetJsonText(ConstHelper.GetIndexMapperKeyValueDict());
-        }
-        public ActionResult GetMapperJsonText()
-        {
-            return this.GetJsonText(this.GetIndexTypeMapperKeyValueDict());
-        }
-
         [NonAction]
         private ActionResult AddOrEditOperater(DBIndexMapperModel model)
         {
@@ -114,7 +107,15 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }, Url.Action("List"), model.IdentityID == 0 ? Url.Action("Add") : "", Url.Action("Edit", new { identityID = model.IdentityID }));
         }
 
-        private ActionResult GetJsonText(Dictionary<int, List<DBKeyValueModel>> KeyValueDict)
+        private string GetIndexJsonText()
+        {
+            return this.GetJsonText(ConstHelper.GetIndexMapperKeyValueDict());
+        }
+        public string GetMapperJsonText()
+        {
+            return this.GetJsonText(this.GetIndexTypeMapperKeyValueDict());
+        }
+        private string GetJsonText(Dictionary<int, List<DBKeyValueModel>> KeyValueDict)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("{");
@@ -153,7 +154,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }
 
             stringBuilder.Append("}");
-            return this.Content(stringBuilder.ToString());
+            return stringBuilder.ToString();
         }
 
         #region 每个项目这儿都会不同，所以需要修改此方法

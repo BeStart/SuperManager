@@ -36,16 +36,14 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [RoleActionFilter]
         public ActionResult Edit(int identityID = 0, int parentID = 0)
         {
-            DBMenuModel model = null;
-            if (identityID > 0)
-            {
-                model = DALFactory.Menu.Select(identityID);
-            }
+            DBMenuModel model = identityID > 0 ? model = DALFactory.Menu.Select(identityID) : null;
+            int menuID = 0;
+            if (model != null) menuID = model.IdentityID;
 
             List<DBModuleModel> moduleList = DALFactory.Module.List();
 
             ViewBag.ParentID = parentID;
-            ViewBag.TreeMenuList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.All(""));
+            ViewBag.TreeMenuList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.TreeList().Where(p => p.IdentityID != menuID).ToList());
             ViewBag.ModuleList = moduleList;
 
             if (model != null && !string.IsNullOrEmpty(model.BelongModule) && moduleList.Count > 0)
@@ -57,6 +55,8 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 }
             }
             ViewBag.FlowStepList = DALFactory.FlowStep.List();
+            ViewBag.MenuJsonText = this.GetMenuJsonText();
+
             return View("Edit", model);
         }
 
@@ -96,10 +96,10 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         }
 
         #region 获取页面菜单 JSON 数据
-        public ActionResult GetMenuJsonText()
+        private string GetMenuJsonText()
         {
             List<DBModuleModel> moduleList = DALFactory.Module.List();
-            if (moduleList == null) return this.Content("{}");
+            if (moduleList == null) return "{}";
 
             List<DBActionTypeModel> actionList = DALFactory.ActionType.List();
 
@@ -142,7 +142,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }
             stringBuilder.Append("}");
 
-            return this.Content(stringBuilder.ToString());
+            return stringBuilder.ToString();
         }
         #endregion
 

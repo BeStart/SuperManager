@@ -33,7 +33,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [RoleActionFilter]
         public ActionResult Edit(int identityID = 0)
         {
-            List<ViewTreeMenuModel> dataList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.All(""));
+            List<ViewTreeMenuModel> dataList = TreeHelper.ToMenuList<ViewTreeMenuModel>(DALFactory.Menu.TreeList());
             ViewBag.MenuList = dataList;
             ViewBag.ModuleList = DALFactory.Module.List();
             ViewBag.ActionTypeList = DALFactory.ActionType.List();

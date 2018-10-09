@@ -64,10 +64,10 @@
 {
     <script type="text/javascript" src="~/JavaScripts/module/IndexMapper/edit.js?v=@SettingHelper.Version"></script>
     <script type="text/javascript">
-        var indexJsonText = "@Html.Action("GetIndexJsonText")";
+        var indexJsonText = "@Html.Raw(ViewBag.IndexJsonText)";
         var indexJsonData = JSON.parse(indexJsonText);
 
-        var indexMapperText = "@Html.Action("GetMapperJsonText")";
-        var indexMapperData = JSON.parse(indexMapperText);
+        var mapperJsonText = "@Html.Raw(ViewBag.MapperJsonText)";
+        var mapperJsonData = JSON.parse(mapperJsonText);
     </script>
 }

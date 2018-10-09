@@ -281,3 +281,23 @@ function GetFormatUploadSizeText(size) {
     var data = Number(size) / (1024 * 1024);
     return data.toFixed(1);
 }
+function SetMenuListGetJsonData(jsonData, dataType, elementID) {
+    var html = "";
+    var itemList = jsonData[dataType];
+    if (itemList != null) {
+        for (var index = 0; index < itemList.length; index++) {
+            html += "<option value=\"{value}\">{name}</option>".replace(/[{]value[}]/gi, itemList[index].key).replace(/[{]name[}]/gi, itemList[index].value);
+        }
+    }
+    $("#" + elementID).html(html);
+}
+function SetCheckBoxListGetJsonData(jsonData, dataType, elementID, checkBoxName) {
+    var html = "";
+    var itemList = jsonData[dataType];
+    if (itemList != null) {
+        for (var index = 0; index < itemList.length; index++) {
+            html += "<label class=\"form-checkbox-label\"><input type=\"checkbox\" name=\"{checkBoxName}\" value=\"{value}\">{name}</label>".replace(/[{]checkBoxName[}]/gi, checkBoxName).replace(/[{]value[}]/gi, itemList[index].key).replace(/[{]name[}]/gi, itemList[index].value);
+        }
+    }
+    $("#" + elementID).html(html);
+}

@@ -32,9 +32,14 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         [RoleActionFilter]
         public ActionResult Edit(int identityID = 0, int parentID = 0)
         {
+            DBTopicTypeModel model = identityID > 0 ? DALFactory.TopicType.Select(identityID) : null;
+            
+            int topicTypeID = 0;
+            if (model != null) topicTypeID = model.IdentityID;
+
             ViewBag.ParentID = parentID;
-            ViewBag.TopicTypeList = DALFactory.TopicType.List(0);
-            return View("Edit", identityID > 0 ? DALFactory.TopicType.Select(identityID) : null);
+            ViewBag.TopicTypeList = DALFactory.TopicType.List(0).Where(p => p.IdentityID != topicTypeID).ToList();
+            return View("Edit", model);
         }
 
         [RoleActionFilter]

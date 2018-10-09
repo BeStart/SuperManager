@@ -54,6 +54,12 @@ namespace SuperManager.DAL
             return DataBaseHelper.More<DBMenuModel>(null, queryLambda, p => dataList.Contains(p.IdentityID), orderLambda, true, TABLE_NAME);
         }
 
+        public List<ViewTreeMenuModel> TreeList()
+        {
+            string commandText = "select IdentityID, ParentID, MenuName, MenuUrl, MenuIcon, BelongModule, ActionList, MenuSort from T_Menu with(nolock) order by MenuSort desc";
+            return DataBaseHelper.ToEntityList<ViewTreeMenuModel>(commandText, null);
+        }
+
         public List<ViewTreeMenuModel> All(string searchKey)
         {
             if (string.IsNullOrEmpty(searchKey))
