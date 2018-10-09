@@ -36,17 +36,13 @@ namespace SuperManager.DAL
         }
         public DBMenuModel Select(int identityID)
         {
-            return DataBaseHelper.Single<DBMenuModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.ParentID, p.MenuIcon, p.MenuName, p.MenuUrl, p.BelongModule, p.ActionList, p.MenuSort, p.MenuStatus }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
+            return DataBaseHelper.Single<DBMenuModel>(new { IdentityID = identityID }, p => new { p.IdentityID, p.ParentID, p.MenuIcon, p.MenuName, p.MenuUrl, p.BelongModule, p.ActionList, p.MenuSort }, p => p.IdentityID == p.IdentityID, TABLE_NAME);
         }
         public List<DBMenuModel> AuthList()
         {
             return DataBaseHelper.More<DBMenuModel>(null, p => new { p.MenuUrl, p.BelongModule, p.ActionList }, null, null, true, TABLE_NAME);
         }
-        public List<DBMenuModel> RoleList(int menuStatus)
-        {
-            return DataBaseHelper.More<DBMenuModel>(new { MenuStatus = menuStatus }, p => new { p.IdentityID, p.ParentID, p.MenuName, p.MenuUrl, p.MenuIcon, p.MenuSort }, p => p.MenuStatus == p.MenuStatus, null, true, TABLE_NAME);
-        }
-        public List<DBMenuModel> List(string identityIDList, int menuStatus = -1)
+        public List<DBMenuModel> List(string identityIDList)
         {
             if (string.IsNullOrEmpty(identityIDList)) identityIDList = "0";
 
@@ -55,26 +51,19 @@ namespace SuperManager.DAL
             System.Linq.Expressions.Expression<Func<DBMenuModel, object>> queryLambda = p => new { p.IdentityID, p.ParentID, p.MenuName, p.MenuUrl, p.BelongModule, p.ActionList, p.MenuSort, p.MenuIcon };
             System.Linq.Expressions.Expression<Func<DBMenuModel, object>> orderLambda = p => p.MenuSort;
 
-            if (menuStatus != -1)
-            {
-                return DataBaseHelper.More<DBMenuModel>(new { MenuStatus = menuStatus }, queryLambda, p => dataList.Contains(p.IdentityID) && p.MenuStatus == p.MenuStatus, orderLambda, true, TABLE_NAME);
-            }
-            else
-            {
-                return DataBaseHelper.More<DBMenuModel>(null, queryLambda, p => dataList.Contains(p.IdentityID), orderLambda, true, TABLE_NAME);
-            }
+            return DataBaseHelper.More<DBMenuModel>(null, queryLambda, p => dataList.Contains(p.IdentityID), orderLambda, true, TABLE_NAME);
         }
 
         public List<ViewTreeMenuModel> All(string searchKey)
         {
             if (string.IsNullOrEmpty(searchKey))
             {
-                string commandText = "select IdentityID, ParentID, MenuName, MenuUrl, MenuIcon, BelongModule, ActionList, MenuSort, MenuStatus from T_Menu with(nolock) order by MenuSort desc";
+                string commandText = "select IdentityID, ParentID, MenuName, MenuUrl, MenuIcon, BelongModule, ActionList, MenuSort from T_Menu with(nolock) order by MenuSort desc";
                 return DataBaseHelper.ToEntityList<ViewTreeMenuModel>(commandText, null);
             }
             else
             {
-                string commandText = "select IdentityID, 0 as ParentID, MenuName, MenuUrl, MenuIcon, BelongModule, ActionList, MenuSort, MenuStatus from T_Menu with(nolock) where MenuName like '%{0}%' order by MenuSort desc";
+                string commandText = "select IdentityID, 0 as ParentID, MenuName, MenuUrl, MenuIcon, BelongModule, ActionList, MenuSort from T_Menu with(nolock) where MenuName like '%{0}%' order by MenuSort desc";
                 commandText = string.Format(commandText, searchKey);
                 return DataBaseHelper.ToEntityList<ViewTreeMenuModel>(commandText);
             }

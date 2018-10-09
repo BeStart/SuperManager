@@ -21,7 +21,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         {
             base.Initialize(requestContext);
             // 如果登录方式是 Cookie
-            if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+            if (ConfigHelper.TokenType == TokenTypeEnum.COOKIE)
             {
                 this.viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
             }

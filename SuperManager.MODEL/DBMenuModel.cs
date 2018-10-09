@@ -40,9 +40,5 @@ namespace SuperManager.MODEL
         /// 菜单图标
         /// </summary>
         public string MenuIcon { get; set; }
-        /// <summary>
-        /// 1、在菜单栏显示，0，不在菜单栏显示
-        /// </summary>
-        public int MenuStatus { get; set; }
     }
 }

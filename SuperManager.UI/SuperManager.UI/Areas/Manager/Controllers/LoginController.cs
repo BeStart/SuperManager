@@ -51,17 +51,17 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 // 设置登录信息
                 ViewUserModel tokenModel = new ViewUserModel() { UserCode = model.UserCode, NickName = model.NickName, RoleID = model.RoleID, RoleName = model.RoleName };
                 // 如果是 Cookie 方式存储
-                if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+                if (ConfigHelper.TokenType == TokenTypeEnum.COOKIE)
                 {
                     CookieHelper.SetCookieT<ViewUserModel>(ConfigHelper.TokenName, tokenModel);
                 }
                 // 如果是 Session 方式存储
-                else if (ConfigHelper.TokenType == TokenTypeEnum.Session)
+                else if (ConfigHelper.TokenType == TokenTypeEnum.SESSION)
                 {
                     this.Session[ConfigHelper.TokenName] = tokenModel;
                 }
                 // 设置角色权限
-                DataHelper.InitRoleMenuAndActionData(tokenModel.RoleID.ToString(), DALFactory.Menu.List(model.MenuList, MenuStatusTypeEnum.SHOW), model.ActionList, DALFactory.Module.List());
+                DataHelper.InitRoleMenuAndActionData(tokenModel.RoleID.ToString(), DALFactory.Menu.List(model.MenuList), model.ActionList, DALFactory.Module.List());
                 // 跳转到管理后台首页
                 return this.Redirect(Url.Action("Index", "Home"));
             }
@@ -74,7 +74,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         public ActionResult Logout()
         {
             // 删除登录信息
-            if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+            if (ConfigHelper.TokenType == TokenTypeEnum.COOKIE)
             {
                 CookieHelper.DeleteCookie(ConfigHelper.TokenName);
             }

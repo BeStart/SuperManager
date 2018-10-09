@@ -35,7 +35,6 @@
                             <th>访问地址</th>
                             <th>操作权限</th>
                             <th>排序</th>
-                            <th>显示</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -77,7 +76,6 @@
                                         }
                                     </td>
                                     <td>@modelItem.MenuSort</td>
-                                    <td>@(modelItem.MenuStatus == SuperManager.ENUM.MenuStatusTypeEnum.SHOW ? "是" : "否")</td>
                                     <td>
                                         <a data-id="@modelItem.IdentityID" class="operater-edit"><i class="glyphicon glyphicon-edit list-oper-button"></i>编辑</a>
                                         <a data-id="@modelItem.IdentityID" class="operater-delete"><i class="glyphicon glyphicon-trash list-oper-pad-button"></i>删除</a>
@@ -88,7 +86,7 @@
                                 <td class="first" style="vertical-align:middle;">
                                     <input type="checkbox" id="checkAllOrNoBottom" />
                                 </td>
-                                <td colspan="6">
+                                <td colspan="5">
                                     <div class="input-group" style="padding-left : 0px; width:300px;">
                                         <select class="form-control" id="operaterType" name="operaterType">
                                             <option value="@SuperManager.ENUM.OperaterTypeEnum.DELETE">删除</option>
@@ -103,7 +101,7 @@
                         else
                         {
                             <tr style="background-color:#ffffff;">
-                                <td colspan="7" class="list-non-data">
+                                <td colspan="6" class="list-non-data">
                                     没有相关数据！
                                 </td>
                             </tr>

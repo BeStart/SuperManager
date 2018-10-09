@@ -116,13 +116,13 @@
         // 封面可上图片大小限制
         var uploadImageMaxSize = "@SettingHelper.UploadImageMaxSize";
         // 封面上传文件路径
-        var uploadCoverPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Cover, fromType = SuperManager.ENUM.UploadFromTypeEnum.File }))";
+        var uploadCoverPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.COVER, fromType = SuperManager.ENUM.UploadFromTypeEnum.FILE }))";
         // 编辑器上传附件路径
-        var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.File, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadFilePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.FILE, fromType = SuperManager.ENUM.UploadFromTypeEnum.PLUGINS }))";
         // 编辑器上传图片路径
-        var uploadImagePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Image, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadImagePath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.IMAGE, fromType = SuperManager.ENUM.UploadFromTypeEnum.PLUGINS }))";
         // 编辑器上传视频路径
-        var uploadVideoPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.Video, fromType = SuperManager.ENUM.UploadFromTypeEnum.Plugins }))";
+        var uploadVideoPath = "@Html.Raw(Url.Action("UploadOperater", new { type = SuperManager.ENUM.UploadTypeEnum.VIDEO, fromType = SuperManager.ENUM.UploadFromTypeEnum.PLUGINS }))";
     </script>   
 }
 

@@ -11,18 +11,18 @@ namespace SuperManager.ENUM
         /// <summary>
         /// 封面
         /// </summary>
-        public const string Cover = "Cover";
+        public const string COVER = "Cover";
         /// <summary>
         /// 图片
         /// </summary>
-        public const string Image = "Image";
+        public const string IMAGE = "Image";
         /// <summary>
         /// 文件
         /// </summary>
-        public const string File = "File";
+        public const string FILE = "File";
         /// <summary>
         /// 视频
         /// </summary>
-        public const string Video = "Video";
+        public const string VIDEO = "Video";
     }
 }

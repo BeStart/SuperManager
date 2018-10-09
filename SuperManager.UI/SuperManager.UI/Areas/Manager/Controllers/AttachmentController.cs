@@ -24,9 +24,9 @@ namespace SuperManager.UI.Areas.Manager.Controllers
 
             ViewBag.AttachmentTypeList = new List<DBKeyValueModel>()
             {
-                new DBKeyValueModel(){ Key = UploadTypeEnum.Cover, Value = "封面" },
-                new DBKeyValueModel(){ Key = UploadTypeEnum.Image, Value = "图片" },
-                new DBKeyValueModel(){ Key = UploadTypeEnum.File, Value = "附件" },
+                new DBKeyValueModel(){ Key = UploadTypeEnum.COVER, Value = "封面" },
+                new DBKeyValueModel(){ Key = UploadTypeEnum.IMAGE, Value = "图片" },
+                new DBKeyValueModel(){ Key = UploadTypeEnum.FILE, Value = "附件" },
             };
             ViewData["AttachmentType"] = attachmentType;
             return View(modelList);

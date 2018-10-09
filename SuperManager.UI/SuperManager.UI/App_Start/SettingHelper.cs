@@ -25,20 +25,20 @@ namespace SuperManager.UI
             {
                 if (dict == null) return false;
 
-                string prevBakCon = (SettingDict != null && SettingDict.ContainsKey(SettingTypeEnum.BakCron)) ? SettingDict[SettingTypeEnum.BakCron] : "";
-                string currentBakCon = (dict.ContainsKey(SettingTypeEnum.BakCron)) ? dict[SettingTypeEnum.BakCron] : "";
+                string prevBakCon = (SettingDict != null && SettingDict.ContainsKey(SettingTypeEnum.BAKCRON)) ? SettingDict[SettingTypeEnum.BAKCRON] : "";
+                string currentBakCon = (dict.ContainsKey(SettingTypeEnum.BAKCRON)) ? dict[SettingTypeEnum.BAKCRON] : "";
 
-                if(!dict.ContainsKey(SettingTypeEnum.LogOpenStatus))
+                if(!dict.ContainsKey(SettingTypeEnum.LOGOPENSTATUS))
                 {
-                    dict[SettingTypeEnum.LogOpenStatus] = "0";
+                    dict[SettingTypeEnum.LOGOPENSTATUS] = "0";
                 }
-                if (!dict.ContainsKey(SettingTypeEnum.AuthOpenStatus))
+                if (!dict.ContainsKey(SettingTypeEnum.AUTHOPENSTATUS))
                 {
-                    dict[SettingTypeEnum.AuthOpenStatus] = "0";
+                    dict[SettingTypeEnum.AUTHOPENSTATUS] = "0";
                 }
-                if (!dict.ContainsKey(SettingTypeEnum.AttachOpenStatus))
+                if (!dict.ContainsKey(SettingTypeEnum.ATTACHOPENSTATUS))
                 {
-                    dict[SettingTypeEnum.AttachOpenStatus] = "0";
+                    dict[SettingTypeEnum.ATTACHOPENSTATUS] = "0";
                 }
 
                 List<ViewSettingModel> modelList = new List<ViewSettingModel>();
@@ -67,17 +67,17 @@ namespace SuperManager.UI
         #region 配置数据
         public static string Version
         {
-            get { return GetValue(SettingTypeEnum.Version); }
+            get { return GetValue(SettingTypeEnum.VERSION); }
         }
         public static string ManagerTitle
         {
-            get { return GetValue(SettingTypeEnum.ManagerTitle); }
+            get { return GetValue(SettingTypeEnum.MANAGERTITLE); }
         }
         public static int ManagerPageSize
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.ManagerPageSize);
+                string value = GetValue(SettingTypeEnum.MANAGERPAGESIZE);
                 if (string.IsNullOrEmpty(value)) return 1;
 
                 return int.Parse(value);
@@ -87,7 +87,7 @@ namespace SuperManager.UI
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.LogOpenStatus);
+                string value = GetValue(SettingTypeEnum.LOGOPENSTATUS);
                 if (string.IsNullOrEmpty(value)) return false;
 
                 return int.Parse(value) > 0;
@@ -97,7 +97,7 @@ namespace SuperManager.UI
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.AuthOpenStatus);
+                string value = GetValue(SettingTypeEnum.AUTHOPENSTATUS);
                 if (string.IsNullOrEmpty(value)) return true;
 
                 return int.Parse(value) > 0;
@@ -107,7 +107,7 @@ namespace SuperManager.UI
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.AttachOpenStatus);
+                string value = GetValue(SettingTypeEnum.ATTACHOPENSTATUS);
                 if (string.IsNullOrEmpty(value)) return false;
 
                 return int.Parse(value) > 0;
@@ -117,48 +117,48 @@ namespace SuperManager.UI
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.UploadImageMaxSize);
+                string value = GetValue(SettingTypeEnum.UPLOADIMAGEMAXSIZE);
                 if (string.IsNullOrEmpty(value)) return 0;
                 return int.Parse(value);
             }
         }
         public static string UploadImageExt
         {
-            get { return GetValue(SettingTypeEnum.UploadImageExt); }
+            get { return GetValue(SettingTypeEnum.UPLOADIMAGEEXT); }
         }
         public static int UploadVideoMaxSize
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.UploadVideoMaxSize);
+                string value = GetValue(SettingTypeEnum.UPLOADVIDEOMAXSIZE);
                 if (string.IsNullOrEmpty(value)) return 0;
                 return int.Parse(value);
             }
         }
         public static string UploadVideoExt
         {
-            get { return GetValue(SettingTypeEnum.UploadVideoExt); }
+            get { return GetValue(SettingTypeEnum.UPLOADVIDEOEXT); }
         }
         public static int UploadFileMaxSize
         {
             get
             {
-                string value = GetValue(SettingTypeEnum.UploadFileMaxSize);
+                string value = GetValue(SettingTypeEnum.UPLOADFILEMAXSIZE);
                 if (string.IsNullOrEmpty(value)) return 0;
                 return int.Parse(value);
             }
         }
         public static string UploadFileExt
         {
-            get { return GetValue(SettingTypeEnum.UploadFileExt); }
+            get { return GetValue(SettingTypeEnum.UPLOADFILEEXT); }
         }
         public static string BakCron
         {
-            get { return GetValue(SettingTypeEnum.BakCron); }
+            get { return GetValue(SettingTypeEnum.BAKCRON); }
         }
         public static string BakPath
         {
-            get { return GetValue(SettingTypeEnum.BakPath); }
+            get { return GetValue(SettingTypeEnum.BAKPATH); }
         }
         #endregion
 

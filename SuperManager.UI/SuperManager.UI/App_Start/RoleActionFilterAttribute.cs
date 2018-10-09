@@ -13,7 +13,7 @@ namespace SuperManager.UI
         protected override void Valid(System.Web.Mvc.ActionExecutingContext filterContext)
         {
             ViewUserModel viewUserModel = null;
-            if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+            if (ConfigHelper.TokenType == TokenTypeEnum.COOKIE)
             {
                 viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
             }
@@ -46,11 +46,11 @@ namespace SuperManager.UI
                 if (operaterType == OperaterTypeEnum.DELETE)
                 {
                     // 删除权限
-                    actionName = ActionTypeEnum.Delete;
+                    actionName = ActionTypeEnum.DELETE;
                 }
                 else if (operaterType == OperaterTypeEnum.CHECKED)
                 {
-                    actionName = ActionTypeEnum.Check;
+                    actionName = ActionTypeEnum.CHECK;
                 }
                 // 取小写
                 actionName = actionName.ToLower();

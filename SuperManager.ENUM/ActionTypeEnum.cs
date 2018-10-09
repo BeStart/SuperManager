@@ -11,18 +11,18 @@ namespace SuperManager.ENUM
         /// <summary>
         /// 添加
         /// </summary>
-        public const string Add = "Add";
+        public const string ADD = "Add";
         /// <summary>
         /// 编辑
         /// </summary>
-        public const string Edit = "Edit";
+        public const string EDIT = "Edit";
         /// <summary>
         /// 删除
         /// </summary>
-        public const string Delete = "Delete";
+        public const string DELETE = "Delete";
         /// <summary>
         /// 审核
         /// </summary>
-        public const string Check = "Check";
+        public const string CHECK = "Check";
     }
 }

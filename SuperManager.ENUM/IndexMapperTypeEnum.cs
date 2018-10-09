@@ -8,7 +8,7 @@ namespace SuperManager.ENUM
 {
     public class IndexMapperTypeEnum
     {
-        public const int Topic = 1;
-        public const int LinkFriend = 2;
+        public const int TOPIC = 1;
+        public const int LINKFRIEND = 2;
     }
 }

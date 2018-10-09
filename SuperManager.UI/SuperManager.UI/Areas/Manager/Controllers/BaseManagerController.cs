@@ -152,12 +152,12 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                 int maxSize = 0;
 
                 // 根据类型读取配置
-                if (type == UploadTypeEnum.Cover || type == UploadTypeEnum.Image)
+                if (type == UploadTypeEnum.COVER || type == UploadTypeEnum.IMAGE)
                 {
                     extensionData = SettingHelper.UploadImageExt;
                     maxSize = SettingHelper.UploadImageMaxSize;
                 }
-                else if (type == UploadTypeEnum.Video)
+                else if (type == UploadTypeEnum.VIDEO)
                 {
                     extensionData = SettingHelper.UploadVideoExt;
                     maxSize = SettingHelper.UploadVideoMaxSize;
@@ -183,7 +183,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    if (fromType == UploadFromTypeEnum.File)
+                    if (fromType == UploadFromTypeEnum.FILE)
                     {
                         return this.Json(new { Error = error, Data = "" });
                     }
@@ -195,15 +195,15 @@ namespace SuperManager.UI.Areas.Manager.Controllers
 
                 // 上传文件目录
                 string directoryName = "";
-                if (type == UploadTypeEnum.Cover)
+                if (type == UploadTypeEnum.COVER)
                 {
                     directoryName = "Covers";
                 }
-                else if (type == UploadTypeEnum.Image)
+                else if (type == UploadTypeEnum.IMAGE)
                 {
                     directoryName = "Images";
                 }
-                else if (type == UploadTypeEnum.Video)
+                else if (type == UploadTypeEnum.VIDEO)
                 {
                     directoryName = "Videos";
                 }
@@ -228,7 +228,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
                     AttachmentPath = filePath
                 });
 
-                if (fromType != UploadFromTypeEnum.File)
+                if (fromType != UploadFromTypeEnum.FILE)
                 {
                     return Content("<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", \"" + filePath + "\");</script>");
                 }
@@ -239,7 +239,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }
             catch (Exception ex)
             {
-                if (fromType != UploadFromTypeEnum.File)
+                if (fromType != UploadFromTypeEnum.FILE)
                 {
                     return this.Content("<script type=\"text/javascript\">alert('" + ex.Message + "！');</script>");
                 }

@@ -81,7 +81,7 @@ namespace SuperManager.DAL
                 {
                     ViewInitMenuModel menuModel = new ViewInitMenuModel()
                     {
-                        TrunkMenu = new DBMenuModel() { ParentID = 0, MenuName = rootMenuItemModel.MenuName, BelongModule = "-1", MenuIcon = rootMenuItemModel.MenuIcon, MenuUrl = "", ActionList = "", MenuSort = 0, MenuStatus = 1 },
+                        TrunkMenu = new DBMenuModel() { ParentID = 0, MenuName = rootMenuItemModel.MenuName, BelongModule = "-1", MenuIcon = rootMenuItemModel.MenuIcon, MenuUrl = "", ActionList = "", MenuSort = 0 },
                         NodeMenuList = new List<DBMenuModel>() { }
                     };
                     List<ViewInitMenuItemModel> nodeMenuItemModelList = menuItemModelList.Where(p => p.ParentCode == rootMenuItemModel.MenuCode).ToList();
@@ -89,7 +89,7 @@ namespace SuperManager.DAL
                     {
                         foreach (ViewInitMenuItemModel nodeMenuItemModel in nodeMenuItemModelList)
                         {
-                            menuModel.NodeMenuList.Add(new DBMenuModel() { MenuName = nodeMenuItemModel.MenuName, MenuUrl = nodeMenuItemModel.MenuUrl, BelongModule = nodeMenuItemModel.MenuCode, ActionList = moduleActionDict.ContainsKey(nodeMenuItemModel.MenuCode) ? moduleActionDict[nodeMenuItemModel.MenuCode] : "", ParentID = 0, MenuIcon = "", MenuSort = 0, MenuStatus = 1 });
+                            menuModel.NodeMenuList.Add(new DBMenuModel() { MenuName = nodeMenuItemModel.MenuName, MenuUrl = nodeMenuItemModel.MenuUrl, BelongModule = nodeMenuItemModel.MenuCode, ActionList = moduleActionDict.ContainsKey(nodeMenuItemModel.MenuCode) ? moduleActionDict[nodeMenuItemModel.MenuCode] : "", ParentID = 0, MenuIcon = "", MenuSort = 0 });
                         }
                     }
                     menuModelList.Add(menuModel);
@@ -97,7 +97,7 @@ namespace SuperManager.DAL
                 foreach (ViewInitMenuModel menuItem in menuModelList)
                 {
                     DBMenuModel menuModel = menuItem.TrunkMenu;
-                    int menuID = DataBaseHelper.TransactionScalar<int>(con, transaction, "insert into T_Menu(ParentID, MenuName, MenuUrl, BelongModule, ActionList, MenuSort, MenuIcon, MenuStatus)values(@ParentID, @MenuName, @MenuUrl, @BelongModule, @ActionList, @MenuSort, @MenuIcon, @MenuStatus);select SCOPE_IDENTITY();", new { menuModel.ParentID, menuModel.MenuName, menuModel.MenuIcon, menuModel.BelongModule, menuModel.MenuUrl, menuModel.ActionList, menuModel.MenuSort, menuModel.MenuStatus });
+                    int menuID = DataBaseHelper.TransactionScalar<int>(con, transaction, "insert into T_Menu(ParentID, MenuName, MenuUrl, BelongModule, ActionList, MenuSort, MenuIcon, MenuStatus)values(@ParentID, @MenuName, @MenuUrl, @BelongModule, @ActionList, @MenuSort, @MenuIcon, @MenuStatus);select SCOPE_IDENTITY();", new { menuModel.ParentID, menuModel.MenuName, menuModel.MenuIcon, menuModel.BelongModule, menuModel.MenuUrl, menuModel.ActionList, menuModel.MenuSort });
                     for(int menuIndex = 0; menuIndex < menuItem.NodeMenuList.Count; menuIndex ++)
                     {
                         menuItem.NodeMenuList[menuIndex].ParentID = menuID;

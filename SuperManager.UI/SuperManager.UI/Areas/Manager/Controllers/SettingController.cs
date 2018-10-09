@@ -31,29 +31,29 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         {
             Dictionary<string, string> dict = new Dictionary<string, string>()
             {
-                { SettingTypeEnum.BakCron, bakCron },
-                { SettingTypeEnum.BakPath, bakPath },
-                { SettingTypeEnum.Version, version },
-                { SettingTypeEnum.ManagerTitle, managerTitle },
-                { SettingTypeEnum.ManagerPageSize, managerPageSize },
-                { SettingTypeEnum.UploadImageExt, uploadImageExt },
-                { SettingTypeEnum.UploadImageMaxSize, uploadImageMaxSize },
-                { SettingTypeEnum.UploadVideoExt, uploadVideoExt },
-                { SettingTypeEnum.UploadVideoMaxSize, uploadVideoMaxSize },
-                { SettingTypeEnum.UploadFileExt, uploadFileExt },
-                { SettingTypeEnum.UploadFileMaxSize, uploadFileMaxSize },
+                { SettingTypeEnum.BAKCRON, bakCron },
+                { SettingTypeEnum.BAKPATH, bakPath },
+                { SettingTypeEnum.VERSION, version },
+                { SettingTypeEnum.MANAGERTITLE, managerTitle },
+                { SettingTypeEnum.MANAGERPAGESIZE, managerPageSize },
+                { SettingTypeEnum.UPLOADIMAGEEXT, uploadImageExt },
+                { SettingTypeEnum.UPLOADIMAGEMAXSIZE, uploadImageMaxSize },
+                { SettingTypeEnum.UPLOADVIDEOEXT, uploadVideoExt },
+                { SettingTypeEnum.UPLOADVIDEOMAXSIZE, uploadVideoMaxSize },
+                { SettingTypeEnum.UPLOADFILEEXT, uploadFileExt },
+                { SettingTypeEnum.UPLOADFILEMAXSIZE, uploadFileMaxSize },
             };
             if(!string.IsNullOrEmpty(logOpenStatus))
             {
-                dict.Add(SettingTypeEnum.LogOpenStatus, "1");
+                dict.Add(SettingTypeEnum.LOGOPENSTATUS, "1");
             }
             if(!string.IsNullOrEmpty(authOpenStatus))
             {
-                dict.Add(SettingTypeEnum.AuthOpenStatus, "1");
+                dict.Add(SettingTypeEnum.AUTHOPENSTATUS, "1");
             }
             if (!string.IsNullOrEmpty(attachOpenStatus))
             {
-                dict.Add(SettingTypeEnum.AttachOpenStatus, "1");
+                dict.Add(SettingTypeEnum.ATTACHOPENSTATUS, "1");
             }
             return this.Operater(null, null, () =>
             {

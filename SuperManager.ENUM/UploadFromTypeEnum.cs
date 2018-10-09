@@ -11,10 +11,10 @@ namespace SuperManager.ENUM
         /// <summary>
         /// 普通上传控件
         /// </summary>
-        public const string File = "file";
+        public const string FILE = "file";
         /// <summary>
         /// 插件
         /// </summary>
-        public const string Plugins = "plugins";
+        public const string PLUGINS = "plugins";
     }
 }

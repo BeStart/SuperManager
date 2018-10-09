@@ -43,7 +43,6 @@
     <Compile Include="IndexMapperTypeEnum.cs" />
     <Compile Include="MessageStatusTypeEnum.cs" />
     <Compile Include="LoginStatusTypeEnum.cs" />
-    <Compile Include="MenuStatusTypeEnum.cs" />
     <Compile Include="OperaterTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingTypeEnum.cs" />

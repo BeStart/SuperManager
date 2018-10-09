@@ -11,11 +11,11 @@ namespace SuperManager.UI
     {
         private static readonly Dictionary<int, List<DBKeyValueModel>> IndexMapperKeyValueDict = new Dictionary<int, List<DBKeyValueModel>>()
         {
-            { IndexMapperTypeEnum.Topic, new List<DBKeyValueModel>(){
+            { IndexMapperTypeEnum.TOPIC, new List<DBKeyValueModel>(){
                 new DBKeyValueModel(){ Key = "1", Value = "栏目一" },
                 new DBKeyValueModel(){ Key = "2", Value = "栏目二" },
             }},
-            { IndexMapperTypeEnum.LinkFriend, new List<DBKeyValueModel>(){
+            { IndexMapperTypeEnum.LINKFRIEND, new List<DBKeyValueModel>(){
                 new DBKeyValueModel(){ Key = "1", Value = "链接一" },
                 new DBKeyValueModel(){ Key = "2", Value = "链接二" },
             }}
@@ -25,8 +25,8 @@ namespace SuperManager.UI
         {
             List<DBKeyValueModel> modelList = new List<DBKeyValueModel>()
             {
-                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.Topic.ToString(), Value = GetIndexMapperName(IndexMapperTypeEnum.Topic) },
-                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.LinkFriend.ToString(), Value = GetIndexMapperName(IndexMapperTypeEnum.LinkFriend) },
+                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.TOPIC.ToString(), Value = GetIndexMapperName(IndexMapperTypeEnum.TOPIC) },
+                new DBKeyValueModel(){ Key = IndexMapperTypeEnum.LINKFRIEND.ToString(), Value = GetIndexMapperName(IndexMapperTypeEnum.LINKFRIEND) },
             };
             return modelList;
         }
@@ -41,8 +41,8 @@ namespace SuperManager.UI
         }
         public static string GetIndexMapperName(int indexType)
         {
-            if (indexType == IndexMapperTypeEnum.Topic) return "新闻";
-            if (indexType == IndexMapperTypeEnum.LinkFriend) return "链接";
+            if (indexType == IndexMapperTypeEnum.TOPIC) return "新闻";
+            if (indexType == IndexMapperTypeEnum.LINKFRIEND) return "链接";
             return "";
         }
         public static string GetIndexMapperName(int indexType, int indexID)

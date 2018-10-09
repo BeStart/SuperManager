@@ -73,9 +73,18 @@ namespace SuperManager.UI
         /// <param name="moduleList">模块列表</param>
         public static void InitRoleMenuAndActionData(string roleID, List<DBMenuModel> menuList, string actionList, List<DBModuleModel> moduleList)
         {
-            AuthMenuModelDict = new Dictionary<string, List<DBMenuModel>>();
-            AuthMenuDict = new Dictionary<string, Dictionary<string, List<Dictionary<string, string>>>>();
-            AuthActionDict = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            if (AuthMenuModelDict == null)
+            {
+                AuthMenuModelDict = new Dictionary<string, List<DBMenuModel>>();
+            }
+            if (AuthMenuDict == null)
+            {
+                AuthMenuDict = new Dictionary<string, Dictionary<string, List<Dictionary<string, string>>>>();
+            }
+            if (AuthActionDict == null)
+            {
+                AuthActionDict = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+            }
             // 设置角色菜单信息
             AuthMenuModelDict[roleID] = menuList;
 
@@ -142,7 +151,10 @@ namespace SuperManager.UI
                             }
                             if (IsContains(actionData.Value, ModuleDict[actionData.Key]))
                             {
-                                AuthActionDict[roleID][actionData.Key].Add(actionData.Value, actionData.Value);
+                                if (!AuthActionDict[roleID][actionData.Key].ContainsKey(actionData.Value))
+                                {
+                                    AuthActionDict[roleID][actionData.Key].Add(actionData.Value, actionData.Value);
+                                }
                             }
                         }
                     }

@@ -10,15 +10,6 @@
     <form action="@Url.Action(Model != null ? "EditOperater" : "AddOperater", new { identityID = (Model != null ? Model.IdentityID : 0) })" class="form-horizontal" method="post">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label style="padding-top:0px;" class="col-xs-2 control-label form-label">是否显示：</label>
-            <div class="col-xs-10 forbidden-text-select form-cell">
-                <div class="radio-inline" style="padding-top:0px;">
-                    <label class="form-radio-label"><input type="radio" name="menuStatus" value="@SuperManager.ENUM.MenuStatusTypeEnum.SHOW" @Html.Raw(Model == null || Model.MenuStatus == SuperManager.ENUM.MenuStatusTypeEnum.SHOW ? "checked=\"checked\"" : "") />显示</label>
-                    <label class="form-radio-label"><input type="radio" name="menuStatus" value="@SuperManager.ENUM.MenuStatusTypeEnum.DEFAULT" @Html.Raw(Model != null && Model.MenuStatus == SuperManager.ENUM.MenuStatusTypeEnum.DEFAULT ? "checked=\"checked\"" : "") />不显示</label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-xs-2 control-label form-label">父级名称：</label>
             <div class="col-xs-10 form-cell">
                 <select class="form-control" style="width:400px;" id="parentID" name="parentID">
@@ -76,7 +67,7 @@
                 <input class="form-control" style="width:100px;" type="text" name="menuSort" value="@(Model != null ? Model.MenuSort : 0)" />
             </div>
         </div>
-        <div class="form-group" id="menuActionContainer" style="display:@((Model != null && !string.IsNullOrEmpty(Model.BelongModule) && !string.IsNullOrEmpty(Model.ActionList)) ? "block" : "none")">
+        <div class="form-group" id="menuActionContainer" style="display:@((Model != null && !string.IsNullOrEmpty(Model.BelongModule) && Model.BelongModule != "-1") ? "block" : "none")">
             <label style="padding-top:0px;" class="col-xs-2 control-label form-label">菜单操作：</label>
             <div class="col-xs-10 forbidden-text-select form-cell">
                 <div class="checkbox-inline" style="padding-top:0px;" id="menuActionList">

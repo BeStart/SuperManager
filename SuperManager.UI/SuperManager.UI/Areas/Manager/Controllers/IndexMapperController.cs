@@ -49,10 +49,10 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             }
             else
             {
-                ViewBag.IndexIDList = ConstHelper.GetIndexMapperKeyValueList(IndexMapperTypeEnum.Topic);
-                if (indexTypeMapperKeyValueDict.ContainsKey(IndexMapperTypeEnum.Topic))
+                ViewBag.IndexIDList = ConstHelper.GetIndexMapperKeyValueList(IndexMapperTypeEnum.TOPIC);
+                if (indexTypeMapperKeyValueDict.ContainsKey(IndexMapperTypeEnum.TOPIC))
                 {
-                    ViewBag.IndexMapperList = indexTypeMapperKeyValueDict[IndexMapperTypeEnum.Topic];
+                    ViewBag.IndexMapperList = indexTypeMapperKeyValueDict[IndexMapperTypeEnum.TOPIC];
                 }
             }
             return View("Edit", model);
@@ -164,20 +164,20 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             List<ViewTreeTopicTypeModel> topicTypeModelList = TreeHelper.ToMenuList<ViewTreeTopicTypeModel>(DALFactory.TopicType.All(""));
             if (topicTypeModelList != null && topicTypeModelList.Count > 0)
             {
-                resultDict.Add(IndexMapperTypeEnum.Topic, new List<DBKeyValueModel>());
+                resultDict.Add(IndexMapperTypeEnum.TOPIC, new List<DBKeyValueModel>());
                 foreach(ViewTreeTopicTypeModel modelItem in topicTypeModelList)
                 {
-                    resultDict[IndexMapperTypeEnum.Topic].Add(new DBKeyValueModel() { Key = modelItem.IdentityID.ToString(), Value = modelItem.LayerName });
+                    resultDict[IndexMapperTypeEnum.TOPIC].Add(new DBKeyValueModel() { Key = modelItem.IdentityID.ToString(), Value = modelItem.LayerName });
                 }
             }
 
             List<DBLinkFriendTypeModel> linkTypeModelList = DALFactory.LinkFriendType.List();
             if(linkTypeModelList != null && linkTypeModelList.Count > 0)
             {
-                resultDict.Add(IndexMapperTypeEnum.LinkFriend, new List<DBKeyValueModel>());
+                resultDict.Add(IndexMapperTypeEnum.LINKFRIEND, new List<DBKeyValueModel>());
                 foreach(DBLinkFriendTypeModel modelItem in linkTypeModelList)
                 {
-                    resultDict[IndexMapperTypeEnum.LinkFriend].Add(new DBKeyValueModel() { Key = modelItem.IdentityID.ToString(), Value = modelItem.TypeName });
+                    resultDict[IndexMapperTypeEnum.LINKFRIEND].Add(new DBKeyValueModel() { Key = modelItem.IdentityID.ToString(), Value = modelItem.TypeName });
                 }
             }
 

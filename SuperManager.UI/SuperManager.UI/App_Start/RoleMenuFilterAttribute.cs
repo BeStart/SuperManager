@@ -36,7 +36,7 @@ namespace SuperManager.UI
         protected virtual void Valid(ActionExecutingContext filterContext)
         {
             ViewUserModel viewUserModel = null;
-            if (ConfigHelper.TokenType == TokenTypeEnum.Cookie)
+            if (ConfigHelper.TokenType == TokenTypeEnum.COOKIE)
             {
                 viewUserModel = CookieHelper.GetCookieT<ViewUserModel>(ConfigHelper.TokenName);
             }

@@ -8,7 +8,7 @@ namespace SuperManager.ENUM
 {
     public class TokenTypeEnum
     {
-        public const string Cookie = "cookie";
-        public const string Session = "session";
+        public const string COOKIE = "cookie";
+        public const string SESSION = "session";
     }
 }
