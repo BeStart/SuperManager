@@ -8,9 +8,6 @@ namespace SuperManager.MODEL
 {
     public class DBActionTypeModel
     {
-        /// <summary>
-        /// 自增编号
-        /// </summary>
         public int IdentityID { get; set; }
         /// <summary>
         /// 类别编号

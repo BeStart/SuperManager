@@ -29,6 +29,12 @@ namespace SuperManager.DAL
             {
                 transactionItemList.Add(new DataBaseTransactionItem()
                 {
+                    CommandText = "update T_Flow set FlowType=@FlowType, FlowName=@FlowName where IdentityID=@IdentityID",
+                    ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
+                    ParameterList = new { FlowType = model.FlowType, FlowName = model.FlowName, IdentityID = model.IdentityID },
+                });
+                transactionItemList.Add(new DataBaseTransactionItem()
+                {
                     CommandText = "delete from T_FlowStep where FlowID=@FlowID",
                     ExecuteType = DataBaseExecuteTypeEnum.ExecuteNonQuery,
                     ParameterList = new { FlowID = model.IdentityID }

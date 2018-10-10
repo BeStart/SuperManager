@@ -21,6 +21,13 @@ namespace SuperManager.UI
             }}
         };
 
+        private static readonly Dictionary<string, string> OperaterKeyValueDict = new Dictionary<string, string>()
+        {
+            { OperaterTypeEnum.DEFAULT, "取消审核"},
+            { OperaterTypeEnum.DELETE, "删除" },
+            { OperaterTypeEnum.CHECKED, "审核" }
+        };
+
         public static List<DBKeyValueModel> GetIndexMapperList()
         {
             List<DBKeyValueModel> modelList = new List<DBKeyValueModel>()
@@ -51,6 +58,11 @@ namespace SuperManager.UI
             DBKeyValueModel model = IndexMapperKeyValueDict[indexType].Where(p => p.Key == indexID.ToString()).FirstOrDefault();
             if (model == null) return "";
             return model.Value;
+        }
+        public static string GetOperaterName(string operaterType)
+        {
+            if (OperaterKeyValueDict == null || OperaterKeyValueDict.Count == 0 || !OperaterKeyValueDict.ContainsKey(operaterType)) return "";
+            return OperaterKeyValueDict[operaterType];
         }
     }
 }

@@ -57,9 +57,9 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             // 可选符号列表
             ViewBag.SymbolTypeList = DALFactory.FlowSymbolType.List();
             // 流程类别列表
-            ViewBag.FlowTypeList = (identityID == 0 ? DALFactory.FlowType.List() : null);
+            ViewBag.FlowTypeList = DALFactory.FlowType.List();
             // 流程步骤数据
-            ViewBag.FlowStepData = this.GetFlowJsonText(identityID);
+            ViewBag.FlowStepJsonData = this.GetFlowStepJsonText(identityID);
             return View("FlowDesignEdit", identityID > 0 ? DALFactory.Flow.Select(identityID) : null);
         }
 
@@ -155,7 +155,7 @@ namespace SuperManager.UI.Areas.Manager.Controllers
         }
 
         [NonAction]
-        public string GetFlowJsonText(int identityID)
+        public string GetFlowStepJsonText(int identityID)
         {
             string format = "{{ \\\"total\\\": {0}, \\\"list\\\": [{1}] }}";
             if (identityID == 0) return string.Format(format, 0, "");

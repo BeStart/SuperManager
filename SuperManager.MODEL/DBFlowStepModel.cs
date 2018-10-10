@@ -8,9 +8,6 @@ namespace SuperManager.MODEL
 {
     public class DBFlowStepModel
     {
-        /// <summary>
-        /// 自增编号
-        /// </summary>
         public int IdentityID { get; set; }
         /// <summary>
         /// 流程编号

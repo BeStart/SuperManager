@@ -985,6 +985,8 @@
     <Content Include="Areas\Manager\Views\Setting\Set.cshtml" />
     <Content Include="Plugins\JQuery\Gridly.rar" />
     <Content Include="Areas\Manager\Views\Application\App.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_ListNoData.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_ListOperaterData.cshtml" />
     <None Include="Plugins\JQuery\JsMap.rar" />
     <Content Include="Plugins\Css\Radio+CheckBox.zip" />
     <None Include="Web.Debug.config">

@@ -9,7 +9,13 @@ namespace SuperManager.MODEL
     public class DBFlowTypeModel
     {
         public int IdentityID { get; set; }
+        /// <summary>
+        /// 类别名称
+        /// </summary>
         public string TypeName { get; set; }
+        /// <summary>
+        /// 类别排序
+        /// </summary>
         public int TypeSort { get; set; }
     }
 }

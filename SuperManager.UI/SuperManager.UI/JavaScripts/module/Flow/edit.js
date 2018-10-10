@@ -154,21 +154,7 @@ $(function () {
             return;
         }
 
-        var vLeft = ($(window).width() - $("#addFlowInfo").width()) * 0.5;
         $("#flowStepList").val(JSON.stringify(stepList));
-        if (flowID == "0") {
-            // 显示保存面板
-            ShowMaskWindow("addFlowInfo", {
-                top: 100,
-                left: vLeft
-            });
-        } else {
-            // 提交表单
-            $("#operaterForm").submit();
-        }
-    });
-    $("#btnAddFlowInfo").click(function () {
-        HideMaskWindow("addFlowInfo");
         // 提交表单
         $("#operaterForm").submit();
     });
