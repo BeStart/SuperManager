@@ -96,6 +96,7 @@
     <Content Include="Content\Static\loading.gif" />
     <Content Include="JavaScripts\jquery.gridly.js" />
     <Content Include="JavaScripts\module\Application\App.js" />
+    <Content Include="Language\zh-cn.txt" />
     <Content Include="settings.xml">
       <SubType>Designer</SubType>
     </Content>

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SuperManager.FILTER
 {
+    /// <summary>
+    /// 验证提交的表单数据是否正确，返回为 NULL 或者空字符串数据表示验证通过，否则提交返回值数据。
+    /// </summary>
     public class FilterFactory
     {
         public static MenuFilter Menu = new MenuFilter();

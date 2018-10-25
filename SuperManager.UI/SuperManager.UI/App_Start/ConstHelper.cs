@@ -9,6 +9,9 @@ namespace SuperManager.UI
 {
     public class ConstHelper
     {
+        /// <summary>
+        /// 索引映射字典
+        /// </summary>
         private static readonly Dictionary<int, List<DBKeyValueModel>> IndexMapperKeyValueDict = new Dictionary<int, List<DBKeyValueModel>>()
         {
             { IndexMapperTypeEnum.TOPIC, new List<DBKeyValueModel>(){
@@ -21,13 +24,20 @@ namespace SuperManager.UI
             }}
         };
 
+        /// <summary>
+        /// 操作字典
+        /// </summary>
         private static readonly Dictionary<string, string> OperaterKeyValueDict = new Dictionary<string, string>()
         {
-            { OperaterTypeEnum.DEFAULT, "取消审核"},
-            { OperaterTypeEnum.DELETE, "删除" },
-            { OperaterTypeEnum.CHECKED, "审核" }
+            { OperaterTypeEnum.DEFAULT, OperaterTypeEnum.DEFAULTNAME},
+            { OperaterTypeEnum.DELETE, OperaterTypeEnum.DELETENAME },
+            { OperaterTypeEnum.CHECKED, OperaterTypeEnum.CHECKEDNAME }
         };
 
+        /// <summary>
+        /// 获取索引映射数据
+        /// </summary>
+        /// <returns></returns>
         public static List<DBKeyValueModel> GetIndexMapperList()
         {
             List<DBKeyValueModel> modelList = new List<DBKeyValueModel>()
@@ -41,15 +51,25 @@ namespace SuperManager.UI
         {
             return IndexMapperKeyValueDict;
         }
+        /// <summary>
+        /// 根据索引类别获取索引映射数据
+        /// </summary>
+        /// <param name="indexType"></param>
+        /// <returns></returns>
         public static List<DBKeyValueModel> GetIndexMapperKeyValueList(int indexType)
         {
             if (IndexMapperKeyValueDict == null || !IndexMapperKeyValueDict.ContainsKey(indexType)) return null;
             return IndexMapperKeyValueDict[indexType];
         }
+        /// <summary>
+        /// 根据索引类别获取映射名称
+        /// </summary>
+        /// <param name="indexType"></param>
+        /// <returns></returns>
         public static string GetIndexMapperName(int indexType)
         {
-            if (indexType == IndexMapperTypeEnum.TOPIC) return "新闻";
-            if (indexType == IndexMapperTypeEnum.LINKFRIEND) return "链接";
+            if (indexType == IndexMapperTypeEnum.TOPIC) return IndexMapperTypeEnum.TOPICNAME;
+            if (indexType == IndexMapperTypeEnum.LINKFRIEND) return IndexMapperTypeEnum.LINKFRIENDNAME;
             return "";
         }
         public static string GetIndexMapperName(int indexType, int indexID)
@@ -59,6 +79,11 @@ namespace SuperManager.UI
             if (model == null) return "";
             return model.Value;
         }
+        /// <summary>
+        /// 根据操作类别获取操作名称
+        /// </summary>
+        /// <param name="operaterType"></param>
+        /// <returns></returns>
         public static string GetOperaterName(string operaterType)
         {
             if (OperaterKeyValueDict == null || OperaterKeyValueDict.Count == 0 || !OperaterKeyValueDict.ContainsKey(operaterType)) return "";

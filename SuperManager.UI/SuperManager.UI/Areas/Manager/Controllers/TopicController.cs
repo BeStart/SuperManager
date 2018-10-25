@@ -65,7 +65,16 @@ namespace SuperManager.UI.Areas.Manager.Controllers
             return this.UploadOperater(() =>
             {
                 return DataHelper.AuthAction(this.viewUserModel.RoleID.ToString(), "Topic", "Upload");
-            }, type, fromType, CKEditorFuncNum);
+            }, type, fromType, CKEditorFuncNum, "Topics", (string attachmentType, string attachmentName, int attachmentSize, string attachmentPath) =>
+            {
+                return DALFactory.Attachment.Operater(new MODEL.DBAttachmentModel()
+                {
+                    AttachmentType = attachmentType,
+                    AttachmentName = attachmentName,
+                    AttachmentSize = attachmentSize,
+                    AttachmentPath = attachmentPath
+                });
+            });
         }
 
         [HttpPost]

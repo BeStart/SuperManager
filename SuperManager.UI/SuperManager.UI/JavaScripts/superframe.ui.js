@@ -46,7 +46,7 @@ function AskConfirmToCallback(note, callback, closeCallback) {
     parent.AskConfirmToCallback(note, callback, closeCallback);
 }
 
-// 遮罩 WINFOW
+// 遮罩 WINDOW
 var MASK_WINDOW = null;
 var MASK_WINDOW_TOP = 0;
 var MASK_WINDOW_LEFT = 0;

@@ -28,4 +28,6 @@
   <item name="bakCron" value="0 0 3 * * ?" />
   <!--数据库备份路径-->
   <item name="bakPath" value="~/DataBase/" />
+  <!--语言配置-->
+  <item name="language" value="zh-cn" />
 </settings>
